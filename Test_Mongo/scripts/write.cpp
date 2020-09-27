@@ -23,17 +23,23 @@ mongocxx::client conn{mongocxx::uri{}};
 
 int record = 0;
 
-void insert_records(vector<string> row,string database,string collections)
+void insert_records(vector<string> row,string database,string collections,string date,string time,string desc)
 {
     auto collection = conn[database][collections];
     auto builder = bsoncxx::builder::stream::document{};
    			 bsoncxx::document::value doc_value = builder
-     		        << "cernid" << row[0]
-            	    << "temperature" << row[1]
-            		<< "pressure" << row[2]
-                 	<< "muons" << row[3]
-            		<< "description" << row[4]
-            			<< bsoncxx::builder::stream::finalize;
+
+                << "date" << date
+                << "time" << time
+                << "desc" << desc
+                << "info" << bsoncxx::builder::stream::open_document
+                            << "cernid" << row[0]
+            	            << "temperature" << row[1]
+            		        << "pressure" << row[2]
+                 	        << "muons" << row[3]
+            		        << "description" << row[4]
+                << bsoncxx::builder::stream::close_document
+            	<< bsoncxx::builder::stream::finalize;
     		bsoncxx::document::view view = doc_value.view();
 
   	//insert into collection
@@ -78,7 +84,7 @@ void clear_db(string database,string collections)
     }
 }
 
-void read_csv_file(string database,string collections)
+void read_csv_file(string date,string time,string desc,string database,string collections)
 {
     vector<string> row(5,"");
 
@@ -92,18 +98,37 @@ void read_csv_file(string database,string collections)
 		 	 getline(ip,row[3],',');
     		 getline(ip,row[4],'\n');
 
-             insert_records(row,database,collections);
+             insert_records(row,database,collections,date,time,desc);
     }
+}
+
+void store_data(string timestamp,string desc,string database,string collections )
+{
+
+    string date,time;
+    date = timestamp.substr(0,timestamp.find("-"));
+    time = timestamp.substr(timestamp.find("-") + 1);
+
+    read_csv_file(date,time,desc,database,collections);
 }
 
 
 int main(int, char**) {
 
     string database = "GEMDB_TEST";
-    string collections = "GEMCollection_TEST";
+    //string collections = "GEMCollection_TEST";
+    string collections = "GEMCollection_TEST2";
+    string timestamp,desc;
+
+    cout << "Insert Timestamp (DATE-TIME) : ";
+    getline(cin , timestamp);
+    cout << "Insert a description : ";
+    getline(cin , desc);
+
+    store_data(timestamp,desc,database,collections);
 
     //read data from the csv file
-	read_csv_file( database, collections);
+	//read_csv_file( database, collections);
 
 	if (record == 0) 
 		cout << "Record not found\n"; 
