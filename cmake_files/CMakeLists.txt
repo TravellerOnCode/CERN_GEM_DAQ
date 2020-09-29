@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 
-include(PkgConfig)
+include(FindPkgConfig)
 pkg_check_modules(MongoCXX IMPORTED_TARGET libmongocxx = 3.4)
 
 add_executable(mongo-test write.cpp)
