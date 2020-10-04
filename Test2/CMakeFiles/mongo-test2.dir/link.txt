@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/mongo-test2.dir/test.cpp.o  -o mongo-test2 -rdynamic /usr/local/lib/libmongocxx.so /usr/local/lib/libbsoncxx.so /usr/local/lib/libbsoncxx.so -Wl,-rpath,/usr/local/lib 
