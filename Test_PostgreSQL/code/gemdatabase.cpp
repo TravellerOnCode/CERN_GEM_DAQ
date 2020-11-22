@@ -7,17 +7,14 @@ CLASSES:
 
         2. postgre_database  //this will contain functions that will interact with the components
 
-NOTE: CURRENTLY WE ARE UNABLE TO RESOLVE HOW TO WORK WITH  ARRAY VALUES WITH LIBPQXX SO WE ARE USING
-EMPLOYEE DATABASE EXAMPLE TO EXPLAIN THE WORKFLOW & CODE
-
 
 Class: component_name{
 
     Class variables:
-        * int ID,SALARY,AGE;
-        * string NAME,ADDRESS;
+        * // All 49 Columns
 
     Functions:
+        * create_table() //creates the table for the VFAT Component
         * display_row() // displays the values of class vars
         * initialize( ...... ) //takes values and initializes the class vars
         * insert_row() //takes an object and inserts the values into the database
