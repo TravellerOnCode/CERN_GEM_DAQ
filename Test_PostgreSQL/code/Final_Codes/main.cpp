@@ -22,7 +22,7 @@ int main()
                      return 1;
               }
 
-              //Postgres_Database ob;
+              Postgres_Database ob;
               result r;
               //ob.insert_datanew(&C,"COMPANY");
               //r = ob.query_response(&C,"COMPANY");
@@ -34,8 +34,6 @@ int main()
               vector<VFAT_Config_Table> results1;
               vector<VFAT_Data_Table> results2;
               vector<VFAT_Index_Table> results3;
-
-
 
               //obj.create_table(&C,"VFAT_COMPONENT");
               //r = ob.query_response(&C,"gemlong");

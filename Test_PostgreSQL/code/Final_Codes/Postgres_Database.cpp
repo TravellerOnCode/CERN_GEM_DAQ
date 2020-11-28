@@ -1,8 +1,7 @@
 #include "Postgres_Database.h"
-#include "VFAT_Data_Table.h"
 
 //Returns the query response of a query 
-result Postgres_Database :: query_response(connection *C,string table_name)
+result Postgres_Database ::query_response(connection *C,string table_name)
 {
         work WW(*C);
         string query = "SELECT * FROM " + table_name +";";

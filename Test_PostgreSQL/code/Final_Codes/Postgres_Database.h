@@ -5,8 +5,10 @@
 using namespace std;
 using namespace pqxx;
 
-class postgre_database
+class Postgres_Database
 {
+    private:
+       
     public:
         result query_response(connection *C,string table_name);
 
