@@ -3,120 +3,126 @@
 void VFAT_Data_Table ::create_table(connection *C,string table_name)
 {
         work WW(*C);
-        string query = "CREATE TABLE " + table_name + "(";
+        string query = "CREATE TABLE " + table_name + "(VFAT_ID bigint PRIMARY KEY,";
         for (int i=0;i<48;i++)
         {
             query = query + vfat_columns[i] + " bigint" +", ";
         }
         query = query + "VFAT_CHANNELS_CHANNEL_0_to_128" + " integer[]);";
-        cout << "Executed Query : " << endl << query << endl;
+        //cout << "Executed Query : " << endl << query << endl;
         WW.exec(query);
-        cout << "Table Created !" << endl;
+        cout << "Table Created -> " << table_name << endl;
         WW.commit();
-
 }
 
-void VFAT_Data_Table ::initialize()
-{
-            this->CFG_IREF=0;
-            this->CFG_HYST=0;
+void VFAT_Data_Table::initialize(long VFAT_ID,vector<long> field_val, vector<long> array_val)
+    {
+	    int i = 0;
+            this->VFAT_ID=VFAT_ID;
+            this->CFG_IREF=field_val[i++];
+            this->CFG_HYST=field_val[i++];
 
-            this->CFG_BIAS_CFD_DAC_2=0;
-            this->CFG_BIAS_CFD_DAC_1=0;
-            this->CFG_BIAS_PRE_I_BSF=0;
+            this->CFG_BIAS_CFD_DAC_2=field_val[i++];
+            this->CFG_BIAS_CFD_DAC_1=field_val[i++];
+            this->CFG_BIAS_PRE_I_BSF=field_val[i++];
 
-            this->CFG_BIAS_PRE_I_BIT=0;
-            this->CFG_BIAS_PRE_I_BLCC=0;
-            this->CFG_BIAS_PRE_VREF=0;
-            this->CFG_BIAS_SH_I_BFCAS=0;
-            this->CFG_BIAS_SH_I_BDIFF=0;
-            this->CFG_BIAS_SH_I_BFAMP=0;
-            this->CFG_BIAS_SD_I_BDIFF=0;
-            this->CFG_BIAS_SD_I_BSF=0;
-            this->CFG_BIAS_SD_I_BFCAS=0;
+            this->CFG_BIAS_PRE_I_BIT=field_val[i++];
+            this->CFG_BIAS_PRE_I_BLCC=field_val[i++];
+            this->CFG_BIAS_PRE_VREF=field_val[i++];
+            this->CFG_BIAS_SH_I_BFCAS=field_val[i++];
+            this->CFG_BIAS_SH_I_BDIFF=field_val[i++];
+            this->CFG_BIAS_SH_I_BFAMP=field_val[i++];
+            this->CFG_BIAS_SD_I_BDIFF=field_val[i++];
+            this->CFG_BIAS_SD_I_BSF=field_val[i++];
+            this->CFG_BIAS_SD_I_BFCAS=field_val[i++];
 
-            this->CFG_VREF_ADC=0;
-            this->CFG_MON_GAIN=0;
-            this->CFG_MONITOR_SELECT=0;
+            this->CFG_VREF_ADC=field_val[i++];
+            this->CFG_MON_GAIN=field_val[i++];
+            this->CFG_MONITOR_SELECT=field_val[i++];
 
-            this->CFG_RES_PRE=0;
-            this->CFG_CAP_PRE=0;
+            this->CFG_RES_PRE=field_val[i++];
+            this->CFG_CAP_PRE=field_val[i++];
 
-            this->CFG_FP_FE=0;
-            this->CFG_PT=0;
+            this->CFG_FP_FE=field_val[i++];
+            this->CFG_PT=field_val[i++];
 
-            this->CFG_SEL_POL=0;
+            this->CFG_SEL_POL=field_val[i++];
 
-            this->CFG_THR_ZCC_DAC=0;
+            this->CFG_THR_ZCC_DAC=field_val[i++];
 
-            this->CFG_THR_ARM_DAC=0;
+            this->CFG_THR_ARM_DAC=field_val[i++];
 
-            this->CFG_SEL_COMP_MODE=0;
-            this->CFG_FORCE_EN_ZCC=0;
-            this->CFG_EN_HYST=0;
-            this->CFG_FORCE_TH=0;
+            this->CFG_SEL_COMP_MODE=field_val[i++];
+            this->CFG_FORCE_EN_ZCC=field_val[i++];
+            this->CFG_EN_HYST=field_val[i++];
+            this->CFG_FORCE_TH=field_val[i++];
 
-            this->CFG_SYNC_LEVEL_MODE=0;
+            this->CFG_SYNC_LEVEL_MODE=field_val[i++];
 
-            this->CFG_PULSE_STRETCH=0;
+            this->CFG_PULSE_STRETCH=field_val[i++];
 
-            this->CFG_SELF_TRIGGER_MODE=0;
-            this->CFG_DDR_TRIGGER_MODE=0;
+            this->CFG_SELF_TRIGGER_MODE=field_val[i++];
+            this->CFG_DDR_TRIGGER_MODE=field_val[i++];
 
-            this->CFG_SPZS_SUMMARY_ONLY=0;
-            this->CFG_SPZS_MAX_PARTITIONS=0;
-            this->CFG_SPZS_ENABLE=0;
-            this->CFG_SZP_ENABLE=0;
-            this->CFG_SZD_ENABLE=0;
+            this->CFG_SPZS_SUMMARY_ONLY=field_val[i++];
+            this->CFG_SPZS_MAX_PARTITIONS=field_val[i++];
+            this->CFG_SPZS_ENABLE=field_val[i++];
+            this->CFG_SZP_ENABLE=field_val[i++];
+            this->CFG_SZD_ENABLE=field_val[i++];
 
-            this->CFG_TIME_TAG=0;
-            this->CFG_EC_BYTES=0;
-            this->CFG_BC_BYTES=0;
+            this->CFG_TIME_TAG=field_val[i++];
+            this->CFG_EC_BYTES=field_val[i++];
+            this->CFG_BC_BYTES=field_val[i++];
 
-            this->CFG_LATENCY=0;
+            this->CFG_LATENCY=field_val[i++];
 
-            this->CFG_CAL_MODE=0;
+            this->CFG_CAL_MODE=field_val[i++];
 
-            this->CFG_CAL_SEL_POL=0;
+            this->CFG_CAL_SEL_POL=field_val[i++];
 
-            this->CFG_CAL_DAC=0;
+            this->CFG_CAL_DAC=field_val[i++];
 
-            this->CFG_CAL_EXT=0;
-            this->CFG_CAL_PHI=0;
-            this->CFG_CAL_FS=0;
-            this->CFG_CAL_DUR=0;
+            this->CFG_CAL_EXT=field_val[i++];
+            this->CFG_CAL_PHI=field_val[i++];
+            this->CFG_CAL_FS=field_val[i++];
+            this->CFG_CAL_DUR=field_val[i++];
+
+	    for(int i = 0; i<128; i++)
+	    {
+		VFAT_CHANNELS_CHANNEL_0_to_128.push_back(array_val[i]);
+	    }
 }
 
 void VFAT_Data_Table:: insert_row(connection *C, string table_name)
 {
         work WW(*C);
         string field_values = "",arrays = "'{";
-        string sql = "INSERT INTO COMPANY(";
+        string sql = "INSERT INTO VFAT_DATA_TABLE(VFAT_ID,";
         for (int i=0;i<48;i++)
         {
             sql = sql + vfat_columns[i] + ", ";
         }
-        sql = sql + ") VALUES (";
-        
+        sql = sql + "VFAT_CHANNELS_CHANNEL_0_to_128) VALUES (";
+        field_values = to_string(this->VFAT_ID)+", ";
         field_values = field_values + 
-                        to_string(this->CFG_IREF) + ", '" +to_string(this->CFG_HYST)+ ", '" \
-                        +to_string(this->CFG_BIAS_CFD_DAC_2)+ ", '" +to_string(this->CFG_BIAS_CFD_DAC_1)+ ", '" +to_string(this->CFG_BIAS_PRE_I_BSF)+ ", '" \
-                        +to_string(this->CFG_BIAS_PRE_I_BIT)+ ", '" +to_string(this->CFG_BIAS_PRE_I_BLCC)+ ", '" +to_string(this->CFG_BIAS_PRE_VREF)+ ", '" \
-                        +to_string(this->CFG_BIAS_SH_I_BFCAS)+ ", '" +to_string(this->CFG_BIAS_SH_I_BDIFF)+ ", '" +to_string(this->CFG_BIAS_SH_I_BFAMP)+ ", '" \
-                        +to_string(this->CFG_BIAS_SD_I_BDIFF)+ ", '" +to_string(this->CFG_BIAS_SD_I_BSF)+ ", '" +to_string(this->CFG_BIAS_SD_I_BFCAS)+ ", '" \
-                        +to_string(this->CFG_VREF_ADC)+ ", '" +to_string(this->CFG_MON_GAIN)+ ", '" +to_string(this->CFG_MONITOR_SELECT)+ ", '" \
-                        +to_string(this->CFG_RES_PRE)+ ", '" +to_string(this->CFG_CAP_PRE)+ ", '" \
-                        +to_string(this->CFG_FP_FE)+ ", '" +to_string(this->CFG_PT)+ ", '" +to_string(this->CFG_SEL_POL)+ ", '" \
-                        +to_string(this->CFG_THR_ZCC_DAC)+ ", '" +to_string(this->CFG_THR_ARM_DAC)+ ", '" \
-                        +to_string(this->CFG_SEL_COMP_MODE)+ ", '" +to_string(this->CFG_FORCE_EN_ZCC)+ ", '" +to_string(this->CFG_EN_HYST)+ ", '" +to_string(this->CFG_FORCE_TH)+ ", '" \
-                        +to_string(this->CFG_SYNC_LEVEL_MODE)+ ", '" +to_string(this->CFG_PULSE_STRETCH)+ ", '" \
-                        +to_string(this->CFG_SELF_TRIGGER_MODE)+ ", '" +to_string(this->CFG_DDR_TRIGGER_MODE)+ ", '" \
-                        +to_string(this->CFG_SPZS_SUMMARY_ONLY)+ ", '" +to_string(this->CFG_SPZS_MAX_PARTITIONS)+ ", '" \
-                        +to_string(this->CFG_SPZS_ENABLE)+ ", '" +to_string(this->CFG_SZP_ENABLE)+ ", '" +to_string(this->CFG_SZD_ENABLE)+ ", '" \
-                        +to_string(this->CFG_TIME_TAG)+ ", '" +to_string(this->CFG_EC_BYTES)+ ", '" +to_string(this->CFG_BC_BYTES)+ ", '" \
-                        +to_string(this->CFG_LATENCY)+ ", '" +to_string(this->CFG_CAL_MODE)+ ", '" \
-                        +to_string(this->CFG_CAL_SEL_POL)+ ", '" +to_string(this->CFG_CAL_DAC)+ ", '" \
-                        +to_string(this->CFG_CAL_EXT)+ ", '" +to_string(this->CFG_CAL_PHI)+ ", '" +to_string(this->CFG_CAL_FS)+ ", '" +to_string(this->CFG_CAL_DUR)+ ", '";
+                        to_string(this->CFG_IREF) + ", " +to_string(this->CFG_HYST)+ ", " \
+                        +to_string(this->CFG_BIAS_CFD_DAC_2)+ ", " +to_string(this->CFG_BIAS_CFD_DAC_1)+ ", " +to_string(this->CFG_BIAS_PRE_I_BSF)+ ", " \
+                        +to_string(this->CFG_BIAS_PRE_I_BIT)+ ", " +to_string(this->CFG_BIAS_PRE_I_BLCC)+ ", " +to_string(this->CFG_BIAS_PRE_VREF)+ ", " \
+                        +to_string(this->CFG_BIAS_SH_I_BFCAS)+ ", " +to_string(this->CFG_BIAS_SH_I_BDIFF)+ ", " +to_string(this->CFG_BIAS_SH_I_BFAMP)+ ", " \
+                        +to_string(this->CFG_BIAS_SD_I_BDIFF)+ ", " +to_string(this->CFG_BIAS_SD_I_BSF)+ ", " +to_string(this->CFG_BIAS_SD_I_BFCAS)+ ", " \
+                        +to_string(this->CFG_VREF_ADC)+ ", " +to_string(this->CFG_MON_GAIN)+ ", " +to_string(this->CFG_MONITOR_SELECT)+ ", " \
+                        +to_string(this->CFG_RES_PRE)+ ", " +to_string(this->CFG_CAP_PRE)+ ", " \
+                        +to_string(this->CFG_FP_FE)+ ", " +to_string(this->CFG_PT)+ ", " +to_string(this->CFG_SEL_POL)+ ", " \
+                        +to_string(this->CFG_THR_ZCC_DAC)+ ", " +to_string(this->CFG_THR_ARM_DAC)+ ", " \
+                        +to_string(this->CFG_SEL_COMP_MODE)+ ", " +to_string(this->CFG_FORCE_EN_ZCC)+ ", " +to_string(this->CFG_EN_HYST)+ ", " +to_string(this->CFG_FORCE_TH)+ ", " \
+                        +to_string(this->CFG_SYNC_LEVEL_MODE)+ ", " +to_string(this->CFG_PULSE_STRETCH)+ ", " \
+                        +to_string(this->CFG_SELF_TRIGGER_MODE)+ ", " +to_string(this->CFG_DDR_TRIGGER_MODE)+ ", " \
+                        +to_string(this->CFG_SPZS_SUMMARY_ONLY)+ ", " +to_string(this->CFG_SPZS_MAX_PARTITIONS)+ ", " \
+                        +to_string(this->CFG_SPZS_ENABLE)+ ", " +to_string(this->CFG_SZP_ENABLE)+ ", " +to_string(this->CFG_SZD_ENABLE)+ ", " \
+                        +to_string(this->CFG_TIME_TAG)+ ", " +to_string(this->CFG_EC_BYTES)+ ", " +to_string(this->CFG_BC_BYTES)+ ", " \
+                        +to_string(this->CFG_LATENCY)+ ", " +to_string(this->CFG_CAL_MODE)+ ", " \
+                        +to_string(this->CFG_CAL_SEL_POL)+ ", " +to_string(this->CFG_CAL_DAC)+ ", " \
+                        +to_string(this->CFG_CAL_EXT)+ ", " +to_string(this->CFG_CAL_PHI)+ ", " +to_string(this->CFG_CAL_FS)+ ", " +to_string(this->CFG_CAL_DUR)+ ", ";
         
         for (int i=0;i<128;i++)
         {
@@ -125,7 +131,6 @@ void VFAT_Data_Table:: insert_row(connection *C, string table_name)
         sql = sql + field_values + arrays + "}');";
         WW.exec(sql);
         WW.commit();
-        cout << "Values inserted !" << endl;
 }
 
 void VFAT_Data_Table::insert_data(connection *C, vector<VFAT_Data_Table> data)
@@ -133,8 +138,9 @@ void VFAT_Data_Table::insert_data(connection *C, vector<VFAT_Data_Table> data)
     int i;
     for (i=0;i<data.size();i++)
     {
-        data[i].insert_row(&(*C),"COMPANY");
+        data[i].insert_row(&(*C),"VFAT_DATA_TABLE");
     }
+    cout << "Values inserted into table : VFAT_DATA_TABLE" << endl;
 }
 
 vector<VFAT_Data_Table> VFAT_Data_Table::row_to_object(result R)
@@ -144,6 +150,8 @@ vector<VFAT_Data_Table> VFAT_Data_Table::row_to_object(result R)
         for (auto const &row: R)
         {
             VFAT_Data_Table obj;
+            obj.VFAT_ID = row["VFAT_ID"].as<long>();
+
             //Actual VFAT Columns
             obj.CFG_IREF = row["CFG_IREF"].as<long>();
             obj.CFG_HYST = row["CFG_HYST"].as<long>(); 

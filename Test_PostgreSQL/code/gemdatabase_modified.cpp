@@ -38,6 +38,7 @@ Class:
 
 #include <bits/stdc++.h>
 #include <pqxx/pqxx> 
+#include <typeinfo>
 #include "json.hpp"
 
 //------------
@@ -538,13 +539,12 @@ class postgre_database  // : public component_name //-- hiding the imheritange f
               cout << "Table displayed successfully" << endl;
               return r;
     }
-};
 
-vector<component_name> VFAT_json_to_vec(string filename)
-{
+    vector<component_name> VFAT_json_to_vec(string filename)
+    {
 	/*function takes filename, reads all VFATS and makes objects out of them and passes it to main
 	*/
-
+    cout << filename << endl;
 	ifstream in(filename, ios::in);
 
 	//parsing file into JSON object
@@ -552,6 +552,8 @@ vector<component_name> VFAT_json_to_vec(string filename)
 	in>>j;
 
 	vector<component_name> vfat_obs;
+
+    cout << "Passed point 2" << endl;
 
 	for(auto vfat_ele = j.begin(); vfat_ele!=j.end(); vfat_ele++)
 	{
@@ -567,27 +569,50 @@ vector<component_name> VFAT_json_to_vec(string filename)
 		//2 vectors for each vfat element
 		vector<long> field_data(48, 0);
 		vector<long> array_data(128, 0);
-
+        cout << "Passed point 3" << endl;
 		for(auto data_ele = j[vfat_ele.key()].begin(); data_ele!=j[vfat_ele.key()].end(); data_ele++)
 		{
 			//iterating through individual data elements
 			if(data_ele.value().size() > 1)
 			{
+                cout << "Passed point 3 --- 1" << endl;
+                
 				//case where the 128 sized array is encountered
 				for(auto arr_itr = data_ele.value().begin(); arr_itr!=data_ele.value().end(); data_ele++)
 				{
-					array_data.push_back(arr_itr.value());
+                    try
+                    {
+                        cout<<arr_itr.value()<<" "<<endl;
+                        cout<<typeid(arr_itr.value()).name()<<" "<< endl << endl << endl;
+					    array_data.push_back(long(arr_itr.value()));
+                        
+                    }
+                    catch(const std::exception& e)
+                    {
+                        cout<<"Error ---- "<<" "<<endl;
+                        std::cerr << e.what() << '\n';
+                    }
 				}
+                
 			}
 			else
+            {
+                cout << "Passed point 3 --- 1 ----- " << endl;
+                cout<<typeid(data_ele.value()).name()<<" "<< endl;
 				field_data.push_back(data_ele.value());
+            }
 		}
-
+        cout << "Passed point 4" << endl;
 		ob.initialize(field_data,array_data);
 		vfat_obs.push_back(ob);
 	}
 	return vfat_obs;
-}
+    }
+};
+
+
+
+
 int main(int argc, char** argv)
 {
     try
@@ -619,16 +644,17 @@ int main(int argc, char** argv)
 	      */
 		
 		//above section commented out for testing without the database
-
+        postgre_database ob;
 		string filename = argv[1];
 		vector<component_name> file_obs;
 
-		file_obs = VFAT_json_to_vec(filename);
-
-		for(int i = 3521; i<3522; i++)
+		file_obs = ob.VFAT_json_to_vec(filename);
+        cout << "Passed point 1" << endl;
+		for(int i = 3515; i<3522; i++)
 		{
 			cout<<"CFG_CAL_DAC"<<file_obs[i].CFG_CAL_DAC<<endl;
 			cout<<"CFG_PT"<<file_obs[i].CFG_PT<<endl;
+            cout << endl;
 		}
 	
         }

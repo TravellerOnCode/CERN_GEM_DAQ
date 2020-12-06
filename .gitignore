@@ -1,1 +1,5 @@
 Test_PostgreSQL/data/
+Test_PostgreSQL/code/component_name.cpp
+Test_PostgreSQL/code/gemdbexp.cpp
+Test_PostgreSQL/code/Sample_JSON.json 
+Test_PostgreSQL/code/Final_Codes/Sample_JSON.json 

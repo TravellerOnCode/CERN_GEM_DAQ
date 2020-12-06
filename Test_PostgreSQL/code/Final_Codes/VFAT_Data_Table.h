@@ -1,3 +1,6 @@
+#ifndef VFAT_DATA_TABLE_H
+#define VFAT_DATA_TABLE_H
+
 #include <iostream>
 #include <pqxx/pqxx> 
 #include <string>
@@ -8,6 +11,8 @@ using namespace pqxx;
 class VFAT_Data_Table
 {
     private:
+
+        long VFAT_ID;
         //Actual VFAT Columns
         long CFG_IREF; // 32
         long CFG_HYST; // 5
@@ -157,10 +162,12 @@ class VFAT_Data_Table
     public:
 
         void create_table(connection *C,string table_name);
-        void initialize();
+        void initialize(long VFAT_ID, vector<long> field_val, vector<long> array_val);
         void insert_row(connection *C, string table_name);
         void insert_data(connection *C, vector<VFAT_Data_Table> data);
         //void display_results(vector<VFAT_Data_Table> &data);
         vector<VFAT_Data_Table> row_to_object(result R);
 
 };
+
+#endif
