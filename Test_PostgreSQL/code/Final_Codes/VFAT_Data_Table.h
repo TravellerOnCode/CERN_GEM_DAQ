@@ -4,6 +4,8 @@
 #include <iostream>
 #include <pqxx/pqxx> 
 #include <string>
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 using namespace pqxx;
@@ -165,8 +167,9 @@ class VFAT_Data_Table
         void initialize(long VFAT_ID, vector<long> field_val, vector<long> array_val);
         void insert_row(connection *C, string table_name);
         void insert_data(connection *C, vector<VFAT_Data_Table> data);
-        //void display_results(vector<VFAT_Data_Table> &data);
         vector<VFAT_Data_Table> row_to_object(result R);
+        void display_row();
+        void display_results(vector<VFAT_Data_Table> &data);
 
 };
 

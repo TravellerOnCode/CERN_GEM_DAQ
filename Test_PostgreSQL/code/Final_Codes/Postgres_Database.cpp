@@ -49,6 +49,7 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
 	int freqq = 0;
 	string vfat_id = "", config_id = "";
 	config_id = filename.substr(0,filename.length()-4);
+	
 	VFAT_Config_Table ob3;
 	ob3.initialize(stoi(config_id));
 	vfat_configs.push_back(ob3);

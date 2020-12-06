@@ -7,6 +7,7 @@ string DBNAME = "gemdatabase";
 string USER = "postgres";
 string PASSWORD = "linuxos16";
 
+
 int main(int argc, char** argv)
 {
     try
@@ -33,12 +34,7 @@ int main(int argc, char** argv)
               VFAT_Data_Table obj2;
               VFAT_Index_Table obj3;
 
-              //creating tables
-              obj1.create_table(&C,"VFAT_CONFIG_TABLE");
-              obj2.create_table(&C,"VFAT_DATA_TABLE");
-              obj3.create_table(&C,"VFAT_INDEX_TABLE");
-
-
+              
               vector<VFAT_Config_Table> configurations;
               vector<VFAT_Data_Table> vfat_data;
               vector<VFAT_Index_Table> indexes;
@@ -47,6 +43,11 @@ int main(int argc, char** argv)
               vector<VFAT_Data_Table> vfat_data2;
               vector<VFAT_Index_Table> indexes2;
 
+              /*
+              //creating tables
+              obj1.create_table(&C,"VFAT_CONFIG_TABLE");
+              obj2.create_table(&C,"VFAT_DATA_TABLE");
+              obj3.create_table(&C,"VFAT_INDEX_TABLE");
 
               string filename1 = argv[1];
               string filename2 = argv[2];
@@ -62,14 +63,7 @@ int main(int argc, char** argv)
 
             
               cout << "All JSON converted to object Vectors" << endl;
-		      /*
-              for(int i = 3515; i<3522; i++)
-		      {
-			    cout<<"CFG_CAL_DAC"<<file_obs[i].CFG_CAL_DAC<<endl;
-			    cout<<"CFG_PT"<<file_obs[i].CFG_PT<<endl;
-                cout << endl;
-		      }
-              */
+		      
 
               //Data Insertion (in this particular order data -> config -> index)
               obj1.insert_data(&C,configurations);
@@ -83,15 +77,15 @@ int main(int argc, char** argv)
               obj3.insert_data(&C,indexes2);
 
               cout << "JSON 2 DATA INSERTED ! " << endl;
-
+                */
 
 
 
               //obj.create_table(&C,"VFAT_COMPONENT");
-              //r = ob.query_response(&C,"gemlong");
+              r = ob.query_response(&C,"VFAT_DATA_TABLE");
               //RETURNS A VECTOR OF OBJECTS
-              //results2 = obj2.row_to_object(r);
-              //obj.display_results(results);
+              vfat_data = obj2.row_to_object(r);
+              obj2.display_results(vfat_data);
 
               C.disconnect ();
         }
