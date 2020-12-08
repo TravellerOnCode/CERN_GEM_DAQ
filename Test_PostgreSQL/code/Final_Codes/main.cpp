@@ -43,7 +43,7 @@ int main(int argc, char** argv)
               vector<VFAT_Data_Table> vfat_data2;
               vector<VFAT_Index_Table> indexes2;
 
-              /*
+              
               //creating tables
               obj1.create_table(&C,"VFAT_CONFIG_TABLE");
               obj2.create_table(&C,"VFAT_DATA_TABLE");
@@ -77,7 +77,7 @@ int main(int argc, char** argv)
               obj3.insert_data(&C,indexes2);
 
               cout << "JSON 2 DATA INSERTED ! " << endl;
-              */
+
 
 
               //obj.create_table(&C,"VFAT_COMPONENT");
