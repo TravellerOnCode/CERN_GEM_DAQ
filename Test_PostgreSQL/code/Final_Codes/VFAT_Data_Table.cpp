@@ -15,8 +15,91 @@ void VFAT_Data_Table ::create_table(connection *C,string table_name)
         WW.commit();
 }
 
-void VFAT_Data_Table::initialize(long VFAT_ID,vector<long> field_val, vector<long> array_val)
+void VFAT_Data_Table ::initialize(long VFAT_ID, unordered_map<string, long> field_val, vector<long> array_val)
     {
+            this->VFAT_ID=VFAT_ID;
+
+            this->CFG_IREF=field_val["CFG_IREF"];
+            this->CFG_HYST=field_val["CFG_HYST"];
+
+            this->CFG_BIAS_CFD_DAC_2=field_val["CFG_BIAS_CFD_DAC_2"];
+            this->CFG_BIAS_CFD_DAC_1=field_val["CFG_BIAS_CFD_DAC_1"];
+            this->CFG_BIAS_PRE_I_BSF=field_val["CFG_BIAS_PRE_I_BSF"];
+
+            this->CFG_BIAS_PRE_I_BIT=field_val["CFG_BIAS_PRE_I_BIT"];
+            this->CFG_BIAS_PRE_I_BLCC=field_val["CFG_BIAS_PRE_I_BLCC"];
+            this->CFG_BIAS_PRE_VREF=field_val["CFG_BIAS_PRE_VREF"];
+            this->CFG_BIAS_SH_I_BFCAS=field_val["CFG_BIAS_SH_I_BFCAS"];
+            this->CFG_BIAS_SH_I_BDIFF=field_val["CFG_BIAS_SH_I_BDIFF"];
+            this->CFG_BIAS_SH_I_BFAMP=field_val["CFG_BIAS_SH_I_BFAMP"];
+            this->CFG_BIAS_SD_I_BDIFF=field_val["CFG_BIAS_SD_I_BDIFF"];
+            this->CFG_BIAS_SD_I_BSF=field_val["CFG_BIAS_SD_I_BSF"];
+            this->CFG_BIAS_SD_I_BFCAS=field_val["CFG_BIAS_SD_I_BFCAS"];
+
+            this->CFG_VREF_ADC=field_val["CFG_VREF_ADC"];
+            this->CFG_MON_GAIN=field_val["CFG_MON_GAIN"];
+            this->CFG_MONITOR_SELECT=field_val["CFG_MONITOR_SELECT"];
+
+            this->CFG_RES_PRE=field_val["CFG_RES_PRE"];
+            this->CFG_CAP_PRE=field_val["CFG_CAP_PRE"];
+
+            this->CFG_FP_FE=field_val["CFG_FP_FE"];
+            this->CFG_PT=field_val["CFG_PT"];
+
+            this->CFG_SEL_POL=field_val["CFG_SEL_POL"];
+
+            this->CFG_THR_ZCC_DAC=field_val["CFG_THR_ZCC_DAC"];
+
+            this->CFG_THR_ARM_DAC=field_val["CFG_THR_ARM_DAC"];
+
+            this->CFG_SEL_COMP_MODE=field_val["CFG_SEL_COMP_MODE"];
+            this->CFG_FORCE_EN_ZCC=field_val["CFG_FORCE_EN_ZCC"];
+            this->CFG_EN_HYST=field_val["CFG_EN_HYST"];
+            this->CFG_FORCE_TH=field_val["CFG_FORCE_TH"];
+
+            this->CFG_SYNC_LEVEL_MODE=field_val["CFG_SYNC_LEVEL_MODE"];
+
+            this->CFG_PULSE_STRETCH=field_val["CFG_PULSE_STRETCH"];
+
+
+            this->CFG_SELF_TRIGGER_MODE=field_val["CFG_SELF_TRIGGER_MODE"];
+            this->CFG_DDR_TRIGGER_MODE=field_val["CFG_DDR_TRIGGER_MODE"];
+
+            this->CFG_SPZS_SUMMARY_ONLY=field_val["CFG_SPZS_SUMMARY_ONLY"];
+            this->CFG_SPZS_MAX_PARTITIONS=field_val["CFG_SPZS_MAX_PARTITIONS"];
+            this->CFG_SPZS_ENABLE=field_val["CFG_SPZS_ENABLE"];
+            this->CFG_SZP_ENABLE=field_val["CFG_SZP_ENABLE"];
+            this->CFG_SZD_ENABLE=field_val["CFG_SZD_ENABLE"];
+
+            this->CFG_TIME_TAG=field_val["CFG_TIME_TAG"];
+            this->CFG_EC_BYTES=field_val["CFG_EC_BYTES"];
+            this->CFG_BC_BYTES=field_val["CFG_BC_BYTES"];
+
+            this->CFG_LATENCY=field_val["CFG_LATENCY"];
+
+            this->CFG_CAL_MODE=field_val["CFG_CAL_MODE"];
+
+            this->CFG_CAL_SEL_POL=field_val["CFG_CAL_SEL_POL"];
+
+            this->CFG_CAL_DAC=field_val["CFG_CAL_DAC"];
+
+            this->CFG_CAL_EXT=field_val["CFG_CAL_EXT"];
+            this->CFG_CAL_PHI=field_val["CFG_CAL_PHI"];
+            this->CFG_CAL_FS=field_val["CFG_CAL_FS"];
+            this->CFG_CAL_DUR=field_val["CFG_CAL_DUR"];
+
+
+	    for(int i = 0; i< array_val.size(); i++)
+	    {
+		VFAT_CHANNELS_CHANNEL_0_to_128.push_back(array_val[i]);
+	    }
+        //cout << "******" << array_val[0] << endl;
+        
+    }
+
+/*
+void VFAT_Data_Table::initialize(long VFAT_ID,vector<long> field_val, vector<long> array_val)
+{
 	    int i = 0;
             this->VFAT_ID=VFAT_ID;
             this->CFG_IREF=field_val[i++];
@@ -92,6 +175,7 @@ void VFAT_Data_Table::initialize(long VFAT_ID,vector<long> field_val, vector<lon
 		VFAT_CHANNELS_CHANNEL_0_to_128.push_back(array_val[i]);
 	    }
 }
+*/
 
 void VFAT_Data_Table:: insert_row(connection *C, string table_name)
 {
@@ -124,11 +208,11 @@ void VFAT_Data_Table:: insert_row(connection *C, string table_name)
                         +to_string(this->CFG_CAL_SEL_POL)+ ", " +to_string(this->CFG_CAL_DAC)+ ", " \
                         +to_string(this->CFG_CAL_EXT)+ ", " +to_string(this->CFG_CAL_PHI)+ ", " +to_string(this->CFG_CAL_FS)+ ", " +to_string(this->CFG_CAL_DUR)+ ", ";
         
-        for (int i=0;i<128;i++)
+        for (int i=0;i<127;i++)
         {
-            arrays = arrays + to_string(this->VFAT_CHANNELS_CHANNEL_0_to_128[i]);
+            arrays = arrays + to_string(this->VFAT_CHANNELS_CHANNEL_0_to_128[i]) +", ";
         }
-        sql = sql + field_values + arrays + "}');";
+        sql = sql + field_values + arrays + to_string(this->VFAT_CHANNELS_CHANNEL_0_to_128[127]) + "}');";
         WW.exec(sql);
         WW.commit();
 }
@@ -284,76 +368,76 @@ vector<VFAT_Data_Table> VFAT_Data_Table::row_to_object(result R)
 //Display a particular row of the table
 void VFAT_Data_Table::display_row()
 {
-            cout << std::left << std::setw(25) << "VFAT_ID " << std::setw(2) << ":" << this->VFAT_ID << endl;
-            cout << std::left << std::setw(25) << "CFG_IREF " << std::setw(2) << ":" << this->CFG_IREF << endl;
-            cout << std::left << std::setw(25) << "CFG_HYST " << std::setw(2) << ":" << this->CFG_HYST << endl;
+            cout << std::left << std::setw(30) << "VFAT_ID " << std::setw(2) << ":" << this->VFAT_ID << endl;
+            cout << std::left << std::setw(30) << "CFG_IREF " << std::setw(2) << ":" << this->CFG_IREF << endl;
+            cout << std::left << std::setw(30) << "CFG_HYST " << std::setw(2) << ":" << this->CFG_HYST << endl;
 
-            cout << std::left << std::setw(25) << "CFG_BIAS_CFD_DAC_2 " << std::setw(2) << ":" << this->CFG_BIAS_CFD_DAC_2 << endl;
-            cout << std::left << std::setw(25) << "CFG_BIAS_CFD_DAC_1 " << std::setw(2) << ":" << this->CFG_BIAS_CFD_DAC_1 << endl;
-            cout << std::left << std::setw(25) << "CFG_BIAS_PRE_I_BSF " << std::setw(2) << ":" << this->CFG_BIAS_PRE_I_BSF << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_CFD_DAC_2 " << std::setw(2) << ":" << this->CFG_BIAS_CFD_DAC_2 << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_CFD_DAC_1 " << std::setw(2) << ":" << this->CFG_BIAS_CFD_DAC_1 << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_PRE_I_BSF " << std::setw(2) << ":" << this->CFG_BIAS_PRE_I_BSF << endl;
 
-            cout << std::left << std::setw(25) << "CFG_BIAS_PRE_I_BIT " << std::setw(2) << ":" << this->CFG_BIAS_PRE_I_BIT << endl;
-            cout << std::left << std::setw(25) << "CFG_BIAS_PRE_I_BLCC " << std::setw(2) << ":" << this->CFG_BIAS_PRE_I_BLCC << endl;
-            cout << std::left << std::setw(25) << "CFG_BIAS_PRE_VREF " << std::setw(2) << ":" << this->CFG_BIAS_PRE_VREF << endl;
-            cout << std::left << std::setw(25) << "CFG_BIAS_SH_I_BFCAS " << std::setw(2) << ":" << this->CFG_BIAS_SH_I_BFCAS << endl;
-            cout << std::left << std::setw(25) << "CFG_BIAS_SH_I_BDIFF " << std::setw(2) << ":" << this->CFG_BIAS_SH_I_BDIFF << endl;
-            cout << std::left << std::setw(25) << "CFG_BIAS_SH_I_BFAMP " << std::setw(2) << ":" << this->CFG_BIAS_SH_I_BFAMP << endl;
-            cout << std::left << std::setw(25) << "CFG_BIAS_SD_I_BDIFF " << std::setw(2) << ":" << this->CFG_BIAS_SD_I_BDIFF << endl;
-            cout << std::left << std::setw(25) << "CFG_BIAS_SD_I_BSF " << std::setw(2) << ":" << this->CFG_BIAS_SD_I_BSF << endl;
-            cout << std::left << std::setw(25) << "CFG_BIAS_SD_I_BFCAS " << std::setw(2) << ":" << this->CFG_BIAS_SD_I_BFCAS << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_PRE_I_BIT " << std::setw(2) << ":" << this->CFG_BIAS_PRE_I_BIT << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_PRE_I_BLCC " << std::setw(2) << ":" << this->CFG_BIAS_PRE_I_BLCC << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_PRE_VREF " << std::setw(2) << ":" << this->CFG_BIAS_PRE_VREF << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_SH_I_BFCAS " << std::setw(2) << ":" << this->CFG_BIAS_SH_I_BFCAS << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_SH_I_BDIFF " << std::setw(2) << ":" << this->CFG_BIAS_SH_I_BDIFF << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_SH_I_BFAMP " << std::setw(2) << ":" << this->CFG_BIAS_SH_I_BFAMP << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_SD_I_BDIFF " << std::setw(2) << ":" << this->CFG_BIAS_SD_I_BDIFF << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_SD_I_BSF " << std::setw(2) << ":" << this->CFG_BIAS_SD_I_BSF << endl;
+            cout << std::left << std::setw(30) << "CFG_BIAS_SD_I_BFCAS " << std::setw(2) << ":" << this->CFG_BIAS_SD_I_BFCAS << endl;
 
-            cout << std::left << std::setw(25) << "CFG_VREF_ADC " << std::setw(2) << ":" << this->CFG_VREF_ADC << endl;
-            cout << std::left << std::setw(25) << "CFG_MON_GAIN " << std::setw(2) << ":" << this->CFG_MON_GAIN << endl;
-            cout << std::left << std::setw(25) << "CFG_MONITOR_SELECT " << std::setw(2) << ":" << this->CFG_MONITOR_SELECT << endl;
+            cout << std::left << std::setw(30) << "CFG_VREF_ADC " << std::setw(2) << ":" << this->CFG_VREF_ADC << endl;
+            cout << std::left << std::setw(30) << "CFG_MON_GAIN " << std::setw(2) << ":" << this->CFG_MON_GAIN << endl;
+            cout << std::left << std::setw(30) << "CFG_MONITOR_SELECT " << std::setw(2) << ":" << this->CFG_MONITOR_SELECT << endl;
 
-            cout << std::left << std::setw(25) << "CFG_RES_PRE " << std::setw(2) << ":" << this->CFG_RES_PRE << endl;
-            cout << std::left << std::setw(25) << "CFG_CAP_PRE " << std::setw(2) << ":" << this->CFG_CAP_PRE << endl;
+            cout << std::left << std::setw(30) << "CFG_RES_PRE " << std::setw(2) << ":" << this->CFG_RES_PRE << endl;
+            cout << std::left << std::setw(30) << "CFG_CAP_PRE " << std::setw(2) << ":" << this->CFG_CAP_PRE << endl;
 
-            cout << std::left << std::setw(25) << "CFG_FP_FE " << std::setw(2) << ":" << this->CFG_FP_FE << endl;
-            cout << std::left << std::setw(25) << "CFG_PT " << std::setw(2) << ":" << this->CFG_PT << endl;
+            cout << std::left << std::setw(30) << "CFG_FP_FE " << std::setw(2) << ":" << this->CFG_FP_FE << endl;
+            cout << std::left << std::setw(30) << "CFG_PT " << std::setw(2) << ":" << this->CFG_PT << endl;
 
-            cout << std::left << std::setw(25) << "CFG_SEL_POL " << std::setw(2) << ":" << this->CFG_SEL_POL << endl;
+            cout << std::left << std::setw(30) << "CFG_SEL_POL " << std::setw(2) << ":" << this->CFG_SEL_POL << endl;
 
-            cout << std::left << std::setw(25) << "CFG_THR_ZCC_DAC " << std::setw(2) << ":" << this->CFG_THR_ZCC_DAC << endl;
+            cout << std::left << std::setw(30) << "CFG_THR_ZCC_DAC " << std::setw(2) << ":" << this->CFG_THR_ZCC_DAC << endl;
 
-            cout << std::left << std::setw(25) << "CFG_THR_ARM_DAC " << std::setw(2) << ":" << this->CFG_THR_ARM_DAC << endl;
+            cout << std::left << std::setw(30) << "CFG_THR_ARM_DAC " << std::setw(2) << ":" << this->CFG_THR_ARM_DAC << endl;
 
-            cout << std::left << std::setw(25) << "CFG_SEL_COMP_MODE " << std::setw(2) << ":" << this->CFG_SEL_COMP_MODE << endl;
-            cout << std::left << std::setw(25) << "CFG_FORCE_EN_ZCC " << std::setw(2) << ":" << this->CFG_FORCE_EN_ZCC << endl;
-            cout << std::left << std::setw(25) << "CFG_EN_HYST " << std::setw(2) << ":" << this->CFG_EN_HYST << endl;
-            cout << std::left << std::setw(25) << "CFG_FORCE_TH " << std::setw(2) << ":" << this->CFG_FORCE_TH << endl;
+            cout << std::left << std::setw(30) << "CFG_SEL_COMP_MODE " << std::setw(2) << ":" << this->CFG_SEL_COMP_MODE << endl;
+            cout << std::left << std::setw(30) << "CFG_FORCE_EN_ZCC " << std::setw(2) << ":" << this->CFG_FORCE_EN_ZCC << endl;
+            cout << std::left << std::setw(30) << "CFG_EN_HYST " << std::setw(2) << ":" << this->CFG_EN_HYST << endl;
+            cout << std::left << std::setw(30) << "CFG_FORCE_TH " << std::setw(2) << ":" << this->CFG_FORCE_TH << endl;
 
-            cout << std::left << std::setw(25) << "CFG_SYNC_LEVEL_MODE " << std::setw(2) << ":" << this->CFG_SYNC_LEVEL_MODE << endl;
+            cout << std::left << std::setw(30) << "CFG_SYNC_LEVEL_MODE " << std::setw(2) << ":" << this->CFG_SYNC_LEVEL_MODE << endl;
 
-            cout << std::left << std::setw(25) << "CFG_PULSE_STRETCH " << std::setw(2) << ":" << this->CFG_PULSE_STRETCH << endl;
+            cout << std::left << std::setw(30) << "CFG_PULSE_STRETCH " << std::setw(2) << ":" << this->CFG_PULSE_STRETCH << endl;
 
-            cout << std::left << std::setw(25) << "CFG_SELF_TRIGGER_MODE " << std::setw(2) << ":" << this->CFG_SELF_TRIGGER_MODE << endl;
-            cout << std::left << std::setw(25) << "CFG_DDR_TRIGGER_MODE " << std::setw(2) << ":" << this->CFG_DDR_TRIGGER_MODE << endl;
+            cout << std::left << std::setw(30) << "CFG_SELF_TRIGGER_MODE " << std::setw(2) << ":" << this->CFG_SELF_TRIGGER_MODE << endl;
+            cout << std::left << std::setw(30) << "CFG_DDR_TRIGGER_MODE " << std::setw(2) << ":" << this->CFG_DDR_TRIGGER_MODE << endl;
 
-            cout << std::left << std::setw(25) << "CFG_SPZS_SUMMARY_ONLY " << std::setw(2) << ":" << this->CFG_SPZS_SUMMARY_ONLY << endl;
-            cout << std::left << std::setw(25) << "CFG_SPZS_MAX_PARTITIONS " << std::setw(2) << ":" << this->CFG_SPZS_MAX_PARTITIONS << endl;
-            cout << std::left << std::setw(25) << "CFG_SPZS_ENABLE " << std::setw(2) << ":" << this->CFG_SPZS_ENABLE << endl;
-            cout << std::left << std::setw(25) << "CFG_SZP_ENABLE " << std::setw(2) << ":" << this->CFG_SZP_ENABLE << endl;
-            cout << std::left << std::setw(25) << "CFG_SZD_ENABLE " << std::setw(2) << ":" << this->CFG_SZD_ENABLE << endl;
+            cout << std::left << std::setw(30) << "CFG_SPZS_SUMMARY_ONLY " << std::setw(2) << ":" << this->CFG_SPZS_SUMMARY_ONLY << endl;
+            cout << std::left << std::setw(30) << "CFG_SPZS_MAX_PARTITIONS " << std::setw(2) << ":" << this->CFG_SPZS_MAX_PARTITIONS << endl;
+            cout << std::left << std::setw(30) << "CFG_SPZS_ENABLE " << std::setw(2) << ":" << this->CFG_SPZS_ENABLE << endl;
+            cout << std::left << std::setw(30) << "CFG_SZP_ENABLE " << std::setw(2) << ":" << this->CFG_SZP_ENABLE << endl;
+            cout << std::left << std::setw(30) << "CFG_SZD_ENABLE " << std::setw(2) << ":" << this->CFG_SZD_ENABLE << endl;
 
-            cout << std::left << std::setw(25) << "CFG_TIME_TAG " << std::setw(2) << ":" << this->CFG_TIME_TAG << endl;
-            cout << std::left << std::setw(25) << "CFG_EC_BYTES " << std::setw(2) << ":" << this->CFG_EC_BYTES << endl;
-            cout << std::left << std::setw(25) << "CFG_BC_BYTES " << std::setw(2) << ":" << this->CFG_BC_BYTES << endl;
+            cout << std::left << std::setw(30) << "CFG_TIME_TAG " << std::setw(2) << ":" << this->CFG_TIME_TAG << endl;
+            cout << std::left << std::setw(30) << "CFG_EC_BYTES " << std::setw(2) << ":" << this->CFG_EC_BYTES << endl;
+            cout << std::left << std::setw(30) << "CFG_BC_BYTES " << std::setw(2) << ":" << this->CFG_BC_BYTES << endl;
 
-            cout << std::left << std::setw(25) << "CFG_LATENCY " << std::setw(2) << ":" << this->CFG_LATENCY << endl;
+            cout << std::left << std::setw(30) << "CFG_LATENCY " << std::setw(2) << ":" << this->CFG_LATENCY << endl;
 
-            cout << std::left << std::setw(25) << "CFG_CAL_MODE " << std::setw(2) << ":" << this->CFG_CAL_MODE << endl;
+            cout << std::left << std::setw(30) << "CFG_CAL_MODE " << std::setw(2) << ":" << this->CFG_CAL_MODE << endl;
 
-            cout << std::left << std::setw(25) << "CFG_CAL_SEL_POL " << std::setw(2) << ":" << this->CFG_CAL_SEL_POL << endl;
+            cout << std::left << std::setw(30) << "CFG_CAL_SEL_POL " << std::setw(2) << ":" << this->CFG_CAL_SEL_POL << endl;
 
-            cout << std::left << std::setw(25) << "CFG_CAL_DAC " << std::setw(2) << ":" << this->CFG_CAL_DAC << endl;
+            cout << std::left << std::setw(30) << "CFG_CAL_DAC " << std::setw(2) << ":" << this->CFG_CAL_DAC << endl;
 
-            cout << std::left << std::setw(25) << "CFG_CAL_EXT " << std::setw(2) << ":" << this->CFG_CAL_EXT << endl;
-            cout << std::left << std::setw(25) << "CFG_CAL_PHI " << std::setw(2) << ":" << this->CFG_CAL_PHI << endl;
-            cout << std::left << std::setw(25) << "CFG_CAL_FS " << std::setw(2) << ":" << this->CFG_CAL_FS << endl;
-            cout << std::left << std::setw(25) << "CFG_CAL_DUR " << std::setw(2) << ":" << this->CFG_CAL_DUR << endl;
+            cout << std::left << std::setw(30) << "CFG_CAL_EXT " << std::setw(2) << ":" << this->CFG_CAL_EXT << endl;
+            cout << std::left << std::setw(30) << "CFG_CAL_PHI " << std::setw(2) << ":" << this->CFG_CAL_PHI << endl;
+            cout << std::left << std::setw(30) << "CFG_CAL_FS " << std::setw(2) << ":" << this->CFG_CAL_FS << endl;
+            cout << std::left << std::setw(30) << "CFG_CAL_DUR " << std::setw(2) << ":" << this->CFG_CAL_DUR << endl;
             
-            cout << std::left << std::setw(25) << "VFAT_CHANNELS_CHANNEL_0_to_128 " << std::setw(2) << ":" << "[ " ;
+            cout << std::left << std::setw(30) << "VFAT_CHANNELS_CHANNEL_0_to_128 " << std::setw(2) << ":" << "[ " ;
             for (int i=0;i<128;i++)
             {
                 cout << this->VFAT_CHANNELS_CHANNEL_0_to_128[i] << ", ";

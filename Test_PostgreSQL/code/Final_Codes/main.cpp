@@ -64,7 +64,7 @@ int main(int argc, char** argv)
             
               cout << "All JSON converted to object Vectors" << endl;
 		      
-
+            
               //Data Insertion (in this particular order data -> config -> index)
               obj1.insert_data(&C,configurations);
               obj2.insert_data(&C,vfat_data);
@@ -77,8 +77,7 @@ int main(int argc, char** argv)
               obj3.insert_data(&C,indexes2);
 
               cout << "JSON 2 DATA INSERTED ! " << endl;
-                */
-
+              */
 
 
               //obj.create_table(&C,"VFAT_COMPONENT");
@@ -86,7 +85,7 @@ int main(int argc, char** argv)
               //RETURNS A VECTOR OF OBJECTS
               vfat_data = obj2.row_to_object(r);
               obj2.display_results(vfat_data);
-
+            
               C.disconnect ();
         }
         catch(const std::exception& e)
