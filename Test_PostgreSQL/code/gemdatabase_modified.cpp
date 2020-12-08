@@ -45,7 +45,7 @@ Class:
 
 using namespace std;
 using namespace pqxx;
-using json = nlohmann::json;
+using json = nlohmann::ordered_json;
 
 string DBNAME = "gemdaq";
 string USER = "postgres";
@@ -235,76 +235,77 @@ class component_name
 
     
     //Initialize an object with values
-    void initialize(vector<long> field_val, vector<long> array_val)
+    void initialize(unordered_map<string, long> field_val, vector<long> array_val)
     {
-	    int i = 0;
-            this->CFG_IREF=field_val[i++];
-            this->CFG_HYST=field_val[i++];
+            this->CFG_IREF=field_val["CGF_IREF"];
+            this->CFG_HYST=field_val["CFG_HYST"];
 
-            this->CFG_BIAS_CFD_DAC_2=field_val[i++];
-            this->CFG_BIAS_CFD_DAC_1=field_val[i++];
-            this->CFG_BIAS_PRE_I_BSF=field_val[i++];
+            this->CFG_BIAS_CFD_DAC_2=field_val["CFG_BIAS_CFD_DAC_2"];
+            this->CFG_BIAS_CFD_DAC_1=field_val["CFG_BIAS_CFD_DAC_1"];
+            this->CFG_BIAS_PRE_I_BSF=field_val["CFG_BIAS_PRE_I_BSF"];
 
-            this->CFG_BIAS_PRE_I_BIT=field_val[i++];
-            this->CFG_BIAS_PRE_I_BLCC=field_val[i++];
-            this->CFG_BIAS_PRE_VREF=field_val[i++];
-            this->CFG_BIAS_SH_I_BFCAS=field_val[i++];
-            this->CFG_BIAS_SH_I_BDIFF=field_val[i++];
-            this->CFG_BIAS_SH_I_BFAMP=field_val[i++];
-            this->CFG_BIAS_SD_I_BDIFF=field_val[i++];
-            this->CFG_BIAS_SD_I_BSF=field_val[i++];
-            this->CFG_BIAS_SD_I_BFCAS=field_val[i++];
+            this->CFG_BIAS_PRE_I_BIT=field_val["CFG_BIAS_PRE_I_BIT"];
+            this->CFG_BIAS_PRE_I_BLCC=field_val["CFG_BIAS_PRE_I_BLCC"];
+            this->CFG_BIAS_PRE_VREF=field_val["CFG_BIAS_PRE_VREF"];
+            this->CFG_BIAS_SH_I_BFCAS=field_val["CFG_BIAS_SH_I_BFCAS"];
+            this->CFG_BIAS_SH_I_BDIFF=field_val["CFG_BIAS_SH_I_BDIFF"];
+            this->CFG_BIAS_SH_I_BFAMP=field_val["CFG_BIAS_SH_I_BFAMP"];
+            this->CFG_BIAS_SD_I_BDIFF=field_val["CFG_BIAS_SD_I_BDIFF"];
+            this->CFG_BIAS_SD_I_BSF=field_val["CFG_BIAS_SD_I_BSF"];
+            this->CFG_BIAS_SD_I_BFCAS=field_val["CFG_BIAS_SD_I_BFCAS"];
 
-            this->CFG_VREF_ADC=field_val[i++];
-            this->CFG_MON_GAIN=field_val[i++];
-            this->CFG_MONITOR_SELECT=field_val[i++];
+            this->CFG_VREF_ADC=field_val["CFG_VREF_ADC"];
+            this->CFG_MON_GAIN=field_val["CFG_MON_GAIN"];
+            this->CFG_MONITOR_SELECT=field_val["CFG_MONITOR_SELECT"];
 
-            this->CFG_RES_PRE=field_val[i++];
-            this->CFG_CAP_PRE=field_val[i++];
+            this->CFG_RES_PRE=field_val["CFG_RES_PRE"];
+            this->CFG_CAP_PRE=field_val["CFG_CAP_PRE"];
 
-            this->CFG_FP_FE=field_val[i++];
-            this->CFG_PT=field_val[i++];
+            this->CFG_FP_FE=field_val["CFG_FP_FE"];
+            this->CFG_PT=field_val["CFG_PT"];
 
-            this->CFG_SEL_POL=field_val[i++];
+            this->CFG_SEL_POL=field_val["CFG_SEL_POL"];
 
-            this->CFG_THR_ZCC_DAC=field_val[i++];
+            this->CFG_THR_ZCC_DAC=field_val["CFG_THR_ZCC_DAC"];
 
-            this->CFG_THR_ARM_DAC=field_val[i++];
+            this->CFG_THR_ARM_DAC=field_val["CFG_THR_ARM_DAC"];
 
-            this->CFG_SEL_COMP_MODE=field_val[i++];
-            this->CFG_FORCE_EN_ZCC=field_val[i++];
-            this->CFG_EN_HYST=field_val[i++];
-            this->CFG_FORCE_TH=field_val[i++];
+            this->CFG_SEL_COMP_MODE=field_val["CFG_SEL_COMP_MODE"];
+            this->CFG_FORCE_EN_ZCC=field_val["CFG_FORCE_EN_ZCC"];
+            this->CFG_EN_HYST=field_val["CFG_EN_HYST"];
+            this->CFG_FORCE_TH=field_val["CFG_FORCE_TH"];
 
-            this->CFG_SYNC_LEVEL_MODE=field_val[i++];
+            this->CFG_SYNC_LEVEL_MODE=field_val["CFG_SYNC_LEVEL_MODE"];
 
-            this->CFG_PULSE_STRETCH=field_val[i++];
+            this->CFG_PULSE_STRETCH=field_val["CFG_PULSE_STRETCH"];
 
-            this->CFG_SELF_TRIGGER_MODE=field_val[i++];
-            this->CFG_DDR_TRIGGER_MODE=field_val[i++];
 
-            this->CFG_SPZS_SUMMARY_ONLY=field_val[i++];
-            this->CFG_SPZS_MAX_PARTITIONS=field_val[i++];
-            this->CFG_SPZS_ENABLE=field_val[i++];
-            this->CFG_SZP_ENABLE=field_val[i++];
-            this->CFG_SZD_ENABLE=field_val[i++];
+            this->CFG_SELF_TRIGGER_MODE=field_val["CFG_SELF_TRIGGER_MODE"];
+            this->CFG_DDR_TRIGGER_MODE=field_val["CFG_DDR_TRIGGER_MODE"];
 
-            this->CFG_TIME_TAG=field_val[i++];
-            this->CFG_EC_BYTES=field_val[i++];
-            this->CFG_BC_BYTES=field_val[i++];
+            this->CFG_SPZS_SUMMARY_ONLY=field_val["CFG_SPZS_SUMMARY_ONLY"];
+            this->CFG_SPZS_MAX_PARTITIONS=field_val["CFG_SPZS_MAX_PARTITIONS"];
+            this->CFG_SPZS_ENABLE=field_val["CFG_SPZS_ENABLE"];
+            this->CFG_SZP_ENABLE=field_val["CFG_SZP_ENABLE"];
+            this->CFG_SZD_ENABLE=field_val["CFG_SZD_ENABLE"];
 
-            this->CFG_LATENCY=field_val[i++];
+            this->CFG_TIME_TAG=field_val["CFG_TIME_TAG"];
+            this->CFG_EC_BYTES=field_val["CFG_EC_BYTES"];
+            this->CFG_BC_BYTES=field_val["CFG_BC_BYTES"];
 
-            this->CFG_CAL_MODE=field_val[i++];
+            this->CFG_LATENCY=field_val["CFG_LATENCY"];
 
-            this->CFG_CAL_SEL_POL=field_val[i++];
+            this->CFG_CAL_MODE=field_val["CFG_CAL_MODE"];
 
-            this->CFG_CAL_DAC=field_val[i++];
+            this->CFG_CAL_SEL_POL=field_val["CFG_CAL_SEL_POL"];
 
-            this->CFG_CAL_EXT=field_val[i++];
-            this->CFG_CAL_PHI=field_val[i++];
-            this->CFG_CAL_FS=field_val[i++];
-            this->CFG_CAL_DUR=field_val[i++];
+            this->CFG_CAL_DAC=field_val["CFG_CAL_DAC"];
+
+            this->CFG_CAL_EXT=field_val["CFG_CAL_EXT"];
+            this->CFG_CAL_PHI=field_val["CFG_CAL_PHI"];
+            this->CFG_CAL_FS=field_val["CFG_CAL_FS"];
+            this->CFG_CAL_DUR=field_val["CFG_CAL_DUR"];
+
 
 	    for(int i = 0; i<128; i++)
 	    {
@@ -540,74 +541,79 @@ class postgre_database  // : public component_name //-- hiding the imheritange f
               return r;
     }
 
-    vector<component_name> VFAT_json_to_vec(string filename)
-    {
-	/*function takes filename, reads all VFATS and makes objects out of them and passes it to main
-	*/
-    cout << filename << endl;
-	ifstream in(filename, ios::in);
+vector<component_name> VFAT_json_to_vec(string filename)
+{
+        /*function takes filename, reads all VFATS and makes objects out of them and passes it to main
+        */
 
-	//parsing file into JSON object
-	json j;
-	in>>j;
+        ifstream in(filename, ios::in);
 
-	vector<component_name> vfat_obs;
+        //parsing file into JSON object
+        json j;
+        in>>j;
 
-    cout << "Passed point 2" << endl;
+        int i = 0;
 
-	for(auto vfat_ele = j.begin(); vfat_ele!=j.end(); vfat_ele++)
-	{
-		//loop iterating through all the VFAT elements
-		if(vfat_ele.key()[0] != 'v')
-		{
-			//case where other components are found
-			//vfat elements ID always assumed to start with a 'v'
-			continue;
-		}
+        vector<component_name> vfat_obs;
+
+        for(auto vfat_ele : j.items())
+        {
+                cout<<"Outer Loop passed"<<endl;
+                //loop iterating through all the VFAT elements
+                if(vfat_ele.key()[0] != 'v')
+                {
+                        //case where other components are found
+                        //vfat elements ID always assumed to start with a 'v'
+                        continue;
+                }
+
+                cout<<vfat_ele.key()<<endl;
+
+                component_name ob;
+                //1 vector and 1 map for each vfat element
+                unordered_map<string, long> field_data;
+                vector<long> array_data;
+
+		for(auto data_ele : vfat_ele.value().items())
+                {
+                        cout<<"Data field inner loop entered"<<endl;
+                        //iterating through individual data elements
+                        if(data_ele.value().size() > 1)
+                        {
+                                //case where the 128 sized array is encountered
+                                for(auto arr_itr : data_ele.value().items())
+                                {
+                                        cout<<"Array inner loop entered"<<endl;
+                                        array_data.push_back(stol(arr_itr.value().dump()));
+                                        cout<<"Array value pushed"<<endl;
+                                }
+                        }
+                        else
+                        {
+                                field_data[data_ele.key()] = (stol(data_ele.value().dump()));
+                                cout<<"Data field value pushed"<<endl;
+                        }
+                }
+
+                ob.initialize(field_data,array_data);
+                vfat_obs.push_back(ob);
 		
-		component_name ob;
-		//2 vectors for each vfat element
-		vector<long> field_data(48, 0);
-		vector<long> array_data(128, 0);
-        cout << "Passed point 3" << endl;
-		for(auto data_ele = j[vfat_ele.key()].begin(); data_ele!=j[vfat_ele.key()].end(); data_ele++)
-		{
-			//iterating through individual data elements
-			if(data_ele.value().size() > 1)
-			{
-                cout << "Passed point 3 --- 1" << endl;
-                
-				//case where the 128 sized array is encountered
-				for(auto arr_itr = data_ele.value().begin(); arr_itr!=data_ele.value().end(); data_ele++)
-				{
-                    try
-                    {
-                        cout<<arr_itr.value()<<" "<<endl;
-                        cout<<typeid(arr_itr.value()).name()<<" "<< endl << endl << endl;
-					    array_data.push_back(long(arr_itr.value()));
-                        
-                    }
-                    catch(const std::exception& e)
-                    {
-                        cout<<"Error ---- "<<" "<<endl;
-                        std::cerr << e.what() << '\n';
-                    }
-				}
-                
-			}
-			else
-            {
-                cout << "Passed point 3 --- 1 ----- " << endl;
-                cout<<typeid(data_ele.value()).name()<<" "<< endl;
-				field_data.push_back(data_ele.value());
-            }
-		}
-        cout << "Passed point 4" << endl;
-		ob.initialize(field_data,array_data);
-		vfat_obs.push_back(ob);
+		//printing all field and array values for every VFAT element to cross-check
+		
+                cout<<"field data:"<<endl;
+
+                for(auto k = field_data.begin(); k!=field_data.end(); k++)
+                        cout<<k->first<<":"<<k->second<<endl;
+
+                cout<<"array data:"<<endl;
+
+                for(int k = 0; k<array_data.size(); k++)
+                        cout<<array_data[k]<<endl;
+
 	}
-	return vfat_obs;
-    }
+        return vfat_obs;
+}
+
 };
 
 
