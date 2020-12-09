@@ -38,7 +38,8 @@ int main(int argc, char** argv)
               VFAT_Index_Table obj3;
 
               vector<VFAT_Config_Table> configurations;
-              vector<VFAT_Data_Table> vfat_data;
+              vector<VFAT_Data_Table> vfat_data; //Store data from current JSON
+              vector<VFAT_Data_Table> vfat_data_ref; //Store data from reference JSON
               vector<VFAT_Index_Table> indexes;
 
               vector<VFAT_Config_Table> configurations2;
@@ -63,13 +64,31 @@ int main(int argc, char** argv)
 
 		      vfat_data = ob.VFAT_json_to_vec(filename1);
               configurations = ob.Config_json_to_vec();
-              indexes = ob.Index_json_to_vec();
+              //indexes = ob.Index_json_to_vec();
 
 
-              vfat_data = ob.GET_DATA_FROM_REFCONFIG(&C,reference_config); //Getting Data stored in Reference JSON
+              vfat_data_ref = ob.GET_DATA_FROM_REFCONFIG(&C,reference_config); //Getting Data stored in Reference JSON
               obj2.display_results(vfat_data); //Displaying the results
             
               cout << "All JSON converted to object Vectors" << endl;
+
+              //---------------------------------------------------------------------------
+
+              /*
+                    So till now we have this ..... 
+                    vfat_data [ ] : contains VFAT Data from Original JSON
+                    vfat_data_ref [ ] : contains VFAT Data from reference JSON
+
+                    Now, we need a function like .....
+                    vfat_data = extract_new_data(vfat_data,vfat_data_ref);
+                            --->>> This Function will call a function compare(VFAT_Data_TABLE obj1, VFAT_Data_Table obj2)
+                                    --->> Returns 0/1 or True/False on each object comparison
+                        
+
+                    Then will simply call this,
+                    obj2.insert_data(&C,vfat_data,stoi(config_id)); [ ALREADY DONE ]
+
+              */
 		      
               //---------------------------------------------------------------------------
 
