@@ -16,6 +16,8 @@ class VFAT_Data_Table
 {
     private:
 
+        long id;
+
         long VFAT_ID;
         //Actual VFAT Columns
         long CFG_IREF; // 32

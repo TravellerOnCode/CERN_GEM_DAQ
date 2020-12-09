@@ -170,6 +170,8 @@ vector<VFAT_Data_Table> VFAT_Data_Table::row_to_object(result R)
         for (auto const &row: R)
         {
             VFAT_Data_Table obj;
+            obj.id = row["ID"].as<long>(); //System Generated ID
+
             obj.VFAT_ID = row["VFAT_ID"].as<long>();
 
             //Actual VFAT Columns
@@ -304,6 +306,7 @@ vector<VFAT_Data_Table> VFAT_Data_Table::row_to_object(result R)
 //Display a particular row of the table
 void VFAT_Data_Table::display_row()
 {
+            cout << std::left << std::setw(30) << "ID " << std::setw(2) << ":" << this->id << endl;
             cout << std::left << std::setw(30) << "VFAT_ID " << std::setw(2) << ":" << this->VFAT_ID << endl;
             cout << std::left << std::setw(30) << "CFG_IREF " << std::setw(2) << ":" << this->CFG_IREF << endl;
             cout << std::left << std::setw(30) << "CFG_HYST " << std::setw(2) << ":" << this->CFG_HYST << endl;
@@ -374,12 +377,11 @@ void VFAT_Data_Table::display_row()
             cout << std::left << std::setw(30) << "CFG_CAL_DUR " << std::setw(2) << ":" << this->CFG_CAL_DUR << endl;
             
             cout << std::left << std::setw(30) << "VFAT_CHANNELS_CHANNEL_0_to_128 " << std::setw(2) << ":" << "[ " ;
-            for (int i=0;i<128;i++)
+            for (int i=0;i<128-1;i++)
             {
                 cout << this->VFAT_CHANNELS_CHANNEL_0_to_128[i] << ", ";
             }
-            cout << " ]" << endl << endl;
-
+            cout << this->VFAT_CHANNELS_CHANNEL_0_to_128[127] << "] " << endl << endl;
 
 }
 
