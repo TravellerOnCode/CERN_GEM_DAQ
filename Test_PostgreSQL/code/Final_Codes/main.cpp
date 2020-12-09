@@ -28,7 +28,6 @@ int main(int argc, char** argv)
                 
               // DECLARING NECESSARY OBJECTS AND VECTORS 
               Postgres_Database ob;
-              Postgres_Database ob2;
               result r;
               //ob.insert_datanew(&C,"COMPANY");
               //r = ob.query_response(&C,"COMPANY");
@@ -41,10 +40,6 @@ int main(int argc, char** argv)
               vector<VFAT_Data_Table> vfat_data; //Store data from current JSON
               vector<VFAT_Data_Table> vfat_data_ref; //Store data from reference JSON
               vector<VFAT_Index_Table> indexes;
-
-              vector<VFAT_Config_Table> configurations2;
-              vector<VFAT_Data_Table> vfat_data2;
-              vector<VFAT_Index_Table> indexes2;
 
               //---------------------------------------------------------------------------
 
