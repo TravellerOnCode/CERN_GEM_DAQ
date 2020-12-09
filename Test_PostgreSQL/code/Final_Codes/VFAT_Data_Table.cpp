@@ -102,7 +102,7 @@ long VFAT_Data_Table:: insert_row(connection *C, string table_name)
         work WW(*C);
         long id;
         string field_values = "",arrays = "'{";
-        string sql = "INSERT INTO VFAT_DATA_TABLE(VFAT_ID,";
+        string sql = "INSERT INTO "+to_string(VFAT_DATA_TABLE)+"(VFAT_ID,";
         for (int i=0;i<48;i++)
         {
             sql = sql + vfat_columns[i] + ", ";
@@ -153,14 +153,14 @@ void VFAT_Data_Table::insert_data(connection *C, vector<VFAT_Data_Table> data, l
     for (i=0;i<data.size();i++)
     {
         //Insert the data and get the ID number
-        id = data[i].insert_row(&(*C),"VFAT_DATA_TABLE"); 
+        id = data[i].insert_row(&(*C),VFAT_DATA_TABLE); 
 
         //Insert into Index Table along with Config
         VFAT_Index_Table obj;
         obj.initialize(config_id,id); 
-        obj.insert_row(&(*C),"VFAT_INDEX_TABLE");
+        obj.insert_row(&(*C),VFAT_INDEX_TABLE);
     }
-    cout << "Values inserted into table : VFAT_DATA_TABLE" << endl;
+    cout << "Values inserted into table : "<< VFAT_DATA_TABLE << endl;
 }
 
 vector<VFAT_Data_Table> VFAT_Data_Table::row_to_object(result R)

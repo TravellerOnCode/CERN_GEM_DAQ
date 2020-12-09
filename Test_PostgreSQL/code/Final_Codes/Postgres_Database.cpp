@@ -35,7 +35,7 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
 {
 	//function takes filename, reads all VFATS and makes objects out of them and passes it to main
 	
-        cout << "File Name: " << filename << endl;
+    cout << "File Name: " << filename << endl;
 	ifstream in(filename, ios::in);
 
 	//parsing file into JSON object
@@ -122,7 +122,7 @@ vector<VFAT_Data_Table> Postgres_Database ::GET_DATA_FROM_REFCONFIG(connection *
 
         //vector<long> id_list;
         work WW(*C);
-        string query = "SELECT * FROM VFAT_INDEX_TABLE WHERE CONFIG_ID = " + to_string(reference_config_id) + ";";
+        string query = "SELECT * FROM "+to_string(VFAT_INDEX_TABLE)+" WHERE CONFIG_ID = " + to_string(reference_config_id) + ";";
         string id_list = "";
         result r = WW.exec(query);
         v = obj.row_to_object(r);
@@ -133,7 +133,7 @@ vector<VFAT_Data_Table> Postgres_Database ::GET_DATA_FROM_REFCONFIG(connection *
                 id_list = id_list + to_string(v[i].get_id()) + ", ";
         }
         id_list = id_list + to_string(v[v.size()-1].get_id());
-        query = "SELECT * FROM VFAT_DATA_TABLE WHERE ID IN (" + id_list + ");";
+        query = "SELECT * FROM "+to_string(VFAT_DATA_TABLE)+" WHERE ID IN (" + id_list + ");";
         r = WW.exec(query);
         vfat_data = obj2.row_to_object(r);
 

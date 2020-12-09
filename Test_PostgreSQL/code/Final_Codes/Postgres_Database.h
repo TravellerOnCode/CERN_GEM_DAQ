@@ -9,6 +9,7 @@
 #include "VFAT_Data_Table.h"
 #include "VFAT_Index_Table.h"
 #include "VFAT_Config_Table.h"
+#include "info.h"
 
 using namespace std;
 using namespace pqxx;

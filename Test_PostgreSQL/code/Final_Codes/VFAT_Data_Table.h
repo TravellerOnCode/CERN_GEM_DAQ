@@ -8,6 +8,7 @@
 #include <sstream>
 #include <iomanip>
 #include "VFAT_Index_Table.h"
+#include "info.h"
 
 using namespace std;
 using namespace pqxx;

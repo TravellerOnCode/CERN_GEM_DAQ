@@ -2,11 +2,7 @@
 #include "VFAT_Data_Table.h"
 #include "VFAT_Index_Table.h"
 #include "Postgres_Database.h"
-
-string DBNAME = "gemdatabase2";
-string USER = "postgres";
-string PASSWORD = "linuxos16";
-
+#include "info.h"
 
 int main(int argc, char** argv)
 {
@@ -14,7 +10,7 @@ int main(int argc, char** argv)
         {
             
             //connect to the database
-             connection C("dbname = " + DBNAME + " user = "+ USER +" password = "+ PASSWORD +" \
+             connection C("dbname = " +  to_string(DBNAME) + " user = "+ USER +" password = "+ PASSWORD +" \
                 hostaddr = 127.0.0.1 port = 5432");
              if (C.is_open()) {
                    cout << "Opened database successfully: " << C.dbname() << endl;
@@ -44,9 +40,9 @@ int main(int argc, char** argv)
               //---------------------------------------------------------------------------
 
               //creating tables
-              //obj1.create_table(&C,"VFAT_CONFIG_TABLE");
-              //obj2.create_table(&C,"VFAT_DATA_TABLE");
-              ///obj3.create_table(&C,"VFAT_INDEX_TABLE");
+              obj1.create_table(&C,VFAT_CONFIG_TABLE);
+              obj2.create_table(&C,VFAT_DATA_TABLE);
+              obj3.create_table(&C,VFAT_INDEX_TABLE);
 
               //---------------------------------------------------------------------------
 
@@ -56,14 +52,15 @@ int main(int argc, char** argv)
               string config_id = filename1.substr(0,filename1.length()-4);
 
               //---------------------------------------------------------------------------
-
+              
 		      vfat_data = ob.VFAT_json_to_vec(filename1);
               configurations = ob.Config_json_to_vec();
               //indexes = ob.Index_json_to_vec();
 
-
+              /*
               vfat_data_ref = ob.GET_DATA_FROM_REFCONFIG(&C,reference_config); //Getting Data stored in Reference JSON
               obj2.display_results(vfat_data_ref); //Displaying the results
+              */
             
               cout << "All JSON converted to object Vectors" << endl;
 
@@ -88,19 +85,23 @@ int main(int argc, char** argv)
               //---------------------------------------------------------------------------
 
               //Data Insertion (in this particular order data -> config -> index)
-              //obj1.insert_data(&C,configurations);
-              //obj2.insert_data(&C,vfat_data,stoi(config_id));
+              obj1.insert_data(&C,configurations);
+              obj2.insert_data(&C,vfat_data,stoi(config_id));
               //*****obj3.insert_data(&C,indexes);
 
               //cout << "JSON 1 DATA INSERTED ! " << endl;
 
               //---------------------------------------------------------------------------
+              
+              // PLACED HERE FOR TESTING PURPOSE
+              vfat_data_ref = ob.GET_DATA_FROM_REFCONFIG(&C,reference_config); //Getting Data stored in Reference JSON
+              obj2.display_results(vfat_data_ref); //Displaying the results
 
               //---------------------------------------------------------------------------
 
-              string query = "select * from vfat_data_table where vfat_id = 9000";
+              string query = "select * from " + to_string(VFAT_DATA_TABLE) + " where vfat_id = 1000";
               //obj.create_table(&C,"VFAT_COMPONENT");
-              r = ob.query_response(&C,"VFAT_DATA_TABLE",query);
+              r = ob.query_response(&C,VFAT_DATA_TABLE,query);
               //RETURNS A VECTOR OF OBJECTS
               vfat_data = obj2.row_to_object(r);
               obj2.display_results(vfat_data);

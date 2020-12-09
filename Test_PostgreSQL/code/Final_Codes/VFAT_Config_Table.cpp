@@ -29,9 +29,9 @@ void VFAT_Config_Table:: insert_data(connection *C, vector<VFAT_Config_Table> da
     int i;
     for (i=0;i<data.size();i++)
     {
-        data[i].insert_row(&(*C),"VFAT_CONFIG_TABLE");
+        data[i].insert_row(&(*C),VFAT_CONFIG_TABLE);
     }
-    cout << "Values inserted into table : VFAT_CONFIG_TABLE" << endl;
+    cout << "Values inserted into table : " << VFAT_CONFIG_TABLE << endl;
 }
 
 vector<VFAT_Config_Table> VFAT_Config_Table:: row_to_object(result R)

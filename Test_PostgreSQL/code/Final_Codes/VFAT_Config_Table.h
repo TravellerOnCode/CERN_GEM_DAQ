@@ -4,6 +4,7 @@
 #include <iostream>
 #include <pqxx/pqxx> 
 #include <string>
+#include "info.h"
 //#include "json.hpp"
 
 //------------
