@@ -68,7 +68,7 @@ int main(int argc, char** argv)
 
 
               vfat_data_ref = ob.GET_DATA_FROM_REFCONFIG(&C,reference_config); //Getting Data stored in Reference JSON
-              obj2.display_results(vfat_data); //Displaying the results
+              obj2.display_results(vfat_data_ref); //Displaying the results
             
               cout << "All JSON converted to object Vectors" << endl;
 
