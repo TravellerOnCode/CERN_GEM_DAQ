@@ -3,10 +3,10 @@
 void VFAT_Index_Table:: create_table(connection *C,string table_name)
 {
         work WW(*C);
-        string query = "CREATE TABLE " + table_name + "( CONFIG_ID bigint, VFAT_ID bigint,";
-         string s1 = "PRIMARY KEY(CONFIG_ID,VFAT_ID),";
+        string query = "CREATE TABLE " + table_name + "( CONFIG_ID bigint, ID bigint,";
+         string s1 = "PRIMARY KEY(CONFIG_ID,ID),";
          string s2 = "FOREIGN KEY (CONFIG_ID) REFERENCES VFAT_CONFIG_TABLE(CONFIG_ID),";
-         string s3 = "FOREIGN KEY (VFAT_ID) REFERENCES VFAT_DATA_TABLE(VFAT_ID));";
+         string s3 = "FOREIGN KEY (ID) REFERENCES VFAT_DATA_TABLE(ID));";
         query = query + s1 + s2 + s3;
         //cout << "Executed Query : " << endl << query << endl;
         WW.exec(query);
@@ -14,17 +14,22 @@ void VFAT_Index_Table:: create_table(connection *C,string table_name)
         WW.commit();
 }
 
-void VFAT_Index_Table::initialize(long config_id,long vfat_id)
+void VFAT_Index_Table::initialize(long config_id,long id)
 {
     this->config_id = config_id;
-    this->vfat_id = vfat_id;
+    this->id = id;
+}
+
+long VFAT_Index_Table:: get_id()
+{
+    return this->id;
 }
 
 void VFAT_Index_Table:: insert_row(connection *C, string table_name)
 {       
         work WW(*C);
         string field_values = "",arrays = "'{";
-        string sql = "INSERT INTO "+table_name+" VALUES(" + to_string(this->config_id)+", "+to_string(this->vfat_id)+");";
+        string sql = "INSERT INTO "+table_name+" VALUES(" + to_string(this->config_id)+", "+to_string(this->id)+");";
         WW.exec(sql);
         WW.commit();
 }
@@ -49,7 +54,7 @@ vector<VFAT_Index_Table> VFAT_Index_Table:: row_to_object(result R)
 
             //Actual VFAT Columns
             obj.config_id = row["CONFIG_ID"].as<long>();
-            obj.vfat_id = row["VFAT_ID"].as<long>();
+            obj.id = row["ID"].as<long>();
             //obj.display_row();
             query_results.push_back(obj);
         }

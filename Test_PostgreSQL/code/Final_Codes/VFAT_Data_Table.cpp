@@ -3,7 +3,7 @@
 void VFAT_Data_Table ::create_table(connection *C,string table_name)
 {
         work WW(*C);
-        string query = "CREATE TABLE " + table_name + "(VFAT_ID bigint PRIMARY KEY,";
+        string query = "CREATE TABLE " + table_name + "(ID SERIAL PRIMARY KEY, VFAT_ID bigint,";
         for (int i=0;i<48;i++)
         {
             query = query + vfat_columns[i] + " bigint" +", ";
@@ -16,7 +16,7 @@ void VFAT_Data_Table ::create_table(connection *C,string table_name)
 }
 
 void VFAT_Data_Table ::initialize(long VFAT_ID, unordered_map<string, long> field_val, vector<long> array_val)
-    {
+{
             this->VFAT_ID=VFAT_ID;
 
             this->CFG_IREF=field_val["CFG_IREF"];
@@ -91,95 +91,16 @@ void VFAT_Data_Table ::initialize(long VFAT_ID, unordered_map<string, long> fiel
 
 	    for(int i = 0; i< array_val.size(); i++)
 	    {
-		VFAT_CHANNELS_CHANNEL_0_to_128.push_back(array_val[i]);
+		    VFAT_CHANNELS_CHANNEL_0_to_128.push_back(array_val[i]);
 	    }
         //cout << "******" << array_val[0] << endl;
         
-    }
-
-/*
-void VFAT_Data_Table::initialize(long VFAT_ID,vector<long> field_val, vector<long> array_val)
-{
-	    int i = 0;
-            this->VFAT_ID=VFAT_ID;
-            this->CFG_IREF=field_val[i++];
-            this->CFG_HYST=field_val[i++];
-
-            this->CFG_BIAS_CFD_DAC_2=field_val[i++];
-            this->CFG_BIAS_CFD_DAC_1=field_val[i++];
-            this->CFG_BIAS_PRE_I_BSF=field_val[i++];
-
-            this->CFG_BIAS_PRE_I_BIT=field_val[i++];
-            this->CFG_BIAS_PRE_I_BLCC=field_val[i++];
-            this->CFG_BIAS_PRE_VREF=field_val[i++];
-            this->CFG_BIAS_SH_I_BFCAS=field_val[i++];
-            this->CFG_BIAS_SH_I_BDIFF=field_val[i++];
-            this->CFG_BIAS_SH_I_BFAMP=field_val[i++];
-            this->CFG_BIAS_SD_I_BDIFF=field_val[i++];
-            this->CFG_BIAS_SD_I_BSF=field_val[i++];
-            this->CFG_BIAS_SD_I_BFCAS=field_val[i++];
-
-            this->CFG_VREF_ADC=field_val[i++];
-            this->CFG_MON_GAIN=field_val[i++];
-            this->CFG_MONITOR_SELECT=field_val[i++];
-
-            this->CFG_RES_PRE=field_val[i++];
-            this->CFG_CAP_PRE=field_val[i++];
-
-            this->CFG_FP_FE=field_val[i++];
-            this->CFG_PT=field_val[i++];
-
-            this->CFG_SEL_POL=field_val[i++];
-
-            this->CFG_THR_ZCC_DAC=field_val[i++];
-
-            this->CFG_THR_ARM_DAC=field_val[i++];
-
-            this->CFG_SEL_COMP_MODE=field_val[i++];
-            this->CFG_FORCE_EN_ZCC=field_val[i++];
-            this->CFG_EN_HYST=field_val[i++];
-            this->CFG_FORCE_TH=field_val[i++];
-
-            this->CFG_SYNC_LEVEL_MODE=field_val[i++];
-
-            this->CFG_PULSE_STRETCH=field_val[i++];
-
-            this->CFG_SELF_TRIGGER_MODE=field_val[i++];
-            this->CFG_DDR_TRIGGER_MODE=field_val[i++];
-
-            this->CFG_SPZS_SUMMARY_ONLY=field_val[i++];
-            this->CFG_SPZS_MAX_PARTITIONS=field_val[i++];
-            this->CFG_SPZS_ENABLE=field_val[i++];
-            this->CFG_SZP_ENABLE=field_val[i++];
-            this->CFG_SZD_ENABLE=field_val[i++];
-
-            this->CFG_TIME_TAG=field_val[i++];
-            this->CFG_EC_BYTES=field_val[i++];
-            this->CFG_BC_BYTES=field_val[i++];
-
-            this->CFG_LATENCY=field_val[i++];
-
-            this->CFG_CAL_MODE=field_val[i++];
-
-            this->CFG_CAL_SEL_POL=field_val[i++];
-
-            this->CFG_CAL_DAC=field_val[i++];
-
-            this->CFG_CAL_EXT=field_val[i++];
-            this->CFG_CAL_PHI=field_val[i++];
-            this->CFG_CAL_FS=field_val[i++];
-            this->CFG_CAL_DUR=field_val[i++];
-
-	    for(int i = 0; i<128; i++)
-	    {
-		VFAT_CHANNELS_CHANNEL_0_to_128.push_back(array_val[i]);
-	    }
 }
-*/
 
-void VFAT_Data_Table:: insert_row(connection *C, string table_name)
+long VFAT_Data_Table:: insert_row(connection *C, string table_name)
 {
         work WW(*C);
+        long id;
         string field_values = "",arrays = "'{";
         string sql = "INSERT INTO VFAT_DATA_TABLE(VFAT_ID,";
         for (int i=0;i<48;i++)
@@ -212,17 +133,32 @@ void VFAT_Data_Table:: insert_row(connection *C, string table_name)
         {
             arrays = arrays + to_string(this->VFAT_CHANNELS_CHANNEL_0_to_128[i]) +", ";
         }
-        sql = sql + field_values + arrays + to_string(this->VFAT_CHANNELS_CHANNEL_0_to_128[127]) + "}');";
-        WW.exec(sql);
+        sql = sql + field_values + arrays + to_string(this->VFAT_CHANNELS_CHANNEL_0_to_128[127]) + "}') RETURNING ID;";
+        result R = WW.exec(sql);
+        for (auto const &row: R)
+        {
+            id = row["ID"].as<long>();
+        }
+            
         WW.commit();
+        return id;
+
 }
 
-void VFAT_Data_Table::insert_data(connection *C, vector<VFAT_Data_Table> data)
+//This should accept only those Objects that are unique
+void VFAT_Data_Table::insert_data(connection *C, vector<VFAT_Data_Table> data, long config_id)
 {
     int i;
+    long id;
     for (i=0;i<data.size();i++)
     {
-        data[i].insert_row(&(*C),"VFAT_DATA_TABLE");
+        //Insert the data and get the ID number
+        id = data[i].insert_row(&(*C),"VFAT_DATA_TABLE"); 
+
+        //Insert into Index Table along with Config
+        VFAT_Index_Table obj;
+        obj.initialize(config_id,id); 
+        obj.insert_row(&(*C),"VFAT_INDEX_TABLE");
     }
     cout << "Values inserted into table : VFAT_DATA_TABLE" << endl;
 }

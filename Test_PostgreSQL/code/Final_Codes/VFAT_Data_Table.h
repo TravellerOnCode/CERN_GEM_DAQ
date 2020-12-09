@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include "VFAT_Index_Table.h"
 
 using namespace std;
 using namespace pqxx;
@@ -167,8 +168,8 @@ class VFAT_Data_Table
         void create_table(connection *C,string table_name);
         //void initialize(long VFAT_ID, vector<long> field_val, vector<long> array_val);
         void initialize(long VFAT_ID, unordered_map<string, long> field_val, vector<long> array_val);
-        void insert_row(connection *C, string table_name);
-        void insert_data(connection *C, vector<VFAT_Data_Table> data);
+        long insert_row(connection *C, string table_name);
+        void insert_data(connection *C, vector<VFAT_Data_Table> data,long config_id);
         vector<VFAT_Data_Table> row_to_object(result R);
         void display_row();
         void display_results(vector<VFAT_Data_Table> &data);

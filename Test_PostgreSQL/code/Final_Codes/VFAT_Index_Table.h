@@ -15,10 +15,11 @@ class VFAT_Index_Table
 {
     private:
         long config_id;
-        long vfat_id;
+        long id;
     public:
+        long get_id();
         void create_table(connection *C,string table_name);
-        void initialize(long config_id,long vfat_id);
+        void initialize(long config_id,long id);
         void insert_row(connection *C, string table_name);
         void insert_data(connection *C, vector<VFAT_Index_Table> data);
         //void display_results(vector<VFAT_Data_Table> &data);

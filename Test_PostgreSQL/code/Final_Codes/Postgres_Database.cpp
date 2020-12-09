@@ -1,10 +1,10 @@
 #include "Postgres_Database.h"
 
 //Returns the query response of a query 
-result Postgres_Database ::query_response(connection *C,string table_name)
+result Postgres_Database ::query_response(connection *C,string table_name,string query)
 {
         work WW(*C);
-        string query = "SELECT * FROM " + table_name +";";
+        //string query = "SELECT * FROM " + table_name +";";
 
         result r = WW.exec(query);
         for (auto const &row: r)
@@ -35,7 +35,7 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
 {
 	//function takes filename, reads all VFATS and makes objects out of them and passes it to main
 	
-    cout << "File Name: " << filename << endl;
+        cout << "File Name: " << filename << endl;
 	ifstream in(filename, ios::in);
 
 	//parsing file into JSON object
@@ -45,7 +45,7 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
 	vector<VFAT_Data_Table> vfat_obs;
 
 	//cout << j.begin().key() << "------" << j.end().key() << endl;
-    //cout << "Passed point 2" << endl;
+        //cout << "Passed point 2" << endl;
 	int freqq = 0;
 	string vfat_id = "", config_id = "";
 	config_id = filename.substr(0,filename.length()-4);
@@ -112,77 +112,30 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
 	return vfat_obs;
 }
 
-/*
-vector<VFAT_Data_Table> VFAT_json_to_vec(string filename)
+vector<VFAT_Data_Table> Postgres_Database ::GET_DATA_FROM_REFCONFIG(connection *C,long reference_config_id)
 {
-        //function takes filename, reads all VFATS and makes objects out of them and passes it to main
-        
+        VFAT_Index_Table obj;
+        VFAT_Data_Table obj2;
 
-        ifstream in(filename, ios::in);
+        vector<VFAT_Index_Table> v;
+        vector<VFAT_Data_Table> vfat_data;
 
-        //parsing file into JSON object
-        json j;
-        in>>j;
+        //vector<long> id_list;
+        work WW(*C);
+        string query = "SELECT * FROM VFAT_INDEX_TABLE WHERE CONFIG_ID = " + to_string(reference_config_id) + ";";
+        string id_list = "";
+        result r = WW.exec(query);
+        v = obj.row_to_object(r);
 
-        int i = 0;
-
-        vector<VFAT_Data_Table> vfat_obs;
-
-        for(auto vfat_ele : j.items())
+        for (int i=0;i<v.size()-1;i++)
         {
-                cout<<"Outer Loop passed"<<endl;
-                //loop iterating through all the VFAT elements
-                if(vfat_ele.key()[0] != 'v')
-                {
-                        //case where other components are found
-                        //vfat elements ID always assumed to start with a 'v'
-                        continue;
-                }
+                //id_list.push_back(v[i].get_id());
+                id_list = id_list + to_string(v[i].get_id()) + ", ";
+        }
+        id_list = id_list + to_string(v[v.size()-1].get_id());
+        query = "SELECT * FROM VFAT_DATA_TABLE WHERE ID IN (" + id_list + ");";
+        r = WW.exec(query);
+        vfat_data = obj2.row_to_object(r);
 
-                cout<<vfat_ele.key()<<endl;
-
-                VFAT_Data_Table ob;
-                //1 vector and 1 map for each vfat element
-                unordered_map<string, long> field_data;
-                vector<long> array_data;
-
-		for(auto data_ele : vfat_ele.value().items())
-                {
-                        cout<<"Data field inner loop entered"<<endl;
-                        //iterating through individual data elements
-                        if(data_ele.value().size() > 1)
-                        {
-                                //case where the 128 sized array is encountered
-                                for(auto arr_itr : data_ele.value().items())
-                                {
-                                        cout<<"Array inner loop entered"<<endl;
-                                        array_data.push_back(stol(arr_itr.value().dump()));
-                                        cout<<"Array value pushed"<<endl;
-                                }
-                        }
-                        else
-                        {
-                                field_data[data_ele.key()] = (stol(data_ele.value().dump()));
-                                cout<<"Data field value pushed"<<endl;
-                        }
-                }
-
-                ob.initialize(field_data,array_data);
-                vfat_obs.push_back(ob);
-		
-		//printing all field and array values for every VFAT element to cross-check
-		
-                cout<<"field data:"<<endl;
-
-                for(auto k = field_data.begin(); k!=field_data.end(); k++)
-                        cout<<k->first<<":"<<k->second<<endl;
-
-                cout<<"array data:"<<endl;
-
-                for(int k = 0; k<array_data.size(); k++)
-                        cout<<array_data[k]<<endl;
-
-	}
-        return vfat_obs;
+        return vfat_data;
 }
-*/
