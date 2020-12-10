@@ -1,0 +1,4 @@
+/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/Debug/CMakeFiles/rebuild_cache.dir
+/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/Debug/CMakeFiles/edit_cache.dir
+/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/Debug/CMakeFiles/library.dir
+/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/Debug/CMakeFiles/gemdatabase.dir
