@@ -15,6 +15,11 @@ void VFAT_Data_Table ::create_table(connection *C,string table_name)
         WW.commit();
 }
 
+long VFAT_Data_Table ::get_id()
+{
+    return this->id;
+}
+
 void VFAT_Data_Table ::initialize(long VFAT_ID, unordered_map<string, long> field_val, vector<long> array_val)
 {
             this->VFAT_ID=VFAT_ID;
@@ -397,4 +402,106 @@ void VFAT_Data_Table::display_results(vector<VFAT_Data_Table> &data)
             break;
     }
 }
+
+int VFAT_Data_Table::compare(const VFAT_Data_Table &ob1, const VFAT_Data_Table &ob2)
+{
+	//compares all fields of two objects and returns value>0 if unequal, 0 if equal
+        
+	int flag = 0;
+
+	if(ob1.CFG_IREF != ob2.CFG_IREF ||
+		ob1.CFG_HYST != ob2.CFG_HYST ||
+		ob1.CFG_BIAS_CFD_DAC_2 != ob2.CFG_BIAS_CFD_DAC_2 ||
+		ob1.CFG_BIAS_CFD_DAC_1 != ob2.CFG_BIAS_CFD_DAC_1 ||
+		ob1.CFG_BIAS_PRE_I_BSF != ob2.CFG_BIAS_PRE_I_BSF ||
+		ob1.CFG_BIAS_PRE_I_BIT != ob2.CFG_BIAS_PRE_I_BIT ||
+		ob1.CFG_BIAS_PRE_I_BLCC != ob2.CFG_BIAS_PRE_I_BLCC ||
+		ob1.CFG_BIAS_PRE_VREF != ob2.CFG_BIAS_PRE_VREF ||
+		ob1.CFG_BIAS_SH_I_BFCAS != ob2.CFG_BIAS_SH_I_BFCAS ||
+		ob1.CFG_BIAS_SH_I_BDIFF != ob2.CFG_BIAS_SH_I_BDIFF ||
+		ob1.CFG_BIAS_SH_I_BFAMP != ob2.CFG_BIAS_SH_I_BFAMP ||
+		ob1.CFG_BIAS_SD_I_BDIFF != ob2.CFG_BIAS_SD_I_BDIFF ||
+		ob1.CFG_BIAS_SD_I_BSF != ob2.CFG_BIAS_SD_I_BSF ||
+		ob1.CFG_BIAS_SD_I_BFCAS != ob2.CFG_BIAS_SD_I_BFCAS ||
+		ob1.CFG_VREF_ADC != ob2.CFG_VREF_ADC ||
+		ob1.CFG_MON_GAIN != ob2.CFG_MON_GAIN ||
+		ob1.CFG_MONITOR_SELECT != ob2.CFG_MONITOR_SELECT ||
+	    ob1.CFG_RES_PRE != ob2.CFG_RES_PRE ||
+		ob1.CFG_CAP_PRE != ob2.CFG_CAP_PRE ||
+		ob1.CFG_FP_FE != ob2.CFG_FP_FE ||
+		ob1.CFG_PT != ob2.CFG_PT ||
+		ob1.CFG_SEL_POL != ob2.CFG_SEL_POL ||
+		ob1.CFG_THR_ZCC_DAC != ob2.CFG_THR_ZCC_DAC ||
+		ob1.CFG_THR_ARM_DAC != ob2.CFG_THR_ARM_DAC ||
+		ob1.CFG_SEL_COMP_MODE != ob2.CFG_SEL_COMP_MODE ||
+		ob1.CFG_FORCE_EN_ZCC != ob2.CFG_FORCE_EN_ZCC ||
+		ob1.CFG_EN_HYST != ob2.CFG_EN_HYST ||
+		ob1.CFG_FORCE_TH != ob2.CFG_FORCE_TH ||
+		ob1.CFG_SYNC_LEVEL_MODE != ob2.CFG_SYNC_LEVEL_MODE ||
+		ob1.CFG_PULSE_STRETCH != ob2.CFG_PULSE_STRETCH ||
+		ob1.CFG_SELF_TRIGGER_MODE != ob2.CFG_SELF_TRIGGER_MODE ||
+		ob1.CFG_DDR_TRIGGER_MODE != ob2.CFG_DDR_TRIGGER_MODE ||
+		ob1.CFG_SPZS_SUMMARY_ONLY != ob2.CFG_SPZS_SUMMARY_ONLY ||
+		ob1.CFG_SPZS_MAX_PARTITIONS != ob2.CFG_SPZS_MAX_PARTITIONS ||
+		ob1.CFG_SPZS_ENABLE != ob2.CFG_SPZS_ENABLE ||
+		ob1.CFG_SZP_ENABLE != ob2.CFG_SZP_ENABLE ||
+		ob1.CFG_SZD_ENABLE != ob2.CFG_SZD_ENABLE ||
+		ob1.CFG_TIME_TAG != ob2.CFG_TIME_TAG ||
+		ob1.CFG_EC_BYTES != ob2.CFG_EC_BYTES ||
+		ob1.CFG_BC_BYTES != ob2.CFG_BC_BYTES ||
+		ob1.CFG_LATENCY != ob2.CFG_LATENCY ||
+		ob1.CFG_CAL_MODE != ob2.CFG_CAL_MODE ||
+		ob1.CFG_CAL_SEL_POL != ob2.CFG_CAL_SEL_POL ||
+		ob1.CFG_CAL_DAC != ob2.CFG_CAL_DAC ||
+		ob1.CFG_CAL_EXT != ob2.CFG_CAL_EXT ||
+		ob1.CFG_CAL_PHI != ob2.CFG_CAL_PHI ||
+		ob1.CFG_CAL_FS != ob2.CFG_CAL_FS ||
+		ob1.CFG_CAL_DUR != ob2.CFG_CAL_DUR)
+		{
+			flag ++;
+		}
+
+		if(flag!=0)
+			return 1;
+		else
+		{
+			if(!(ob1.VFAT_CHANNELS_CHANNEL_0_to_128 == ob2.VFAT_CHANNELS_CHANNEL_0_to_128))
+			{
+				flag++;
+			}
+            if(flag!=0)
+			    return 1;
+            
+			return 0;
+		}
+}
+
+vector<VFAT_Data_Table> VFAT_Data_Table::ref_compare(connection *C,vector<VFAT_Data_Table> vfat_ob, vector<VFAT_Data_Table> ref_ob, long config_id)
+{
+        vector<VFAT_Data_Table> insert_vfats;
+
+        for(int i = 0; i<vfat_ob.size(); i++)
+        {
+                for(int j = 0; j<ref_ob.size(); j++)
+                {
+                        if(vfat_ob[i].VFAT_ID == ref_ob[j].VFAT_ID)
+                        {
+                                if(compare(vfat_ob[i], ref_ob[j])==1)
+                                {
+                                    insert_vfats.push_back(vfat_ob[i]);
+                                }        
+                                else
+                                {
+                                    VFAT_Index_Table obj;
+                                    obj.initialize(config_id,ref_ob[j].get_id()); 
+                                    obj.insert_row(&(*C),VFAT_INDEX_TABLE);
+ 
+                                }
+                        }
+                }
+        }
+    cout << "ALL References Resolved !" << endl << endl;
+	return insert_vfats;
+}
+
 

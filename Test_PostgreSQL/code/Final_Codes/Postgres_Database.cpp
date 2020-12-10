@@ -7,6 +7,7 @@ result Postgres_Database ::query_response(connection *C,string table_name,string
         //string query = "SELECT * FROM " + table_name +";";
 
         result r = WW.exec(query);
+		/*
         for (auto const &row: r)
         {
            //cout << row["ID"].c_str() << "   " << row["NAME"].c_str();
@@ -14,7 +15,8 @@ result Postgres_Database ::query_response(connection *C,string table_name,string
                cout << field.c_str() << '\t';
            cout << endl;
         }
-        cout << "Table displayed successfully" << endl;
+		*/
+        //cout << "Table displayed successfully" << endl;
         return r;
 }
 

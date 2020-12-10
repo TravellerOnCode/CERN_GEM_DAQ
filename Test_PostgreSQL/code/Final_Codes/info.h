@@ -10,6 +10,6 @@
 
 
 //Database info
-#define DBNAME "gemdatabase2"
+#define DBNAME "gemdatabase3"
 #define USER "postgres"
 #define PASSWORD "linuxos16" 

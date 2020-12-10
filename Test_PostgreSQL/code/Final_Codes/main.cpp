@@ -25,8 +25,7 @@ int main(int argc, char** argv)
               // DECLARING NECESSARY OBJECTS AND VECTORS 
               Postgres_Database ob;
               result r;
-              //ob.insert_datanew(&C,"COMPANY");
-              //r = ob.query_response(&C,"COMPANY");
+
 
               VFAT_Config_Table obj1;
               VFAT_Data_Table obj2;
@@ -40,15 +39,13 @@ int main(int argc, char** argv)
               //---------------------------------------------------------------------------
 
               //creating tables
-              obj1.create_table(&C,VFAT_CONFIG_TABLE);
-              obj2.create_table(&C,VFAT_DATA_TABLE);
-              obj3.create_table(&C,VFAT_INDEX_TABLE);
+              //obj1.create_table(&C,VFAT_CONFIG_TABLE);
+              //obj2.create_table(&C,VFAT_DATA_TABLE);
+              //obj3.create_table(&C,VFAT_INDEX_TABLE);
 
               //---------------------------------------------------------------------------
 
               string filename1 = argv[1]; //Read Input JSON File
-              //string filename2 = argv[2];
-              long reference_config = stoi(argv[2]); //Read Reference JSON Name
               string config_id = filename1.substr(0,filename1.length()-4);
 
               //---------------------------------------------------------------------------
@@ -57,50 +54,42 @@ int main(int argc, char** argv)
               configurations = ob.Config_json_to_vec();
               //indexes = ob.Index_json_to_vec();
 
-              /*
-              vfat_data_ref = ob.GET_DATA_FROM_REFCONFIG(&C,reference_config); //Getting Data stored in Reference JSON
-              obj2.display_results(vfat_data_ref); //Displaying the results
-              */
-            
               cout << "All JSON converted to object Vectors" << endl;
 
               //---------------------------------------------------------------------------
 
-              /*
-                    So till now we have this ..... 
-                    vfat_data [ ] : contains VFAT Data from Original JSON
-                    vfat_data_ref [ ] : contains VFAT Data from reference JSON
-
-                    Now, we need a function like .....
-                    vfat_data = extract_new_data(vfat_data,vfat_data_ref);
-                            --->>> This Function will call a function compare(VFAT_Data_TABLE obj1, VFAT_Data_Table obj2)
-                                    --->> Returns 0/1 or True/False on each object comparison
-                        
-
-                    Then will simply call this,
-                    obj2.insert_data(&C,vfat_data,stoi(config_id)); [ ALREADY DONE ]
-
-              */
-		      
+              if (argc > 2)
+              {
+                   long reference_config = stoi(argv[2]); //Read Reference JSON Name
+                   vfat_data_ref = ob.GET_DATA_FROM_REFCONFIG(&C,reference_config); //Getting Data stored in Reference JSON
+                   //obj2.display_results(vfat_data_ref); //Displaying the results
+                   obj1.insert_data(&C,configurations);
+                   vfat_data = obj2.ref_compare(&C,vfat_data,vfat_data_ref,stoi(config_id));
+                   obj2.insert_data(&C,vfat_data,stoi(config_id));
+              }
+              else
+              {
+                  //Data Insertion (in this particular order data -> config -> index)
+                  obj1.insert_data(&C,configurations);
+                  obj2.insert_data(&C,vfat_data,stoi(config_id));
+                  //*****obj3.insert_data(&C,indexes);
+              }
+              
+                    		      
               //---------------------------------------------------------------------------
 
-              //Data Insertion (in this particular order data -> config -> index)
-              obj1.insert_data(&C,configurations);
-              obj2.insert_data(&C,vfat_data,stoi(config_id));
-              //*****obj3.insert_data(&C,indexes);
-
+              
               //cout << "JSON 1 DATA INSERTED ! " << endl;
 
               //---------------------------------------------------------------------------
               
               // PLACED HERE FOR TESTING PURPOSE
-              vfat_data_ref = ob.GET_DATA_FROM_REFCONFIG(&C,reference_config); //Getting Data stored in Reference JSON
-              obj2.display_results(vfat_data_ref); //Displaying the results
+              //vfat_data_ref = ob.GET_DATA_FROM_REFCONFIG(&C,reference_config); //Getting Data stored in Reference JSON
+              //obj2.display_results(vfat_data_ref); //Displaying the results
 
               //---------------------------------------------------------------------------
 
-              string query = "select * from " + to_string(VFAT_DATA_TABLE) + " where vfat_id = 1000";
-              //obj.create_table(&C,"VFAT_COMPONENT");
+              string query = "select * from " + to_string(VFAT_DATA_TABLE)+";" ;// + " where vfat_id = 1000";
               r = ob.query_response(&C,VFAT_DATA_TABLE,query);
               //RETURNS A VECTOR OF OBJECTS
               vfat_data = obj2.row_to_object(r);
