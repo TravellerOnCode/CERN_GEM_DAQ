@@ -7,14 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/Postgres_Database.h
-bits/stdc++.h
--
-iostream
--
-pqxx/pqxx
--
-string
--
 json.hpp
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/json.hpp
 VFAT_Data_Table.h
@@ -25,18 +17,30 @@ VFAT_Config_Table.h
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/VFAT_Config_Table.h
 info.h
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/info.h
-
-/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/VFAT_Config_Table.h
+bits/stdc++.h
+-
 iostream
 -
 pqxx/pqxx
 -
 string
 -
+
+/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/VFAT_Config_Table.h
 info.h
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/info.h
+iostream
+-
+pqxx/pqxx
+-
+string
+-
 
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/VFAT_Data_Table.h
+VFAT_Index_Table.h
+/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/VFAT_Index_Table.h
+info.h
+/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/info.h
 bits/stdc++.h
 -
 iostream
@@ -49,20 +53,16 @@ sstream
 -
 iomanip
 -
-VFAT_Index_Table.h
+
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/VFAT_Index_Table.h
 info.h
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/info.h
-
-/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/VFAT_Index_Table.h
 iostream
 -
 pqxx/pqxx
 -
 string
 -
-info.h
-/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/info.h
 
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/Final_Codes/info.h
 

@@ -3,21 +3,10 @@
 //Returns the query response of a query 
 result Postgres_Database ::query_response(connection *C,string table_name,string query)
 {
-        work WW(*C);
-        //string query = "SELECT * FROM " + table_name +";";
-
-        result r = WW.exec(query);
-		/*
-        for (auto const &row: r)
-        {
-           //cout << row["ID"].c_str() << "   " << row["NAME"].c_str();
-           for (auto const &field: row) 
-               cout << field.c_str() << '\t';
-           cout << endl;
-        }
-		*/
-        //cout << "Table displayed successfully" << endl;
-        return r;
+	work WW(*C);
+	//string query = "SELECT * FROM " + table_name +";";
+	result r = WW.exec(query);
+	return r;
 }
 
 string Postgres_Database ::extract_configid(string filename)
@@ -58,7 +47,7 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
 	vector<VFAT_Data_Table> vfat_obs;
 
 	//cout << j.begin().key() << "------" << j.end().key() << endl;
-        //cout << "Passed point 2" << endl;
+    //cout << "Passed point 2" << endl;
 	int freqq = 0;
 	string vfat_id = "", config_id = "";
 	//config_id = filename.substr(3,filename.length()-4);
@@ -92,18 +81,17 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
 			//iterating through individual data elements
 			if(data_ele.value().size() > 1)
 			{
-					//case where the 128 sized array is encountered
-					for(auto arr_itr : data_ele.value().items())
-					{
-							//cout<<"Array inner loop entered"<<endl;
-							array_data.push_back(stoi(arr_itr.value().dump()));
-							//cout<<"Array value pushed"<<endl;
-					}
-			}
-			else
+				//case where the 128 sized array is encountered
+				for(auto arr_itr : data_ele.value().items())
+				{
+					//cout<<"Array inner loop entered"<<endl;
+					array_data.push_back(stoi(arr_itr.value().dump()));
+					//cout<<"Array value pushed"<<endl;
+				}
+			} else
 			{
-					field_data[data_ele.key()] = (stoi(data_ele.value().dump()));
-					//cout<<"Data field value pushed"<<endl;
+				field_data[data_ele.key()] = (stoi(data_ele.value().dump()));
+				//cout<<"Data field value pushed"<<endl;
 			}
 		}
         //cout << "Passed point 4" << endl;
@@ -118,8 +106,6 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
 
 		vfat_obs.push_back(ob);
 		vfat_indexes.push_back(ob2);
-		
-
 		freqq = freqq + 1;
 	}
 	cout << "No. of VFAT Configurations scanned -> " << freqq << endl;
@@ -128,28 +114,28 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
 
 vector<VFAT_Data_Table> Postgres_Database ::GET_DATA_FROM_REFCONFIG(connection *C,long reference_config_id)
 {
-        VFAT_Index_Table obj;
-        VFAT_Data_Table obj2;
+	VFAT_Index_Table obj;
+	VFAT_Data_Table obj2;
 
-        vector<VFAT_Index_Table> v;
-        vector<VFAT_Data_Table> vfat_data;
+	vector<VFAT_Index_Table> v;
+	vector<VFAT_Data_Table> vfat_data;
 
-        //vector<long> id_list;
-        work WW(*C);
-        string query = "SELECT * FROM "+to_string(VFAT_INDEX_TABLE)+" WHERE CONFIG_ID = " + to_string(reference_config_id) + ";";
-        string id_list = "";
-        result r = WW.exec(query);
-        v = obj.row_to_object(r);
+	//vector<long> id_list;
+	work WW(*C);
+	string query = "SELECT * FROM "+to_string(VFAT_INDEX_TABLE)+" WHERE CONFIG_ID = " + to_string(reference_config_id) + ";";
+	string id_list = "";
+	result r = WW.exec(query);
+	v = obj.row_to_object(r);
 
-        for (int i=0;i<v.size()-1;i++)
-        {
-                //id_list.push_back(v[i].get_id());
-                id_list = id_list + to_string(v[i].get_id()) + ", ";
-        }
-        id_list = id_list + to_string(v[v.size()-1].get_id());
-        query = "SELECT * FROM "+to_string(VFAT_DATA_TABLE)+" WHERE ID IN (" + id_list + ");";
-        r = WW.exec(query);
-        vfat_data = obj2.row_to_object(r);
+	for (int i=0;i<v.size()-1;i++)
+	{
+		//id_list.push_back(v[i].get_id());
+		id_list = id_list + to_string(v[i].get_id()) + ", ";
+	}
+	id_list = id_list + to_string(v[v.size()-1].get_id());
+	query = "SELECT * FROM "+to_string(VFAT_DATA_TABLE)+" WHERE ID IN (" + id_list + ");";
+	r = WW.exec(query);
+	vfat_data = obj2.row_to_object(r);
 
-        return vfat_data;
+	return vfat_data;
 }

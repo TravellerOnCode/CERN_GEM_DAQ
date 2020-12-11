@@ -1,20 +1,34 @@
-#ifndef VFAT_DATA_TABLE_H
-#define VFAT_DATA_TABLE_H
+#pragma once
 
+#include "VFAT_Index_Table.h"
+#include "info.h"
 #include <bits/stdc++.h>
 #include <iostream>
 #include <pqxx/pqxx> 
 #include <string>
 #include <sstream>
 #include <iomanip>
-#include "VFAT_Index_Table.h"
-#include "info.h"
 
 using namespace std;
 using namespace pqxx;
 
 class VFAT_Data_Table
 {
+
+    public:
+
+        void create_table(connection *C,string table_name);
+        long get_id();
+        void initialize(long VFAT_ID, unordered_map<string, long> field_val, vector<long> array_val);
+        long insert_row(connection *C, string table_name);
+        void insert_data(connection *C, vector<VFAT_Data_Table> data,long config_id);
+        vector<VFAT_Data_Table> row_to_object(result R);
+        vector<VFAT_Data_Table> ref_compare(connection *C,vector<VFAT_Data_Table> vfat_ob, vector<VFAT_Data_Table> ref_ob, long config_id);
+	    int compare(const VFAT_Data_Table& ob1, const VFAT_Data_Table& ob2);
+        void display_row();
+        void display_results(vector<VFAT_Data_Table> &data);
+
+
     private:
 
         long id;
@@ -166,21 +180,4 @@ class VFAT_Data_Table
                                     "CFG_CAL_DAC",
                                     "CFG_CAL_EXT","CFG_CAL_PHI","CFG_CAL_FS","CFG_CAL_DUR" };
 
-    public:
-
-        void create_table(connection *C,string table_name);
-        long get_id();
-        //void initialize(long VFAT_ID, vector<long> field_val, vector<long> array_val);
-        void initialize(long VFAT_ID, unordered_map<string, long> field_val, vector<long> array_val);
-        long insert_row(connection *C, string table_name);
-        void insert_data(connection *C, vector<VFAT_Data_Table> data,long config_id);
-        vector<VFAT_Data_Table> row_to_object(result R);
-        vector<VFAT_Data_Table> ref_compare(connection *C,vector<VFAT_Data_Table> vfat_ob, vector<VFAT_Data_Table> ref_ob, long config_id);
-	    int compare(const VFAT_Data_Table& ob1, const VFAT_Data_Table& ob2);
-
-        void display_row();
-        void display_results(vector<VFAT_Data_Table> &data);
-
 };
-
-#endif
