@@ -4,7 +4,8 @@ project(gemdatabase)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
-include_directories( CMAKE_CURRENT_SOURCE_DIR)
+include_directories(CMAKE_CURRENT_SOURCE_DIR)
+# add_subdirectory() 
 
 find_package(Boost)
     IF (Boost_FOUND)
@@ -23,6 +24,7 @@ file(GLOB_RECURSE SOURCE_FILES "src/*.cpp")
 add_library(
     library
     info.h
+    json.hpp
     Postgres_Database.h
     Postgres_Database.cpp
     VFAT_Config_Table.h

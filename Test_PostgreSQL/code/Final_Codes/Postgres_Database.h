@@ -24,6 +24,7 @@ class Postgres_Database
         vector<VFAT_Config_Table> vfat_configs;
 
         result query_response(connection *C,string table_name,string query);
+        string extract_configid(string filename);
         vector<VFAT_Index_Table> Index_json_to_vec();
         vector<VFAT_Config_Table> Config_json_to_vec();
         vector<VFAT_Data_Table> VFAT_json_to_vec(string filename);

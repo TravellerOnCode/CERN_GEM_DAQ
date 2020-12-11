@@ -20,6 +20,17 @@ result Postgres_Database ::query_response(connection *C,string table_name,string
         return r;
 }
 
+string Postgres_Database ::extract_configid(string filename)
+{
+	int l1,l2;
+	string config_id = "";
+	l1 = filename.find_last_of('/');
+	l2 = filename.find_last_of('.');
+	config_id = filename.substr(l1+1,l2);
+	return config_id;
+
+}
+
 //to store the index values
 vector<VFAT_Index_Table> Postgres_Database ::Index_json_to_vec()
 {
@@ -50,7 +61,8 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
         //cout << "Passed point 2" << endl;
 	int freqq = 0;
 	string vfat_id = "", config_id = "";
-	config_id = filename.substr(0,filename.length()-4);
+	//config_id = filename.substr(3,filename.length()-4);
+	config_id = extract_configid(filename);
 	
 	VFAT_Config_Table ob3;
 	ob3.initialize(stoi(config_id));

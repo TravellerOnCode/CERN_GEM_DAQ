@@ -3,7 +3,7 @@
 void VFAT_Data_Table ::create_table(connection *C,string table_name)
 {
         work WW(*C);
-        string query = "CREATE TABLE " + table_name + "(ID SERIAL PRIMARY KEY, VFAT_ID bigint,";
+        string query = "CREATE TABLE IF NOT EXISTS " + table_name + "(ID SERIAL PRIMARY KEY, VFAT_ID bigint,";
         for (int i=0;i<48;i++)
         {
             query = query + vfat_columns[i] + " bigint" +", ";

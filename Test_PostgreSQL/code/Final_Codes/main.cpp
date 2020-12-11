@@ -39,14 +39,16 @@ int main(int argc, char** argv)
               //---------------------------------------------------------------------------
 
               //creating tables
-              //obj1.create_table(&C,VFAT_CONFIG_TABLE);
-              //obj2.create_table(&C,VFAT_DATA_TABLE);
-              //obj3.create_table(&C,VFAT_INDEX_TABLE);
+              obj1.create_table(&C,VFAT_CONFIG_TABLE);
+              obj2.create_table(&C,VFAT_DATA_TABLE);
+              obj3.create_table(&C,VFAT_INDEX_TABLE);
 
               //---------------------------------------------------------------------------
 
               string filename1 = argv[1]; //Read Input JSON File
-              string config_id = filename1.substr(0,filename1.length()-4);
+              //string config_id = filename1.substr(3,filename1.length()-4);
+              string config_id = ob.extract_configid(filename1);
+
 
               //---------------------------------------------------------------------------
               

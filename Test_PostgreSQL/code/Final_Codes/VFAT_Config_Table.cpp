@@ -3,7 +3,7 @@
 void VFAT_Config_Table:: create_table(connection *C,string table_name)
 {
         work WW(*C);
-        string query = "CREATE TABLE " + table_name + "( CONFIG_ID bigint PRIMARY KEY);";
+        string query = "CREATE TABLE IF NOT EXISTS " + table_name + "( CONFIG_ID bigint PRIMARY KEY);";
         //cout << "Executed Query : " << endl << query << endl;
         WW.exec(query);
         cout << "Table Created -> " << table_name << endl;
