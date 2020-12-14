@@ -1,0 +1,21 @@
+#ifndef GEM_CORE_LAYOUT_TREE_CONSTANTS_H
+#define GEM_CORE_LAYOUT_TREE_CONSTANTS_H
+
+// This file contains constants used by the layout tree implementation. It is
+// configured by cmake and never installed.
+
+#include <string_view>
+
+/// @brief Internal namespace
+namespace gem::core::layout_tree::detail {
+
+/// @brief The location of the layout tree data
+const std::string_view tree_dir = "${CMAKE_INSTALL_FULL_SYSCONFDIR}/gem/layout-tree.d";
+
+/// @brief The maximum tree depth when looking for files in the layout tree
+///        directory
+const int max_recursion_depth = 128;
+
+} // namespace gem::core::layout_tree::detail
+
+#endif // GEM_CORE_LAYOUT_TREE_CONSTANTS_H

@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibrary.a  CMakeFiles/library.dir/src/Postgres_Database.cpp.o CMakeFiles/library.dir/src/VFAT_Config_Table.cpp.o CMakeFiles/library.dir/src/VFAT_Data_Table.cpp.o CMakeFiles/library.dir/src/VFAT_Index_Table.cpp.o
+/usr/bin/ranlib liblibrary.a
