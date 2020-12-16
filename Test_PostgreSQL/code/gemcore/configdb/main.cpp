@@ -10,14 +10,17 @@ int main(int argc, char** argv)
         {
             
             //connect to the database
-            connection C("dbname = " +  to_string(DBNAME) + " user = "+ USER +" password = "+ PASSWORD +" \
-            hostaddr = 127.0.0.1 port = 5432");
-            if (C.is_open()) {
-                cout << "Opened database successfully: " << C.dbname() << endl;
-            } 
+            connection dbClient ( "dbname = " +  to_string(DBNAME) + "\
+                            user = "+ USER +"\
+                            password = "+ PASSWORD +" \
+                            hostaddr = "+ IP + "\
+                            port = "+ PORT);
+
+            if (dbClient.is_open())
+                cout << "Opened database successfully: " << dbClient.dbname() << endl;
             else {
-                    cout << "Can't open database" << endl;
-                    return 1;
+                cout << "Can't open database" << endl;
+                return 1;
             }
 
             //---------------------------------------------------------------------------
@@ -39,21 +42,21 @@ int main(int argc, char** argv)
             //---------------------------------------------------------------------------
 
             //creating tables
-            obj1.create_table(&C,VFAT_CONFIG_TABLE);
-            obj2.create_table(&C,VFAT_DATA_TABLE);
-            obj3.create_table(&C,VFAT_INDEX_TABLE);
+            obj1.create_table(&dbClient);
+            obj2.create_table(&dbClient);
+            obj3.create_table(&dbClient);
 
             //---------------------------------------------------------------------------
 
-            string filename1 = argv[1]; //Read Input JSON File
+            string filepath = argv[1]; //Read Input JSON File
             //string config_id = filename1.substr(3,filename1.length()-4);
-            string config_id = ob.extract_configid(filename1);
+            string config_id = ob.extract_configid(filepath);
 
 
             //---------------------------------------------------------------------------
             
-            vfat_data = ob.VFAT_json_to_vec(filename1);
-            configurations = ob.Config_json_to_vec();
+            vfat_data = ob.getVFATSettings(filepath);
+            configurations = ob.getConfigIDs();
             //indexes = ob.Index_json_to_vec();
 
             cout << "All JSON converted to object Vectors" << endl;
@@ -63,17 +66,17 @@ int main(int argc, char** argv)
             if (argc > 2)
             {
                 long reference_config = stoi(argv[2]); //Read Reference JSON Name
-                vfat_data_ref = ob.GET_DATA_FROM_REFCONFIG(&C,reference_config); //Getting Data stored in Reference JSON
+                vfat_data_ref = ob.getReferenceVFATSettings(&dbClient,reference_config); //Getting Data stored in Reference JSON
                 //obj2.display_results(vfat_data_ref); //Displaying the results
-                obj1.insert_data(&C,configurations);
-                vfat_data = obj2.ref_compare(&C,vfat_data,vfat_data_ref,stoi(config_id));
-                obj2.insert_data(&C,vfat_data,stoi(config_id));
+                obj1.insert_data(&dbClient,configurations);
+                vfat_data = obj2.getNewSettings(&dbClient,vfat_data,vfat_data_ref,stoi(config_id));
+                obj2.insert_data(&dbClient,vfat_data,stoi(config_id));
             }
             else
             {
                 //Data Insertion (in this particular order data -> config -> index)
-                obj1.insert_data(&C,configurations);
-                obj2.insert_data(&C,vfat_data,stoi(config_id));
+                obj1.insert_data(&dbClient,configurations);
+                obj2.insert_data(&dbClient,vfat_data,stoi(config_id));
                 //*****obj3.insert_data(&C,indexes);
             }
             
@@ -92,12 +95,12 @@ int main(int argc, char** argv)
             //---------------------------------------------------------------------------
 
             string query = "select * from " + to_string(VFAT_DATA_TABLE)+";" ;// + " where vfat_id = 1000";
-            r = ob.query_response(&C,VFAT_DATA_TABLE,query);
+            r = ob.query_response(&dbClient,query);
             //RETURNS A VECTOR OF OBJECTS
             vfat_data = obj2.row_to_object(r);
             obj2.display_results(vfat_data);
         
-            C.disconnect ();
+            dbClient.disconnect ();
         }
         catch(const std::exception& e)
         {

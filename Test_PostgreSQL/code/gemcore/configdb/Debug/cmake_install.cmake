@@ -1,4 +1,4 @@
-# Install script for directory: /home/chakraborty/My_Workspace/Data_Acquisition/cmsgemos/gemcore/configdb
+# Install script for directory: /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/configdb
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/chakraborty/My_Workspace/Data_Acquisition/cmsgemos/gemcore/configdb/Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/configdb/Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

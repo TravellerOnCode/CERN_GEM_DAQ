@@ -6,5 +6,5 @@ CXX_FLAGS =  -lpqxx -lpq -g   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/chakraborty/My_Workspace/Data_Acquisition/cmsgemos/gemcore/configdb/CMAKE_CURRENT_SOURCE_DIR 
+CXX_INCLUDES = -I/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/configdb/CMAKE_CURRENT_SOURCE_DIR 
 

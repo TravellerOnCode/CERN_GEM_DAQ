@@ -12,114 +12,140 @@
 using namespace std;
 using namespace pqxx;
 
+/// Class to store the Data for a particular component. This stores the settings of a particular VFAT.
+/// This table is used to store the settings scanned in the JSON. 
+/// Table Schema: <data table name> (bigint id, bigint config_id, ............ )
+/// The class variables indicate the columns of the table.
+
 class VFAT_Data_Table
 {
 
     public:
+        /// Create the data table
+        void create_table(connection *dbClient);
 
-        void create_table(connection *C,string table_name);
+        /// Access the id
         long get_id();
+
+        /// Initialize the class objects 
         void initialize(long VFAT_ID, unordered_map<string, long> field_val, vector<long> array_val);
-        long insert_row(connection *C, string table_name);
-        void insert_data(connection *C, vector<VFAT_Data_Table> data,long config_id);
+        
+        /// Insert a row into the Table
+        long insert_row(connection *dbClient);
+
+        /// Insert data from the class objects into the Table
+        void insert_data(connection *dbClient, vector<VFAT_Data_Table> data,long config_id);
+        
+        /// Converts a Query Response into vector of class objects
         vector<VFAT_Data_Table> row_to_object(result R);
-        vector<VFAT_Data_Table> ref_compare(connection *C,vector<VFAT_Data_Table> vfat_ob, vector<VFAT_Data_Table> ref_ob, long config_id);
-	    int compare(const VFAT_Data_Table& ob1, const VFAT_Data_Table& ob2);
+        
+        /// Get the Reference Configuration ID
+        /// Check into the database and store new settings into a vector as objects.
+        /// Insert a reference of the already present settings into the Index Table.
+        vector<VFAT_Data_Table> getNewSettings(connection *dbClient,vector<VFAT_Data_Table> vfat_ob, vector<VFAT_Data_Table> ref_ob, long config_id);
+	    
+        /// Compare two VFAT settings.
+        int compareSettings(const VFAT_Data_Table& ob1, const VFAT_Data_Table& ob2);
+        
+        /// To display the results
         void display_row();
         void display_results(vector<VFAT_Data_Table> &data);
 
 
     private:
-
+        
+        /// ID
         long id;
 
+        /// Component ID
         long VFAT_ID;
-        //Actual VFAT Columns
-        long CFG_IREF; // 32
-        long CFG_HYST; // 5
-
-        long CFG_BIAS_CFD_DAC_2;// 40
-        long CFG_BIAS_CFD_DAC_1;// 40
-        long CFG_BIAS_PRE_I_BSF;// 13
         
-        long CFG_BIAS_PRE_I_BIT;// 150
-        long CFG_BIAS_PRE_I_BLCC;// 25
-        long CFG_BIAS_PRE_VREF;// 86
-        long CFG_BIAS_SH_I_BFCAS;// 130
-        long CFG_BIAS_SH_I_BDIFF;// 80
-        long CFG_BIAS_SH_I_BFAMP;// 1
-        long CFG_BIAS_SD_I_BDIFF;// 140
-        long CFG_BIAS_SD_I_BSF;// 15
-        long CFG_BIAS_SD_I_BFCAS;// 135
+        //Actual VFAT Columns
+        long CFG_IREF;
+        long CFG_HYST;
+
+        long CFG_BIAS_CFD_DAC_2;
+        long CFG_BIAS_CFD_DAC_1;
+        long CFG_BIAS_PRE_I_BSF;
+        
+        long CFG_BIAS_PRE_I_BIT;
+        long CFG_BIAS_PRE_I_BLCC;
+        long CFG_BIAS_PRE_VREF;
+        long CFG_BIAS_SH_I_BFCAS;
+        long CFG_BIAS_SH_I_BDIFF;
+        long CFG_BIAS_SH_I_BFAMP;
+        long CFG_BIAS_SD_I_BDIFF;
+        long CFG_BIAS_SD_I_BSF;
+        long CFG_BIAS_SD_I_BFCAS;
 
         //## DAC monitor
-        long CFG_VREF_ADC;// 3
-        long CFG_MON_GAIN;// 0
-        long CFG_MONITOR_SELECT;// 0
+        long CFG_VREF_ADC;
+        long CFG_MON_GAIN;
+        long CFG_MONITOR_SELECT;
 
         //## Input
         //# Preamp gain - high
-        long CFG_RES_PRE;// 1
-        long CFG_CAP_PRE;// 0
+        long CFG_RES_PRE;
+        long CFG_CAP_PRE;
         //# Preamp gain - medium
-        //long CFG_RES_PRE;// 2
-        //long CFG_CAP_PRE;// 1
+        //long CFG_RES_PRE;
+        //long CFG_CAP_PRE;
         //# Preamp gain - low
-        //long CFG_RES_PRE;// 4
-        //long CFG_CAP_PRE;// 3
+        //long CFG_RES_PRE;
+        //long CFG_CAP_PRE;
 
         //# Timing constants - long
-        long CFG_FP_FE;// 7
-        long CFG_PT;// 15
+        long CFG_FP_FE;
+        long CFG_PT;
 
         //# Use negative polarity (errata VFAT3 manual)
-        long CFG_SEL_POL;// 0
+        long CFG_SEL_POL;
 
         //# Provide a slight offset to the ZCC comparator baseline voltage
-        long CFG_THR_ZCC_DAC;// 10
+        long CFG_THR_ZCC_DAC;
 
         //# "Main" threshold
-        long CFG_THR_ARM_DAC;// 100
+        long CFG_THR_ARM_DAC;
 
         //# Comparator mode - CFD
-        long CFG_SEL_COMP_MODE;// 0
-        long CFG_FORCE_EN_ZCC;// 0
+        long CFG_SEL_COMP_MODE;
+        long CFG_FORCE_EN_ZCC;
         //# Comparator mode - arming
-        //long CFG_SEL_COMP_MODE;// 1
-        //long CFG_FORCE_EN_ZCC;// 0
+        //long CFG_SEL_COMP_MODE;
+        //long CFG_FORCE_EN_ZCC;
         //# Comparator mode - ZCC
-        //long CFG_SEL_COMP_MODE;// 2
-        //long CFG_FORCE_EN_ZCC;// 1
+        //long CFG_SEL_COMP_MODE;
+        //long CFG_FORCE_EN_ZCC;
 
         //# Enable arming comparator hysteresis
-        long CFG_EN_HYST;// 1
+        long CFG_EN_HYST;
 
         //# Disable debug ZCC comparator
-        long CFG_FORCE_TH;// 0
+        long CFG_FORCE_TH;
 
         //# Synchronize input on edge
-        long CFG_SYNC_LEVEL_MODE;// 0
+        long CFG_SYNC_LEVEL_MODE;
 
         //# Pulse length of 4
-        long CFG_PULSE_STRETCH;// 3
+        long CFG_PULSE_STRETCH;
 
         //## Trigger
         //# Disable self-triggering
-        long CFG_SELF_TRIGGER_MODE;// 0
+        long CFG_SELF_TRIGGER_MODE;
         //# Output Sbits at 320MHz
-        long CFG_DDR_TRIGGER_MODE;// 0
+        long CFG_DDR_TRIGGER_MODE;
 
         //## Data format
         //# Disable zero suppression
-        long CFG_SPZS_SUMMARY_ONLY;// 0
-        long CFG_SPZS_MAX_PARTITIONS;// 0
-        long CFG_SPZS_ENABLE;// 0
-        long CFG_SZP_ENABLE;// 0
-        long CFG_SZD_ENABLE;// 0
+        long CFG_SPZS_SUMMARY_ONLY;
+        long CFG_SPZS_MAX_PARTITIONS;
+        long CFG_SPZS_ENABLE;
+        long CFG_SZP_ENABLE;
+        long CFG_SZD_ENABLE;
         //# Default time tags
-        long CFG_TIME_TAG;// 0
-        long CFG_EC_BYTES;// 0
-        long CFG_BC_BYTES;// 0
+        long CFG_TIME_TAG;
+        long CFG_EC_BYTES;
+        long CFG_BC_BYTES;
 
         //## Latency
         //# Default latency for Scurves
@@ -127,21 +153,21 @@ class VFAT_Data_Table
 
         //## Calibration pulses
         //# Ensure the calibration module is off
-        long CFG_CAL_MODE;// 0
+        long CFG_CAL_MODE;
 
         //# Negative polarity
-        long CFG_CAL_SEL_POL;// 0
+        long CFG_CAL_SEL_POL;
 
         //# Pulse amplitude
-        long CFG_CAL_DAC;// 0
+        long CFG_CAL_DAC;
 
-        long CFG_CAL_EXT;// 0
-        long CFG_CAL_PHI;// 0
-        long CFG_CAL_FS;// 0
+        long CFG_CAL_EXT;
+        long CFG_CAL_PHI;
+        long CFG_CAL_FS;
         long CFG_CAL_DUR;// 511
 
         //# Zeroing out all 127 channels
-        std::vector<int> VFAT_CHANNELS_CHANNEL_0_to_128;// 0
+        std::vector<int> VFAT_CHANNELS_CHANNEL_0_to_128;
 
 
         string vfat_columns[48] =

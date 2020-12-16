@@ -1,41 +1,46 @@
 #include "../interface/Postgres_Database.h"
 
 //Returns the query response of a query 
-result Postgres_Database ::query_response(connection *C,string table_name,string query)
+result Postgres_Database ::query_response(connection *dbClient,string query)
 {
-	work WW(*C);
-	//string query = "SELECT * FROM " + table_name +";";
+	work WW(*dbClient);
+
+	/// Execute the Query
 	result r = WW.exec(query);
+
+	/// Return the response
 	return r;
 }
 
-string Postgres_Database ::extract_configid(string filename)
+string Postgres_Database ::extract_configid(string filepath)
 {
+	/// Extract the filename (excluding extension) from the File Path
 	int l1,l2;
 	string config_id = "";
-	l1 = filename.find_last_of('/');
-	l2 = filename.find_last_of('.');
-	config_id = filename.substr(l1+1,l2);
+	l1 = filepath.find_last_of('/');
+	l2 = filepath.find_last_of('.');
+	config_id = filepath.substr(l1+1,l2);
 	return config_id;
 
 }
 
 //to store the index values
-vector<VFAT_Index_Table> Postgres_Database ::Index_json_to_vec()
-{
-	return vfat_indexes;
-}
+//vector<VFAT_Index_Table> Postgres_Database ::Index_json_to_vec()
+//{
+//	return vfat_indexes;
+//}
 
 //to store the config values
-vector<VFAT_Config_Table> Postgres_Database ::Config_json_to_vec()
+vector<VFAT_Config_Table> Postgres_Database ::getConfigIDs()
 {
 	return vfat_configs;
 }
 
 
-vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
+vector<VFAT_Data_Table> Postgres_Database ::getVFATSettings(string filename)
 {
-	//function takes filename, reads all VFATS and makes objects out of them and passes it to main
+	/// Function takes filename, 
+	/// Reads all VFATS and makes objects out of them and passes it to main
 	
     cout << "File Name: " << filename << endl;
 	ifstream in(filename, ios::in);
@@ -105,14 +110,14 @@ vector<VFAT_Data_Table> Postgres_Database ::VFAT_json_to_vec(string filename)
 		//cout << "VFAT_ID -> " << vfat_id << "CFG_IREF -> " << field_data["CFG_IREF"] << endl;
 
 		vfat_obs.push_back(ob);
-		vfat_indexes.push_back(ob2);
+		//vfat_indexes.push_back(ob2);
 		freqq = freqq + 1;
 	}
 	cout << "No. of VFAT Configurations scanned -> " << freqq << endl;
 	return vfat_obs;
 }
 
-vector<VFAT_Data_Table> Postgres_Database ::GET_DATA_FROM_REFCONFIG(connection *C,long reference_config_id)
+vector<VFAT_Data_Table> Postgres_Database ::getReferenceVFATSettings(connection *dbClient,long reference_config_id)
 {
 	VFAT_Index_Table obj;
 	VFAT_Data_Table obj2;
@@ -121,7 +126,7 @@ vector<VFAT_Data_Table> Postgres_Database ::GET_DATA_FROM_REFCONFIG(connection *
 	vector<VFAT_Data_Table> vfat_data;
 
 	//vector<long> id_list;
-	work WW(*C);
+	work WW(*dbClient);
 	string query = "SELECT * FROM "+to_string(VFAT_INDEX_TABLE)+" WHERE CONFIG_ID = " + to_string(reference_config_id) + ";";
 	string id_list = "";
 	result r = WW.exec(query);

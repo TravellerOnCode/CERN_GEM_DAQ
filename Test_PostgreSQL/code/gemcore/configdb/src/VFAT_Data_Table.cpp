@@ -1,27 +1,33 @@
+/// Include the Header File
 #include "../interface/VFAT_Data_Table.h"
 
-void VFAT_Data_Table ::create_table(connection *C,string table_name)
+void VFAT_Data_Table ::create_table(connection *dbClient)
 {
-    work WW(*C);
-    string query = "CREATE TABLE IF NOT EXISTS " + table_name + "(ID SERIAL PRIMARY KEY, VFAT_ID bigint,";
+    work WW(*dbClient);
+    /// Structure the PostgreSQL Statement to create a table
+    string query = "CREATE TABLE IF NOT EXISTS " + to_string(VFAT_DATA_TABLE) + "(ID SERIAL PRIMARY KEY, VFAT_ID bigint,";
+    /// Append the VFAT Column Names
     for (int i=0;i<48;i++)
-    {
         query = query + vfat_columns[i] + " bigint" +", ";
-    }
     query = query + "VFAT_CHANNELS_CHANNEL_0_to_128" + " integer[]);";
+
     //cout << "Executed Query : " << endl << query << endl;
+    /// Execute the PostgreSQL Statement and create the table
     WW.exec(query);
-    cout << "Table Created -> " << table_name << endl;
+    cout << "Table Created -> " << to_string(VFAT_DATA_TABLE) << endl;
+    /// Commit Work to the database
     WW.commit();
 }
 
 long VFAT_Data_Table ::get_id()
 {
+    /// Access the id
     return this->id;
 }
 
 void VFAT_Data_Table ::initialize(long VFAT_ID, unordered_map<string, long> field_val, vector<long> array_val)
 {
+    /// Initialize the Field Vales
     this->VFAT_ID=VFAT_ID;
 
     this->CFG_IREF=field_val["CFG_IREF"];
@@ -102,10 +108,12 @@ void VFAT_Data_Table ::initialize(long VFAT_ID, unordered_map<string, long> fiel
         
 }
 
-long VFAT_Data_Table:: insert_row(connection *C, string table_name)
+long VFAT_Data_Table:: insert_row(connection *dbClient)
 {
-    work WW(*C);
+    work WW(*dbClient);
     long id;
+
+    /// Structure the PostgreSQL Statement to insert data
     string field_values = "",arrays = "'{";
     string sql = "INSERT INTO "+to_string(VFAT_DATA_TABLE)+"(VFAT_ID,";
     for (int i=0;i<48;i++)
@@ -113,6 +121,8 @@ long VFAT_Data_Table:: insert_row(connection *C, string table_name)
         sql = sql + vfat_columns[i] + ", ";
     }
     sql = sql + "VFAT_CHANNELS_CHANNEL_0_to_128) VALUES (";
+
+    /// Append the field values to the SQL Statement.
     field_values = to_string(this->VFAT_ID)+", ";
     field_values = field_values 
                     +to_string(this->CFG_IREF) + ", " +to_string(this->CFG_HYST)+ ", " \
@@ -138,32 +148,40 @@ long VFAT_Data_Table:: insert_row(connection *C, string table_name)
     {
         arrays = arrays + to_string(this->VFAT_CHANNELS_CHANNEL_0_to_128[i]) +", ";
     }
+
+    /// PostgreSQL Insert Statement
     sql = sql + field_values + arrays + to_string(this->VFAT_CHANNELS_CHANNEL_0_to_128[127]) + "}') RETURNING ID;";
+    
+    /// Execute the PostgreSQL Statement and insert data into the table.
+    /// Insertion returns a system generated ID into R
     result R = WW.exec(sql);
+    /// Extracts the ID from the response and store in id.
     for (auto const &row: R)
-    {
         id = row["ID"].as<long>();
-    }
         
+    /// Commit Work to the database
     WW.commit();
+
+    /// Return the id
     return id;
 
 }
 
 //This should accept only those Objects that are unique
-void VFAT_Data_Table::insert_data(connection *C, vector<VFAT_Data_Table> data, long config_id)
+void VFAT_Data_Table::insert_data(connection *dbClient, vector<VFAT_Data_Table> data, long config_id)
 {
     int i;
     long id;
+    /// Insert extracted data, Iterate the Object vector
     for (i=0;i<data.size();i++)
     {
         //Insert the data and get the ID number
-        id = data[i].insert_row(&(*C),VFAT_DATA_TABLE); 
+        id = data[i].insert_row(&(*dbClient)); 
 
         //Insert into Index Table along with Config
         VFAT_Index_Table obj;
         obj.initialize(config_id,id); 
-        obj.insert_row(&(*C),VFAT_INDEX_TABLE);
+        obj.insert_row(&(*dbClient));
     }
     cout << "Values inserted into table : "<< VFAT_DATA_TABLE << endl;
 }
@@ -403,7 +421,7 @@ void VFAT_Data_Table::display_results(vector<VFAT_Data_Table> &data)
     }
 }
 
-int VFAT_Data_Table::compare(const VFAT_Data_Table &ob1, const VFAT_Data_Table &ob2)
+int VFAT_Data_Table::compareSettings(const VFAT_Data_Table &ob1, const VFAT_Data_Table &ob2)
 {
 	//compares all fields of two objects and returns value 1 if unequal, 0 if equal
         
@@ -470,7 +488,7 @@ int VFAT_Data_Table::compare(const VFAT_Data_Table &ob1, const VFAT_Data_Table &
     }
 }
 
-vector<VFAT_Data_Table> VFAT_Data_Table::ref_compare(connection *C,vector<VFAT_Data_Table> vfat_ob, vector<VFAT_Data_Table> ref_ob, long config_id)
+vector<VFAT_Data_Table> VFAT_Data_Table::getNewSettings(connection *dbClient,vector<VFAT_Data_Table> vfat_ob, vector<VFAT_Data_Table> ref_ob, long config_id)
 {
     vector<VFAT_Data_Table> insert_vfats;
 
@@ -480,15 +498,12 @@ vector<VFAT_Data_Table> VFAT_Data_Table::ref_compare(connection *C,vector<VFAT_D
         {
             if(vfat_ob[i].VFAT_ID == ref_ob[j].VFAT_ID)
             {
-                if(compare(vfat_ob[i], ref_ob[j])==1)
-                {
+                if(compareSettings(vfat_ob[i], ref_ob[j])==1)
                     insert_vfats.push_back(vfat_ob[i]);
-                } else
-                {
+                else {
                     VFAT_Index_Table obj;
                     obj.initialize(config_id,ref_ob[j].get_id()); 
-                    obj.insert_row(&(*C),VFAT_INDEX_TABLE);
-
+                    obj.insert_row(&(*dbClient));
                 }
             }
         }

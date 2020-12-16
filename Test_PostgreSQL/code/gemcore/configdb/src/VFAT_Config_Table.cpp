@@ -1,35 +1,47 @@
+/// Include the Header File
 #include "../interface/VFAT_Config_Table.h"
 
-void VFAT_Config_Table:: create_table(connection *C,string table_name)
+void VFAT_Config_Table:: create_table(connection *dbClient)
 {
-    work WW(*C);
-    string query = "CREATE TABLE IF NOT EXISTS " + table_name + "( CONFIG_ID bigint PRIMARY KEY);";
+    work WW(*dbClient);
+
+    /// Structure the PostgreSQL Statement to create a table
+    string query = "CREATE TABLE IF NOT EXISTS " + to_string(VFAT_CONFIG_TABLE) + "( CONFIG_ID bigint PRIMARY KEY);";
     //cout << "Executed Query : " << endl << query << endl;
+    /// Execute the PostgreSQL Statement and create the table
     WW.exec(query);
-    cout << "Table Created -> " << table_name << endl;
+    cout << "Table Created -> " << to_string(VFAT_CONFIG_TABLE) << endl;
+    /// Commit Work to the database
     WW.commit();
 }
 
 void VFAT_Config_Table::initialize(long config_id)
 {
+    /// Initialize the class variables
     this->config_id = config_id;
 }
 
-void VFAT_Config_Table:: insert_row(connection *C, string table_name)
+void VFAT_Config_Table:: insert_row(connection *dbClient)
 {       
-    work WW(*C);
+    work WW(*dbClient);
+    /// Structure the PostgreSQL Statement to insert data
     string field_values = "",arrays = "'{";
-    string sql = "INSERT INTO "+table_name+" VALUES(" + to_string(this->config_id)+");";
+    string sql = "INSERT INTO "+to_string(VFAT_CONFIG_TABLE)+" VALUES(" + to_string(this->config_id)+");";
+    
+    /// Execute the PostgreSQL Statement and insert data into the table
     WW.exec(sql);
+    /// Commit Work to the database
     WW.commit();
 }
 
-void VFAT_Config_Table:: insert_data(connection *C, vector<VFAT_Config_Table> data)
+void VFAT_Config_Table:: insert_data(connection *dbClient, vector<VFAT_Config_Table> data)
 {
     int i;
+    /// Insert extracted data, Iterate the Object vector
     for (i=0;i<data.size();i++)
     {
-        data[i].insert_row(&(*C),VFAT_CONFIG_TABLE);
+        /// Insert data of a particular object
+        data[i].insert_row(&(*dbClient));
     }
     cout << "Values inserted into table : " << VFAT_CONFIG_TABLE << endl;
 }
