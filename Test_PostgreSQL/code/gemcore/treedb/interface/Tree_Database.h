@@ -7,6 +7,7 @@
 #include <sstream>
 #include <string>
 
+
 using namespace std;
 using namespace pqxx;
 
@@ -32,4 +33,4 @@ private:
   long id;
   long parent_id;
   string type;
-}
+};
