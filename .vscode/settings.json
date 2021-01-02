@@ -1,8 +1,13 @@
 {
     "C_Cpp.errorSquiggles": "Enabled",
+    "editor.formatOnSave": true,
+    "clang-format.executable": "/absolute/path/to/clang-format",
     "files.associations": {
         "iostream": "cpp",
         "string": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "*.tcc": "cpp",
+        "string_view": "cpp",
+        "regex": "cpp"
     }
 }

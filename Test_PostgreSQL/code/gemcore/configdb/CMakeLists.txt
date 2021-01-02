@@ -36,5 +36,6 @@ add_library(
 )
 
 add_executable(gemdatabase main.cpp)
+
 target_link_libraries(gemdatabase library ${PQXX_LIB} ${PQ_LIB})
 add_compile_options(-Wall -lpqxx -lpq)
