@@ -1,15 +1,12 @@
 #include "./interface/info.h"
-#include "./interface/postgres_database.h"
-#include "./interface/vfat_config_table.h"
-#include "./interface/vfat_data_table.h"
-#include "./interface/vfat_index_table.h"
+#include "./interface/database_utils.h"
+#include "./interface/vfat_configurations.h"
+#include "./interface/vfat_settings.h"
+#include "./interface/vfat_indexes.h"
 
 int main(int argc, char** argv)
 {
     try {
-
-        const std::string dbname = DBNAME;
-
 
         // connect to the database
         pqxx::connection dbClient(std::string("dbname = ") + DBNAME + "\
@@ -32,17 +29,17 @@ int main(int argc, char** argv)
         //---------------------------------------------------------------------------
 
         // DECLARING NECESSARY OBJECTS AND std::VECTORS
-        postgres_database ob;
+        database_utils ob;
         pqxx::result r;
 
-        vfat_config_table obj1;
-        vfat_data_table obj2;
-        vfat_index_table obj3;
+        vfat_configurations obj1;
+        vfat_settings obj2;
+        vfat_indexes obj3;
 
-        std::vector<vfat_config_table> configurations;
-        std::vector<vfat_data_table> vfat_data; // Store data from current JSON
-        std::vector<vfat_data_table> vfat_data_ref; // Store data from reference JSON
-        std::vector<vfat_index_table> indexes;
+        std::vector<vfat_configurations> configurations;
+        std::vector<vfat_settings> vfat_data; // Store data from current JSON
+        std::vector<vfat_settings> vfat_data_ref; // Store data from reference JSON
+        std::vector<vfat_indexes> indexes;
 
         //---------------------------------------------------------------------------
 
@@ -96,7 +93,7 @@ int main(int argc, char** argv)
 
         //---------------------------------------------------------------------------
 
-        std::string query = std::string("select * from ") + VFAT_DATA_TABLE + ";"; // + " where vfat_id = 1000";
+        std::string query = std::string("select * from ") + "SETTINGS_TABLE" + ";"; // + " where vfat_id = 1000";
         r = ob.query_response(&dbClient, query);
         // RETURNS A std::VECTOR OF OBJECTS
         vfat_data = obj2.row_to_object(r);

@@ -163,113 +163,113 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/gemdatabase.dir/build.make CMakeFiles/gemdatabase.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/postgres_database.o: src/postgres_database.cpp.o
+src/database_utils.o: src/database_utils.cpp.o
 
-.PHONY : src/postgres_database.o
-
-# target to build an object file
-src/postgres_database.cpp.o:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/postgres_database.cpp.o
-.PHONY : src/postgres_database.cpp.o
-
-src/postgres_database.i: src/postgres_database.cpp.i
-
-.PHONY : src/postgres_database.i
-
-# target to preprocess a source file
-src/postgres_database.cpp.i:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/postgres_database.cpp.i
-.PHONY : src/postgres_database.cpp.i
-
-src/postgres_database.s: src/postgres_database.cpp.s
-
-.PHONY : src/postgres_database.s
-
-# target to generate assembly for a file
-src/postgres_database.cpp.s:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/postgres_database.cpp.s
-.PHONY : src/postgres_database.cpp.s
-
-src/vfat_config_table.o: src/vfat_config_table.cpp.o
-
-.PHONY : src/vfat_config_table.o
+.PHONY : src/database_utils.o
 
 # target to build an object file
-src/vfat_config_table.cpp.o:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_config_table.cpp.o
-.PHONY : src/vfat_config_table.cpp.o
+src/database_utils.cpp.o:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/database_utils.cpp.o
+.PHONY : src/database_utils.cpp.o
 
-src/vfat_config_table.i: src/vfat_config_table.cpp.i
+src/database_utils.i: src/database_utils.cpp.i
 
-.PHONY : src/vfat_config_table.i
+.PHONY : src/database_utils.i
 
 # target to preprocess a source file
-src/vfat_config_table.cpp.i:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_config_table.cpp.i
-.PHONY : src/vfat_config_table.cpp.i
+src/database_utils.cpp.i:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/database_utils.cpp.i
+.PHONY : src/database_utils.cpp.i
 
-src/vfat_config_table.s: src/vfat_config_table.cpp.s
+src/database_utils.s: src/database_utils.cpp.s
 
-.PHONY : src/vfat_config_table.s
+.PHONY : src/database_utils.s
 
 # target to generate assembly for a file
-src/vfat_config_table.cpp.s:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_config_table.cpp.s
-.PHONY : src/vfat_config_table.cpp.s
+src/database_utils.cpp.s:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/database_utils.cpp.s
+.PHONY : src/database_utils.cpp.s
 
-src/vfat_data_table.o: src/vfat_data_table.cpp.o
+src/vfat_configurations.o: src/vfat_configurations.cpp.o
 
-.PHONY : src/vfat_data_table.o
+.PHONY : src/vfat_configurations.o
 
 # target to build an object file
-src/vfat_data_table.cpp.o:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_data_table.cpp.o
-.PHONY : src/vfat_data_table.cpp.o
+src/vfat_configurations.cpp.o:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_configurations.cpp.o
+.PHONY : src/vfat_configurations.cpp.o
 
-src/vfat_data_table.i: src/vfat_data_table.cpp.i
+src/vfat_configurations.i: src/vfat_configurations.cpp.i
 
-.PHONY : src/vfat_data_table.i
+.PHONY : src/vfat_configurations.i
 
 # target to preprocess a source file
-src/vfat_data_table.cpp.i:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_data_table.cpp.i
-.PHONY : src/vfat_data_table.cpp.i
+src/vfat_configurations.cpp.i:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_configurations.cpp.i
+.PHONY : src/vfat_configurations.cpp.i
 
-src/vfat_data_table.s: src/vfat_data_table.cpp.s
+src/vfat_configurations.s: src/vfat_configurations.cpp.s
 
-.PHONY : src/vfat_data_table.s
+.PHONY : src/vfat_configurations.s
 
 # target to generate assembly for a file
-src/vfat_data_table.cpp.s:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_data_table.cpp.s
-.PHONY : src/vfat_data_table.cpp.s
+src/vfat_configurations.cpp.s:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_configurations.cpp.s
+.PHONY : src/vfat_configurations.cpp.s
 
-src/vfat_index_table.o: src/vfat_index_table.cpp.o
+src/vfat_indexes.o: src/vfat_indexes.cpp.o
 
-.PHONY : src/vfat_index_table.o
+.PHONY : src/vfat_indexes.o
 
 # target to build an object file
-src/vfat_index_table.cpp.o:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_index_table.cpp.o
-.PHONY : src/vfat_index_table.cpp.o
+src/vfat_indexes.cpp.o:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_indexes.cpp.o
+.PHONY : src/vfat_indexes.cpp.o
 
-src/vfat_index_table.i: src/vfat_index_table.cpp.i
+src/vfat_indexes.i: src/vfat_indexes.cpp.i
 
-.PHONY : src/vfat_index_table.i
+.PHONY : src/vfat_indexes.i
 
 # target to preprocess a source file
-src/vfat_index_table.cpp.i:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_index_table.cpp.i
-.PHONY : src/vfat_index_table.cpp.i
+src/vfat_indexes.cpp.i:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_indexes.cpp.i
+.PHONY : src/vfat_indexes.cpp.i
 
-src/vfat_index_table.s: src/vfat_index_table.cpp.s
+src/vfat_indexes.s: src/vfat_indexes.cpp.s
 
-.PHONY : src/vfat_index_table.s
+.PHONY : src/vfat_indexes.s
 
 # target to generate assembly for a file
-src/vfat_index_table.cpp.s:
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_index_table.cpp.s
-.PHONY : src/vfat_index_table.cpp.s
+src/vfat_indexes.cpp.s:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_indexes.cpp.s
+.PHONY : src/vfat_indexes.cpp.s
+
+src/vfat_settings.o: src/vfat_settings.cpp.o
+
+.PHONY : src/vfat_settings.o
+
+# target to build an object file
+src/vfat_settings.cpp.o:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_settings.cpp.o
+.PHONY : src/vfat_settings.cpp.o
+
+src/vfat_settings.i: src/vfat_settings.cpp.i
+
+.PHONY : src/vfat_settings.i
+
+# target to preprocess a source file
+src/vfat_settings.cpp.i:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_settings.cpp.i
+.PHONY : src/vfat_settings.cpp.i
+
+src/vfat_settings.s: src/vfat_settings.cpp.s
+
+.PHONY : src/vfat_settings.s
+
+# target to generate assembly for a file
+src/vfat_settings.cpp.s:
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_settings.cpp.s
+.PHONY : src/vfat_settings.cpp.s
 
 # Help Target
 help:
@@ -284,18 +284,18 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/postgres_database.o"
-	@echo "... src/postgres_database.i"
-	@echo "... src/postgres_database.s"
-	@echo "... src/vfat_config_table.o"
-	@echo "... src/vfat_config_table.i"
-	@echo "... src/vfat_config_table.s"
-	@echo "... src/vfat_data_table.o"
-	@echo "... src/vfat_data_table.i"
-	@echo "... src/vfat_data_table.s"
-	@echo "... src/vfat_index_table.o"
-	@echo "... src/vfat_index_table.i"
-	@echo "... src/vfat_index_table.s"
+	@echo "... src/database_utils.o"
+	@echo "... src/database_utils.i"
+	@echo "... src/database_utils.s"
+	@echo "... src/vfat_configurations.o"
+	@echo "... src/vfat_configurations.i"
+	@echo "... src/vfat_configurations.s"
+	@echo "... src/vfat_indexes.o"
+	@echo "... src/vfat_indexes.i"
+	@echo "... src/vfat_indexes.s"
+	@echo "... src/vfat_settings.o"
+	@echo "... src/vfat_settings.i"
+	@echo "... src/vfat_settings.s"
 .PHONY : help
 
 

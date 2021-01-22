@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/library.dir/src/postgres_database.cpp.o"
-  "CMakeFiles/library.dir/src/vfat_config_table.cpp.o"
-  "CMakeFiles/library.dir/src/vfat_data_table.cpp.o"
-  "CMakeFiles/library.dir/src/vfat_index_table.cpp.o"
+  "CMakeFiles/library.dir/src/database_utils.cpp.o"
+  "CMakeFiles/library.dir/src/vfat_configurations.cpp.o"
+  "CMakeFiles/library.dir/src/vfat_settings.cpp.o"
+  "CMakeFiles/library.dir/src/vfat_indexes.cpp.o"
   "liblibrary.pdb"
   "liblibrary.a"
 )

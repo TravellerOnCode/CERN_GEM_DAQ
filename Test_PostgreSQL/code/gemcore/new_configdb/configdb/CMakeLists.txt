@@ -3,8 +3,8 @@
 #    SOURCES
 #    Postgres_Database.cpp
 #    VFAT_Config_Table.cpp
-#    VFAT_Data_Table.cpp
-#    VFAT_Index_Table.cpp
+#    VFAT_settings.cpp
+#    VFAT_indexes.cpp
 #)
 #target_link_libraries(gemcore_configdb PUBLIC pqxx)
 #target_link_libraries(gemcore_configdb PUBLIC xDAQ::nlohmann)
@@ -43,14 +43,14 @@ add_library(
     library
     ./interface/info.h
     ./interface/json.hpp
-    ./interface/postgres_database.h
-    ./src/postgres_database.cpp
-    ./interface/vfat_config_table.h
-    ./src/vfat_config_table.cpp
-    ./interface/vfat_data_table.h
-    ./src/vfat_data_table.cpp
-    ./interface/vfat_index_table.h
-    ./src/vfat_index_table.cpp    
+    ./interface/database_utils.h
+    ./src/database_utils.cpp
+    ./interface/vfat_configurations.h
+    ./src/vfat_configurations.cpp
+    ./interface/vfat_settings.h
+    ./src/vfat_settings.cpp
+    ./interface/vfat_indexes.h
+    ./src/vfat_indexes.cpp    
 )
 
 add_executable(gemdatabase main.cpp)

@@ -57,116 +57,116 @@ include CMakeFiles/library.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/library.dir/flags.make
 
-CMakeFiles/library.dir/src/postgres_database.cpp.o: CMakeFiles/library.dir/flags.make
-CMakeFiles/library.dir/src/postgres_database.cpp.o: ../src/postgres_database.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/library.dir/src/postgres_database.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/library.dir/src/postgres_database.cpp.o -c /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/postgres_database.cpp
+CMakeFiles/library.dir/src/database_utils.cpp.o: CMakeFiles/library.dir/flags.make
+CMakeFiles/library.dir/src/database_utils.cpp.o: ../src/database_utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/library.dir/src/database_utils.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/library.dir/src/database_utils.cpp.o -c /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/database_utils.cpp
 
-CMakeFiles/library.dir/src/postgres_database.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/library.dir/src/postgres_database.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/postgres_database.cpp > CMakeFiles/library.dir/src/postgres_database.cpp.i
+CMakeFiles/library.dir/src/database_utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/library.dir/src/database_utils.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/database_utils.cpp > CMakeFiles/library.dir/src/database_utils.cpp.i
 
-CMakeFiles/library.dir/src/postgres_database.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/library.dir/src/postgres_database.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/postgres_database.cpp -o CMakeFiles/library.dir/src/postgres_database.cpp.s
+CMakeFiles/library.dir/src/database_utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/library.dir/src/database_utils.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/database_utils.cpp -o CMakeFiles/library.dir/src/database_utils.cpp.s
 
-CMakeFiles/library.dir/src/postgres_database.cpp.o.requires:
+CMakeFiles/library.dir/src/database_utils.cpp.o.requires:
 
-.PHONY : CMakeFiles/library.dir/src/postgres_database.cpp.o.requires
+.PHONY : CMakeFiles/library.dir/src/database_utils.cpp.o.requires
 
-CMakeFiles/library.dir/src/postgres_database.cpp.o.provides: CMakeFiles/library.dir/src/postgres_database.cpp.o.requires
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/postgres_database.cpp.o.provides.build
-.PHONY : CMakeFiles/library.dir/src/postgres_database.cpp.o.provides
+CMakeFiles/library.dir/src/database_utils.cpp.o.provides: CMakeFiles/library.dir/src/database_utils.cpp.o.requires
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/database_utils.cpp.o.provides.build
+.PHONY : CMakeFiles/library.dir/src/database_utils.cpp.o.provides
 
-CMakeFiles/library.dir/src/postgres_database.cpp.o.provides.build: CMakeFiles/library.dir/src/postgres_database.cpp.o
-
-
-CMakeFiles/library.dir/src/vfat_config_table.cpp.o: CMakeFiles/library.dir/flags.make
-CMakeFiles/library.dir/src/vfat_config_table.cpp.o: ../src/vfat_config_table.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/library.dir/src/vfat_config_table.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/library.dir/src/vfat_config_table.cpp.o -c /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_config_table.cpp
-
-CMakeFiles/library.dir/src/vfat_config_table.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/library.dir/src/vfat_config_table.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_config_table.cpp > CMakeFiles/library.dir/src/vfat_config_table.cpp.i
-
-CMakeFiles/library.dir/src/vfat_config_table.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/library.dir/src/vfat_config_table.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_config_table.cpp -o CMakeFiles/library.dir/src/vfat_config_table.cpp.s
-
-CMakeFiles/library.dir/src/vfat_config_table.cpp.o.requires:
-
-.PHONY : CMakeFiles/library.dir/src/vfat_config_table.cpp.o.requires
-
-CMakeFiles/library.dir/src/vfat_config_table.cpp.o.provides: CMakeFiles/library.dir/src/vfat_config_table.cpp.o.requires
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_config_table.cpp.o.provides.build
-.PHONY : CMakeFiles/library.dir/src/vfat_config_table.cpp.o.provides
-
-CMakeFiles/library.dir/src/vfat_config_table.cpp.o.provides.build: CMakeFiles/library.dir/src/vfat_config_table.cpp.o
+CMakeFiles/library.dir/src/database_utils.cpp.o.provides.build: CMakeFiles/library.dir/src/database_utils.cpp.o
 
 
-CMakeFiles/library.dir/src/vfat_data_table.cpp.o: CMakeFiles/library.dir/flags.make
-CMakeFiles/library.dir/src/vfat_data_table.cpp.o: ../src/vfat_data_table.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/library.dir/src/vfat_data_table.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/library.dir/src/vfat_data_table.cpp.o -c /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_data_table.cpp
+CMakeFiles/library.dir/src/vfat_configurations.cpp.o: CMakeFiles/library.dir/flags.make
+CMakeFiles/library.dir/src/vfat_configurations.cpp.o: ../src/vfat_configurations.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/library.dir/src/vfat_configurations.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/library.dir/src/vfat_configurations.cpp.o -c /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_configurations.cpp
 
-CMakeFiles/library.dir/src/vfat_data_table.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/library.dir/src/vfat_data_table.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_data_table.cpp > CMakeFiles/library.dir/src/vfat_data_table.cpp.i
+CMakeFiles/library.dir/src/vfat_configurations.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/library.dir/src/vfat_configurations.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_configurations.cpp > CMakeFiles/library.dir/src/vfat_configurations.cpp.i
 
-CMakeFiles/library.dir/src/vfat_data_table.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/library.dir/src/vfat_data_table.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_data_table.cpp -o CMakeFiles/library.dir/src/vfat_data_table.cpp.s
+CMakeFiles/library.dir/src/vfat_configurations.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/library.dir/src/vfat_configurations.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_configurations.cpp -o CMakeFiles/library.dir/src/vfat_configurations.cpp.s
 
-CMakeFiles/library.dir/src/vfat_data_table.cpp.o.requires:
+CMakeFiles/library.dir/src/vfat_configurations.cpp.o.requires:
 
-.PHONY : CMakeFiles/library.dir/src/vfat_data_table.cpp.o.requires
+.PHONY : CMakeFiles/library.dir/src/vfat_configurations.cpp.o.requires
 
-CMakeFiles/library.dir/src/vfat_data_table.cpp.o.provides: CMakeFiles/library.dir/src/vfat_data_table.cpp.o.requires
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_data_table.cpp.o.provides.build
-.PHONY : CMakeFiles/library.dir/src/vfat_data_table.cpp.o.provides
+CMakeFiles/library.dir/src/vfat_configurations.cpp.o.provides: CMakeFiles/library.dir/src/vfat_configurations.cpp.o.requires
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_configurations.cpp.o.provides.build
+.PHONY : CMakeFiles/library.dir/src/vfat_configurations.cpp.o.provides
 
-CMakeFiles/library.dir/src/vfat_data_table.cpp.o.provides.build: CMakeFiles/library.dir/src/vfat_data_table.cpp.o
+CMakeFiles/library.dir/src/vfat_configurations.cpp.o.provides.build: CMakeFiles/library.dir/src/vfat_configurations.cpp.o
 
 
-CMakeFiles/library.dir/src/vfat_index_table.cpp.o: CMakeFiles/library.dir/flags.make
-CMakeFiles/library.dir/src/vfat_index_table.cpp.o: ../src/vfat_index_table.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/library.dir/src/vfat_index_table.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/library.dir/src/vfat_index_table.cpp.o -c /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_index_table.cpp
+CMakeFiles/library.dir/src/vfat_settings.cpp.o: CMakeFiles/library.dir/flags.make
+CMakeFiles/library.dir/src/vfat_settings.cpp.o: ../src/vfat_settings.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/library.dir/src/vfat_settings.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/library.dir/src/vfat_settings.cpp.o -c /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_settings.cpp
 
-CMakeFiles/library.dir/src/vfat_index_table.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/library.dir/src/vfat_index_table.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_index_table.cpp > CMakeFiles/library.dir/src/vfat_index_table.cpp.i
+CMakeFiles/library.dir/src/vfat_settings.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/library.dir/src/vfat_settings.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_settings.cpp > CMakeFiles/library.dir/src/vfat_settings.cpp.i
 
-CMakeFiles/library.dir/src/vfat_index_table.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/library.dir/src/vfat_index_table.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_index_table.cpp -o CMakeFiles/library.dir/src/vfat_index_table.cpp.s
+CMakeFiles/library.dir/src/vfat_settings.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/library.dir/src/vfat_settings.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_settings.cpp -o CMakeFiles/library.dir/src/vfat_settings.cpp.s
 
-CMakeFiles/library.dir/src/vfat_index_table.cpp.o.requires:
+CMakeFiles/library.dir/src/vfat_settings.cpp.o.requires:
 
-.PHONY : CMakeFiles/library.dir/src/vfat_index_table.cpp.o.requires
+.PHONY : CMakeFiles/library.dir/src/vfat_settings.cpp.o.requires
 
-CMakeFiles/library.dir/src/vfat_index_table.cpp.o.provides: CMakeFiles/library.dir/src/vfat_index_table.cpp.o.requires
-	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_index_table.cpp.o.provides.build
-.PHONY : CMakeFiles/library.dir/src/vfat_index_table.cpp.o.provides
+CMakeFiles/library.dir/src/vfat_settings.cpp.o.provides: CMakeFiles/library.dir/src/vfat_settings.cpp.o.requires
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_settings.cpp.o.provides.build
+.PHONY : CMakeFiles/library.dir/src/vfat_settings.cpp.o.provides
 
-CMakeFiles/library.dir/src/vfat_index_table.cpp.o.provides.build: CMakeFiles/library.dir/src/vfat_index_table.cpp.o
+CMakeFiles/library.dir/src/vfat_settings.cpp.o.provides.build: CMakeFiles/library.dir/src/vfat_settings.cpp.o
+
+
+CMakeFiles/library.dir/src/vfat_indexes.cpp.o: CMakeFiles/library.dir/flags.make
+CMakeFiles/library.dir/src/vfat_indexes.cpp.o: ../src/vfat_indexes.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/library.dir/src/vfat_indexes.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/library.dir/src/vfat_indexes.cpp.o -c /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_indexes.cpp
+
+CMakeFiles/library.dir/src/vfat_indexes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/library.dir/src/vfat_indexes.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_indexes.cpp > CMakeFiles/library.dir/src/vfat_indexes.cpp.i
+
+CMakeFiles/library.dir/src/vfat_indexes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/library.dir/src/vfat_indexes.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/src/vfat_indexes.cpp -o CMakeFiles/library.dir/src/vfat_indexes.cpp.s
+
+CMakeFiles/library.dir/src/vfat_indexes.cpp.o.requires:
+
+.PHONY : CMakeFiles/library.dir/src/vfat_indexes.cpp.o.requires
+
+CMakeFiles/library.dir/src/vfat_indexes.cpp.o.provides: CMakeFiles/library.dir/src/vfat_indexes.cpp.o.requires
+	$(MAKE) -f CMakeFiles/library.dir/build.make CMakeFiles/library.dir/src/vfat_indexes.cpp.o.provides.build
+.PHONY : CMakeFiles/library.dir/src/vfat_indexes.cpp.o.provides
+
+CMakeFiles/library.dir/src/vfat_indexes.cpp.o.provides.build: CMakeFiles/library.dir/src/vfat_indexes.cpp.o
 
 
 # Object files for target library
 library_OBJECTS = \
-"CMakeFiles/library.dir/src/postgres_database.cpp.o" \
-"CMakeFiles/library.dir/src/vfat_config_table.cpp.o" \
-"CMakeFiles/library.dir/src/vfat_data_table.cpp.o" \
-"CMakeFiles/library.dir/src/vfat_index_table.cpp.o"
+"CMakeFiles/library.dir/src/database_utils.cpp.o" \
+"CMakeFiles/library.dir/src/vfat_configurations.cpp.o" \
+"CMakeFiles/library.dir/src/vfat_settings.cpp.o" \
+"CMakeFiles/library.dir/src/vfat_indexes.cpp.o"
 
 # External object files for target library
 library_EXTERNAL_OBJECTS =
 
-liblibrary.a: CMakeFiles/library.dir/src/postgres_database.cpp.o
-liblibrary.a: CMakeFiles/library.dir/src/vfat_config_table.cpp.o
-liblibrary.a: CMakeFiles/library.dir/src/vfat_data_table.cpp.o
-liblibrary.a: CMakeFiles/library.dir/src/vfat_index_table.cpp.o
+liblibrary.a: CMakeFiles/library.dir/src/database_utils.cpp.o
+liblibrary.a: CMakeFiles/library.dir/src/vfat_configurations.cpp.o
+liblibrary.a: CMakeFiles/library.dir/src/vfat_settings.cpp.o
+liblibrary.a: CMakeFiles/library.dir/src/vfat_indexes.cpp.o
 liblibrary.a: CMakeFiles/library.dir/build.make
 liblibrary.a: CMakeFiles/library.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library liblibrary.a"
@@ -178,10 +178,10 @@ CMakeFiles/library.dir/build: liblibrary.a
 
 .PHONY : CMakeFiles/library.dir/build
 
-CMakeFiles/library.dir/requires: CMakeFiles/library.dir/src/postgres_database.cpp.o.requires
-CMakeFiles/library.dir/requires: CMakeFiles/library.dir/src/vfat_config_table.cpp.o.requires
-CMakeFiles/library.dir/requires: CMakeFiles/library.dir/src/vfat_data_table.cpp.o.requires
-CMakeFiles/library.dir/requires: CMakeFiles/library.dir/src/vfat_index_table.cpp.o.requires
+CMakeFiles/library.dir/requires: CMakeFiles/library.dir/src/database_utils.cpp.o.requires
+CMakeFiles/library.dir/requires: CMakeFiles/library.dir/src/vfat_configurations.cpp.o.requires
+CMakeFiles/library.dir/requires: CMakeFiles/library.dir/src/vfat_settings.cpp.o.requires
+CMakeFiles/library.dir/requires: CMakeFiles/library.dir/src/vfat_indexes.cpp.o.requires
 
 .PHONY : CMakeFiles/library.dir/requires
 
