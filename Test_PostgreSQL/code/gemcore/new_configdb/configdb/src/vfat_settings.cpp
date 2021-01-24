@@ -214,6 +214,9 @@ void vfat_settings::insert_data(pqxx::connection* db_client,
 
 std::vector<vfat_settings> vfat_settings::row_to_object(pqxx::result R)
 {
+    ///converts a single table row to one vfat_settings object 
+    /// Input : query result
+    /// Returns : vector of vfat_settings objects  
     std::vector<vfat_settings> query_results;
 
     for (auto const& row : R) {
@@ -350,9 +353,10 @@ std::vector<vfat_settings> vfat_settings::row_to_object(pqxx::result R)
     return query_results;
 }
 
-// Display a particular row of the table
 void vfat_settings::display_row()
 {
+    ///// Displaya a particular row of the table
+
     std::cout << std::left << std::setw(30) << "ID " << std::setw(2) << ":" << this->m_id
               << std::endl;
     std::cout << std::left << std::setw(30) << "VFAT_ID " << std::setw(2) << ":"
@@ -487,9 +491,9 @@ void vfat_settings::display_row()
 void vfat_settings::display_results(std::vector<vfat_settings>& data)
 {
     int i = 1;
-    for (auto rowObject = data.begin(); rowObject != data.end(); ++rowObject) {
+    for (auto row_object = data.begin(); row_object != data.end(); ++row_object) {
         /// Insert data of a particular object
-        (*rowObject).display_row();
+        (*row_object).display_row();
         std::cout << "------" << std::endl
                   << std::endl;
         i++;
@@ -498,11 +502,11 @@ void vfat_settings::display_results(std::vector<vfat_settings>& data)
     }
 }
 
-int vfat_settings::compareSettings(const vfat_settings& ob1,
+int vfat_settings::compare_settings(const vfat_settings& ob1,
     const vfat_settings& ob2)
 {
-    // compares all fields of two objects and returns value 1 if unequal, 0 if
-    // equal
+    /// compares all fields of two objects 
+    /// returns : 1 if unequal, 0 if equal
 
     int flag = 0;
     if (ob1.IREF != ob2.IREF || ob1.HYST != ob2.HYST || ob1.BIAS_CFD_DAC_2 != ob2.BIAS_CFD_DAC_2 || ob1.BIAS_CFD_DAC_1 != ob2.BIAS_CFD_DAC_1 || ob1.BIAS_PRE_I_BSF != ob2.BIAS_PRE_I_BSF || ob1.BIAS_PRE_I_BIT != ob2.BIAS_PRE_I_BIT || ob1.BIAS_PRE_I_BLCC != ob2.BIAS_PRE_I_BLCC || ob1.BIAS_PRE_VREF != ob2.BIAS_PRE_VREF || ob1.BIAS_SH_I_BFCAS != ob2.BIAS_SH_I_BFCAS || ob1.BIAS_SH_I_BDIFF != ob2.BIAS_SH_I_BDIFF || ob1.BIAS_SH_I_BFAMP != ob2.BIAS_SH_I_BFAMP || ob1.BIAS_SD_I_BDIFF != ob2.BIAS_SD_I_BDIFF || ob1.BIAS_SD_I_BSF != ob2.BIAS_SD_I_BSF || ob1.BIAS_SD_I_BFCAS != ob2.BIAS_SD_I_BFCAS || ob1.VREF_ADC != ob2.VREF_ADC || ob1.MON_GAIN != ob2.MON_GAIN || ob1.MONITOR_SELECT != ob2.MONITOR_SELECT || ob1.RES_PRE != ob2.RES_PRE || ob1.CAP_PRE != ob2.CAP_PRE || ob1.FP_FE != ob2.FP_FE || ob1.PT != ob2.PT || ob1.SEL_POL != ob2.SEL_POL || ob1.THR_ZCC_DAC != ob2.THR_ZCC_DAC || ob1.THR_ARM_DAC != ob2.THR_ARM_DAC || ob1.SEL_COMP_MODE != ob2.SEL_COMP_MODE || ob1.FORCE_EN_ZCC != ob2.FORCE_EN_ZCC || ob1.EN_HYST != ob2.EN_HYST || ob1.FORCE_TH != ob2.FORCE_TH || ob1.SYNC_LEVEL_MODE != ob2.SYNC_LEVEL_MODE || ob1.PULSE_STRETCH != ob2.PULSE_STRETCH || ob1.SELF_TRIGGER_MODE != ob2.SELF_TRIGGER_MODE || ob1.DDR_TRIGGER_MODE != ob2.DDR_TRIGGER_MODE || ob1.SPZS_SUMMARY_ONLY != ob2.SPZS_SUMMARY_ONLY || ob1.SPZS_MAX_PARTITIONS != ob2.SPZS_MAX_PARTITIONS || ob1.SPZS_ENABLE != ob2.SPZS_ENABLE || ob1.SZP_ENABLE != ob2.SZP_ENABLE || ob1.SZD_ENABLE != ob2.SZD_ENABLE || ob1.TIME_TAG != ob2.TIME_TAG || ob1.EC_BYTES != ob2.EC_BYTES || ob1.BC_BYTES != ob2.BC_BYTES || ob1.LATENCY != ob2.LATENCY || ob1.CAL_MODE != ob2.CAL_MODE || ob1.CAL_SEL_POL != ob2.CAL_SEL_POL || ob1.CAL_DAC != ob2.CAL_DAC || ob1.CAL_EXT != ob2.CAL_EXT || ob1.CAL_PHI != ob2.CAL_PHI || ob1.CAL_FS != ob2.CAL_FS || ob1.CAL_DUR != ob2.CAL_DUR) {
@@ -519,23 +523,27 @@ int vfat_settings::compareSettings(const vfat_settings& ob1,
     }
 }
 
-std::vector<vfat_settings> vfat_settings::getNewSettings(
+std::vector<vfat_settings> vfat_settings::get_new_settings(
     pqxx::connection* db_client, std::vector<vfat_settings> vfat_ob,
     std::vector<vfat_settings> ref_ob, long config_id)
 {
+    /// checks into the database to store new settings, inserts a reference of the already present settings into Index table
+    /// Input : new vfat_settings object vector, reference vfat_settings object vector, reference config ID
+    /// Returns : vector of vfat_settings objects to be inserted newly
+
     std::vector<vfat_settings> insert_vfats;
 
-    for (auto rowObject = vfat_ob.begin(); rowObject != vfat_ob.end();
-         ++rowObject) {
-        for (auto refObject = ref_ob.begin(); refObject != ref_ob.end();
-             ++refObject) {
+    for (auto row_object = vfat_ob.begin(); row_object != vfat_ob.end();
+         ++row_object) {
+        for (auto ref_object = ref_ob.begin(); ref_object != ref_ob.end();
+             ++ref_object) {
 
-            if ((*rowObject).VFAT_ID == (*refObject).VFAT_ID) {
-                if (compareSettings((*rowObject), (*refObject)) == 1)
-                    insert_vfats.push_back((*rowObject));
+            if ((*row_object).VFAT_ID == (*ref_object).VFAT_ID) {
+                if (compare_settings((*row_object), (*ref_object)) == 1)
+                    insert_vfats.push_back((*row_object));
                 else {
                     vfat_indexes obj;
-                    obj.initialize(config_id, (*refObject).id());
+                    obj.initialize(config_id, (*ref_object).id());
                     obj.insert_row(&(*db_client));
                 }
             }

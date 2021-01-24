@@ -25,13 +25,13 @@ public:
     /// std::vector<vfat_index_table> Index_json_to_vec();
 
     /// Returns the Configuration IDs from the JSON
-    std::vector<vfat_configurations> getConfigIDs();
+    std::vector<vfat_configurations> get_configid();
 
     /// Returns the VFAT Settings found in JSON
-    std::vector<vfat_settings> getVFATSettings(const std::string& filename);
+    std::vector<vfat_settings> get_VFAT_settings(const std::string& filename);
 
     /// Returns the VFAT Settings found at Reference Configuration ID
-    std::vector<vfat_settings> getReferenceVFATSettings(pqxx::connection* db_client,
+    std::vector<vfat_settings> get_reference_VFAT_settings(pqxx::connection* db_client,
         long reference_config_id);
 
 private:

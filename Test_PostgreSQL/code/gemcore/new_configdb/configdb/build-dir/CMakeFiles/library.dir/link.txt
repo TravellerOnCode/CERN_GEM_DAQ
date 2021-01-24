@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibrary.a  CMakeFiles/library.dir/src/database_utils.cpp.o CMakeFiles/library.dir/src/vfat_configurations.cpp.o CMakeFiles/library.dir/src/vfat_settings.cpp.o CMakeFiles/library.dir/src/vfat_indexes.cpp.o
+/usr/bin/ranlib liblibrary.a

@@ -9,7 +9,7 @@
 // #define VFAT_INDEX_TABLE "INDEX_TABLE"
 
 // Database info
-#define DBNAME "gemdatabase3"
+#define DBNAME "gemdatabase"
 #define USER "postgres"
 #define PASSWORD "linuxos16"
 #define IP "127.0.0.1"

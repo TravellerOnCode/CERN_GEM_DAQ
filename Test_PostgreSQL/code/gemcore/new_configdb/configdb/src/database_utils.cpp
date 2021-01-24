@@ -30,12 +30,12 @@ std::string database_utils::extract_configid(const std::string& filepath)
 //}
 
 // to store the config values
-std::vector<vfat_configurations> database_utils::getConfigIDs()
+std::vector<vfat_configurations> database_utils::get_configid()
 {
     return vfat_configs;
 }
 
-std::vector<vfat_settings> database_utils::getVFATSettings(const std::string& filename)
+std::vector<vfat_settings> database_utils::get_VFAT_settings(const std::string& filename)
 {
     /// Function takes filename,
     /// Reads all VFATS and makes objects out of them and passes it to main
@@ -115,9 +115,10 @@ std::vector<vfat_settings> database_utils::getVFATSettings(const std::string& fi
 }
 
 std::vector<vfat_settings>
-database_utils::getReferenceVFATSettings(pqxx::connection* db_client,
+database_utils::get_reference_VFAT_settings(pqxx::connection* db_client,
     long reference_config_id)
 {
+    ///obtains VFAT settings corresponding to reference configuration ID
     vfat_indexes obj;
     vfat_settings obj2;
 
