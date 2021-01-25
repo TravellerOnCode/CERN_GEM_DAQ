@@ -38,9 +38,9 @@ void vfat_configurations::insert_data(pqxx::connection* db_client,
     std::vector<vfat_configurations> data)
 {
     /// Insert extracted data, Iterate the Object std::vector
-    for (auto rowObject = data.begin(); rowObject != data.end(); ++rowObject) {
+    for (auto row_object = data.begin(); row_object != data.end(); ++row_object) {
         /// Insert data of a particular object
-        (*rowObject).insert_row(&(*db_client));
+        (*row_object).insert_row(&(*db_client));
     }
     std::cout << "Values inserted into table : " << "CONFIGURATION_TABLE" << std::endl;
 }

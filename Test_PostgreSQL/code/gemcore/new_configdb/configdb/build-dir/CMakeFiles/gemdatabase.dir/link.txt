@@ -1,0 +1,1 @@
+/usr/bin/c++   -lpqxx -lpq  -rdynamic CMakeFiles/gemdatabase.dir/main.cpp.o  -o gemdatabase  liblibrary.a -lpqxx -lpq 

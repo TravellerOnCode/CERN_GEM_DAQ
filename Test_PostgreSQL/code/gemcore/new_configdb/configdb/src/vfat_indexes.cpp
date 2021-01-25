@@ -44,15 +44,17 @@ void vfat_indexes::insert_data(pqxx::connection* db_client,
     std::vector<vfat_indexes> data)
 {
     /// Insert extracted data, Iterate the Object std::vector
-    for (auto rowObject = data.begin(); rowObject != data.end(); ++rowObject) {
+    for (auto row_object = data.begin(); row_object != data.end(); ++row_object) {
         /// Insert data of a particular object
-        (*rowObject).insert_row(&(*db_client));
+        (*row_object).insert_row(&(*db_client));
     }
     std::cout << "Values inserted into table : " << "INDEX_TABLE" << std::endl;
 }
 
 std::vector<vfat_indexes> vfat_indexes::row_to_object(pqxx::result R)
 {
+    ///converts each query result row to a vfat_indexes object
+    /// returns a vfat_indexes object vector
     std::vector<vfat_indexes> query_results;
 
     for (auto const& row : R) {

@@ -43,13 +43,13 @@ public:
     /// Get the Reference Configuration ID
     /// Check into the database and store new settings into a std::vector as objects.
     /// Insert a reference of the already present settings into the Index Table.
-    std::vector<vfat_settings> getNewSettings(pqxx::connection* db_client,
+    std::vector<vfat_settings> get_new_settings(pqxx::connection* db_client,
         std::vector<vfat_settings> vfat_ob,
         std::vector<vfat_settings> ref_ob,
         long config_id);
 
     /// Compare two VFAT settings.
-    int compareSettings(const vfat_settings& ob1, const vfat_settings& ob2);
+    int compare_settings(const vfat_settings& ob1, const vfat_settings& ob2);
 
     /// To display the results
     void display_row();

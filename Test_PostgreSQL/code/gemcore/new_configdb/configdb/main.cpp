@@ -8,8 +8,8 @@ int main(int argc, char** argv)
 {
     try {
 
-        // connect to the database
-        pqxx::connection dbClient(std::string("dbname = ") + DBNAME + "\
+        /// connect to the database
+        pqxx::connection db_client(std::string("dbname = ") + DBNAME + "\
                             user = "
             + USER + "\
                             password = "
@@ -19,8 +19,8 @@ int main(int argc, char** argv)
                             port = "
             + PORT);
 
-        if (dbClient.is_open())
-            std::cout << "Opened database successfully: " << dbClient.dbname() << std::endl;
+        if (db_client.is_open())
+            std::cout << "Opened database successfully: " << db_client.dbname() << std::endl;
         else {
             std::cout << "Can't open database" << std::endl;
             return 1;
@@ -44,9 +44,9 @@ int main(int argc, char** argv)
         //---------------------------------------------------------------------------
 
         // creating tables
-        obj1.create_table(&dbClient);
-        obj2.create_table(&dbClient);
-        obj3.create_table(&dbClient);
+        obj1.create_table(&db_client);
+        obj2.create_table(&db_client);
+        obj3.create_table(&db_client);
 
         //---------------------------------------------------------------------------
 
@@ -56,8 +56,8 @@ int main(int argc, char** argv)
 
         //---------------------------------------------------------------------------
 
-        vfat_data = ob.getVFATSettings(filepath);
-        configurations = ob.getConfigIDs();
+        vfat_data = ob.get_VFAT_settings(filepath);
+        configurations = ob.get_configid();
         // indexes = ob.Index_json_to_vec();
 
         std::cout << "All JSON converted to object std::Vectors" << std::endl;
@@ -66,17 +66,17 @@ int main(int argc, char** argv)
 
         if (argc > 2) {
             long reference_config = std::stoi(argv[2]); // Read Reference JSON Name
-            vfat_data_ref = ob.getReferenceVFATSettings(
-                &dbClient, reference_config); // Getting Data stored in Reference JSON
+            vfat_data_ref = ob.get_reference_VFAT_settings(
+                &db_client, reference_config); // Getting Data stored in Reference JSON
             // obj2.display_results(vfat_data_ref); //Displaying the results
-            obj1.insert_data(&dbClient, configurations);
-            vfat_data = obj2.getNewSettings(&dbClient, vfat_data, vfat_data_ref,
+            obj1.insert_data(&db_client, configurations);
+            vfat_data = obj2.get_new_settings(&db_client, vfat_data, vfat_data_ref,
                 stoi(config_id));
-            obj2.insert_data(&dbClient, vfat_data, stoi(config_id));
+            obj2.insert_data(&db_client, vfat_data, stoi(config_id));
         } else {
             // Data Insertion (in this particular order data -> config -> index)
-            obj1.insert_data(&dbClient, configurations);
-            obj2.insert_data(&dbClient, vfat_data, stoi(config_id));
+            obj1.insert_data(&db_client, configurations);
+            obj2.insert_data(&db_client, vfat_data, stoi(config_id));
             //*****obj3.insert_data(&C,indexes);
         }
 
@@ -94,12 +94,12 @@ int main(int argc, char** argv)
         //---------------------------------------------------------------------------
 
         std::string query = std::string("select * from ") + "SETTINGS_TABLE" + ";"; // + " where vfat_id = 1000";
-        r = ob.query_response(&dbClient, query);
+        r = ob.query_response(&db_client, query);
         // RETURNS A std::VECTOR OF OBJECTS
         vfat_data = obj2.row_to_object(r);
         obj2.display_results(vfat_data);
 
-        // dbClient.disconnect();
+        // db_client.disconnect();
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
