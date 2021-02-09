@@ -18,11 +18,17 @@
 
 class vfat_configurations {
 public:
-    /// Create the configuration table
+    
+	///constructor
+    vfat_configurations(const long config_id);
+	
+	/// Create the configuration table
     void create_table(pqxx::connection* db_client);
 
+    /*
     /// Initialize the class objects
     void initialize(long config_id);
+    */
 
     /// Insert a row into the Table
     void insert_row(pqxx::connection* db_client);
