@@ -20,7 +20,7 @@ public:
     /// std::vector<vfat_index_table> Index_json_to_vec();
 
     /// Returns the Configuration IDs from the JSON
-    std::vector<vfat_configurations> get_configid();
+    std::vector<vfat_configurations> get_config_ids();
 
     /// Returns the VFAT Settings found in JSON
     std::vector<vfat_settings> get_VFAT_settings(const std::string& filename);

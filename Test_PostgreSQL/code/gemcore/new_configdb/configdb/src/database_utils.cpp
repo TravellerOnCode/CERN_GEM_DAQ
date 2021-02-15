@@ -30,7 +30,7 @@ std::string database_utils::extract_configid(const std::string& filepath)
 //}
 
 // to store the config values
-std::vector<vfat_configurations> database_utils::get_configid()
+std::vector<vfat_configurations> database_utils::get_config_ids()
 {
     return vfat_configs;
 }
@@ -56,8 +56,7 @@ std::vector<vfat_settings> database_utils::get_VFAT_settings(const std::string& 
     // config_id = filename.substr(3,filename.length()-4);
     config_id = extract_configid(filename);
 
-    vfat_configurations ob3;
-    ob3.initialize(stoi(config_id));
+    vfat_configurations ob3(stoi(config_id));
     vfat_configs.push_back(ob3);
 
     for (auto vfat_ele = j.begin(); vfat_ele != j.end(); vfat_ele++) {
