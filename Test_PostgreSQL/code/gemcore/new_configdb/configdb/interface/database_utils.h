@@ -5,13 +5,8 @@
 #include "info.h"
 #include "vfat_configurations.h"
 #include "vfat_settings.h"
-//#include "vfat_index_table.h"
-//#include <bits/stdc++.h>
-//#include <iostream>
 #include "json.hpp"
 #include <pqxx/pqxx>
-//#include <string>
-//#include <vector>
 
 class database_utils {
 public:

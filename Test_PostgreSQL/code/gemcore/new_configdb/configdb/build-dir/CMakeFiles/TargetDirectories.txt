@@ -1,4 +1,0 @@
-/home/sreeb/cern_project/CERN_GEM_DAQ/Test_PostgreSQL/code/gemcore/new_configdb/configdb/build-dir/CMakeFiles/rebuild_cache.dir
-/home/sreeb/cern_project/CERN_GEM_DAQ/Test_PostgreSQL/code/gemcore/new_configdb/configdb/build-dir/CMakeFiles/edit_cache.dir
-/home/sreeb/cern_project/CERN_GEM_DAQ/Test_PostgreSQL/code/gemcore/new_configdb/configdb/build-dir/CMakeFiles/gemdatabase.dir
-/home/sreeb/cern_project/CERN_GEM_DAQ/Test_PostgreSQL/code/gemcore/new_configdb/configdb/build-dir/CMakeFiles/library.dir

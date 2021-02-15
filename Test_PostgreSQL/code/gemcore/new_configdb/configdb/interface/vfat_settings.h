@@ -4,11 +4,6 @@
 #include "info.h"
 #include "vfat_indexes.h"
 #include <bits/stdc++.h>
-//#include <iomanip>
-//#include <iostream>
-//#include <pqxx/pqxx>
-//#include <sstream>
-//#include <string>
 
 /// Class to store the Data for a particular component. This stores the settings
 /// of a particular VFAT.
