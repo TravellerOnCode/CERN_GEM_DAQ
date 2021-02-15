@@ -14,7 +14,7 @@ void vfat_indexes::create_table(pqxx::connection* db_client)
     // std::cout << "Executed Query : " << endl << query << endl;
     /// Execute the PostgreSQL Statement and create the table
     WW.exec(query);
-    std::cout << std::string("Table Created -> ") << "CONFIGURATION_TABLE" << std::endl;
+    std::cout << std::string("Table Created -> ") << "INDEX_TABLE" << std::endl;
     /// Commit Work to the database
     WW.commit();
 }

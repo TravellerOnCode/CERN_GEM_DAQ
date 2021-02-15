@@ -9,11 +9,11 @@ int main(int argc, char** argv)
 	
 	    ///database info
 
-	    string DBNAME = "gemdatabase";
-	    string USER = "postgres";
-	    string PASSWORD = "linuxos16";
-	    string IP = "127.0.0.1";
-	    string PORT = "5432";
+	    std::string DBNAME = "gemdatabase3";
+	    std::string USER = "postgres";
+	    std::string PASSWORD = "linuxos16";
+	    std::string IP = "127.0.0.1";
+	    std::string PORT = "5432";
 
         /// connect to the database
         pqxx::connection db_client(std::string("dbname = ") + DBNAME + "\

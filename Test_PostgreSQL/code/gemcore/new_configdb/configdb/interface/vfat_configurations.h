@@ -1,7 +1,7 @@
 #ifndef VFAT_CONFIGURATIONS_H
 #define VFAT_CONFIGURATIONS_H
 
-#include "info.h"
+/// #include "info.h"
 #include <iostream>
 #include <pqxx/pqxx>
 #include <string>
@@ -19,16 +19,18 @@
 class vfat_configurations {
 public:
     
+    
 	///constructor
-    vfat_configurations(const long config_id);
+    /// vfat_configurations(const long config_id);
+    
 	
 	/// Create the configuration table
     void create_table(pqxx::connection* db_client);
 
-    /*
+    
     /// Initialize the class objects
     void initialize(long config_id);
-    */
+    
 
     /// Insert a row into the Table
     void insert_row(pqxx::connection* db_client);

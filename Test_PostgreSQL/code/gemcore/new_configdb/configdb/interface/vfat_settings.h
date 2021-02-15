@@ -1,7 +1,7 @@
 #ifndef VFAT_SETTINGS_H
 #define VFAT_SETTINGS_H
 
-#include "info.h"
+/// #include "info.h"
 #include "vfat_indexes.h"
 #include <bits/stdc++.h>
 

@@ -1,10 +1,12 @@
 /// Include the Header File
 #include "../interface/vfat_configurations.h"
 
+/*
 vfat_configurations::vfat_configurations(const long config_id)
 {
     this->config_id = config_id;
 }
+*/
 
 void vfat_configurations::create_table(pqxx::connection* db_client)
 {
@@ -20,11 +22,11 @@ void vfat_configurations::create_table(pqxx::connection* db_client)
     WW.commit();
 }
 
-/*void vfat_configurations::initialize(long config_id)
+void vfat_configurations::initialize(long config_id)
 {
     /// Initialize the class variables
     this->config_id = config_id;
-}*/
+}
 
 void vfat_configurations::insert_row(pqxx::connection* db_client)
 {

@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/database_utils.h
-info.h
-/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/info.h
 vfat_configurations.h
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/vfat_configurations.h
 vfat_settings.h
@@ -17,8 +15,6 @@ json.hpp
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/json.hpp
 pqxx/pqxx
 -
-
-/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/info.h
 
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/json.hpp
 algorithm
@@ -345,8 +341,6 @@ vector
 -
 
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/vfat_configurations.h
-info.h
-/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/info.h
 iostream
 -
 pqxx/pqxx
@@ -355,8 +349,6 @@ string
 -
 
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/vfat_indexes.h
-info.h
-/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/info.h
 iostream
 -
 pqxx/pqxx
@@ -365,8 +357,6 @@ string
 -
 
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/vfat_settings.h
-info.h
-/home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/info.h
 vfat_indexes.h
 /home/chakraborty/My_Workspace/Data_Acquisition/Test_PostgreSQL/code/gemcore/new_configdb/configdb/interface/vfat_indexes.h
 bits/stdc++.h

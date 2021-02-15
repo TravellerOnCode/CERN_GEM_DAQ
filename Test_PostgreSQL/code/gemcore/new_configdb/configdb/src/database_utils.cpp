@@ -56,7 +56,8 @@ std::vector<vfat_settings> database_utils::get_VFAT_settings(const std::string& 
     // config_id = filename.substr(3,filename.length()-4);
     config_id = extract_configid(filename);
 
-    vfat_configurations ob3(stoi(config_id));
+    vfat_configurations ob3; /// (stoi(config_id));
+    ob3.initialize(stoi(config_id));
     vfat_configs.push_back(ob3);
 
     for (auto vfat_ele = j.begin(); vfat_ele != j.end(); vfat_ele++) {

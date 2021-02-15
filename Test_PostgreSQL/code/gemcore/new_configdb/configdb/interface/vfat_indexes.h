@@ -1,7 +1,7 @@
 #ifndef VFAT_INDEXES_H
 #define VFAT_INDEXES_H
 
-#include "info.h"
+/// #include "info.h"
 #include <iostream>
 #include <pqxx/pqxx>
 #include <string>

@@ -2,7 +2,7 @@
 #define DATABASE_UTILS_H
 
 /// Header File inclusion
-#include "info.h"
+/// #include "info.h"
 #include "vfat_configurations.h"
 #include "vfat_settings.h"
 #include "json.hpp"
@@ -28,6 +28,11 @@ public:
     /// Returns the VFAT Settings found at Reference Configuration ID
     std::vector<vfat_settings> get_reference_VFAT_settings(pqxx::connection* db_client,
         long reference_config_id);
+
+    /// Creating Tables
+    void create_configurations_table(pqxx::connection* db_client);
+    void create_indexes_table(pqxx::connection* db_client);
+    void create_settings_table(pqxx::connection* db_client);
 
 private:
     /// std::vector<vfat_index_table> vfat_indexes;
