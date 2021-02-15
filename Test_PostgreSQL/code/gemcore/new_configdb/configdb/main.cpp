@@ -1,4 +1,3 @@
-#include "./interface/info.h"
 #include "./interface/database_utils.h"
 #include "./interface/vfat_configurations.h"
 #include "./interface/vfat_settings.h"
@@ -7,6 +6,14 @@
 int main(int argc, char** argv)
 {
     try {
+	
+	    ///database info
+
+	    string DBNAME = "gemdatabase";
+	    string USER = "postgres";
+	    string PASSWORD = "linuxos16";
+	    string IP = "127.0.0.1";
+	    string PORT = "5432";
 
         /// connect to the database
         pqxx::connection db_client(std::string("dbname = ") + DBNAME + "\
@@ -57,7 +64,7 @@ int main(int argc, char** argv)
         //---------------------------------------------------------------------------
 
         vfat_data = ob.get_VFAT_settings(filepath);
-        configurations = ob.get_configid();
+        configurations = ob.get_config_ids();
         // indexes = ob.Index_json_to_vec();
 
         std::cout << "All JSON converted to object std::Vectors" << std::endl;
